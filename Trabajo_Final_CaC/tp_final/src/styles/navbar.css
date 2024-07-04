@@ -1,0 +1,192 @@
+/* ------------ NavBar general -------------- */
+:root{
+    --bg-nav-solid:rgba(147, 147, 173, 0.884);
+}
+.navbar {
+    min-width: 190px;
+    max-width: 1920px;
+    position: fixed;
+    margin: 0 auto;
+    width: 98dvw;
+    z-index: 1000;
+    background-color: var(--bg-nav);
+    height: 45px;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+}
+
+#navbar a {
+    text-decoration: none !important;
+}
+
+.logo-animado:hover {
+    margin-right: 10px;
+    transform: rotate(rotate);
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-timing-function: ease ease-in-out;
+    animation-iteration-count: 1;
+}
+
+/* ----------------Footer-------------- */
+#footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 2rem;
+
+}
+
+.img-footer {
+    width: 4rem;
+}
+
+.img-footer:hover{
+    transform: scale(1.1);
+    transition: 500ms ease-in;
+}
+
+/*-------------mediaQueries----------*/
+
+/* ajustes para tablet*/
+@media (max-width:992px) {
+    .navbar {
+        position: fixed;
+        height: 50px;
+    }
+
+    nav ul {
+        padding: 0.5rem 1rem;
+        background: url(../../public/img/logo.png),
+            radial-gradient(circle, rgba(2, 0, 36, 0.7) 29%, rgba(9, 9, 121, 0.7) 54%, rgba(137, 138, 138, 0.5550595238095238) 83%);
+        background-size:20dvh;
+        background-position: center;
+        border-radius: 2rem;
+        max-width: 45dvw;
+    }
+
+    nav ul li {
+        position: relative;
+        justify-content: center;
+        background-color: var(--bg-nav-solid);
+        /*relleno botones*/
+        border-radius: 0.5rem;
+        margin: 5px;
+        width: 35%;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-item {
+        height: 2rem;
+        margin: 0 0 5px 30px;
+    }
+
+    #navbar a {
+        text-decoration: none !important;
+        background-color: rgba(147, 147, 173, 0) !important;
+
+        /*relleno logo y <a> mantener transparencia en 0 */
+    }
+
+    #navbar a,
+    nav ul li:hover {
+        transform: scale(1.15);
+        transition: 0.5s;
+        background-color: var(--bg-nav-solid);
+    }
+
+}
+
+/* ajustes para mobile */
+@media (max-width:768px) {
+
+    nav ul li {
+        justify-content: center;
+        background-color: var(--bg-nav-solid);
+        border-radius: 0.5rem;
+        margin: 2px;
+        padding: 0;
+        width: 35%;
+        font-size: .8rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+
+    .nav-item {
+        height: 1.5rem;
+        background-color: rgba(147, 147, 173, 0.884);
+
+    }
+
+    #navbar a {
+        text-decoration: none !important;
+        background-color: rgba(147, 147, 173, 0) !important;
+        /*relleno logo y <a> mantener transparencia en 0*/
+    }
+
+}
+
+@media (width <=460px) {
+
+    /* Esta mediaQuery es para que no se rompa por debajo de 400px(no se si hay algun movil por debajo de eso...) */
+    .nav-item {
+        height: 1.2rem;
+    }
+
+    nav ul {
+        max-width: 100dvw;
+    }
+
+    nav ul li {
+        font-size: .5rem;
+    }
+
+    #navbar a, nav-item,
+    nav ul li:hover {
+        transform: scale(1.5);
+        transition: 0.5s;
+        background-color: var(--bg-nav-solid);
+    }
+
+}
+
+/* ---------------Animaciones---------------- */
+@-webkit-keyframes rotate {
+    0% {
+        -webkit-transform: rotate3d(0, 0, 1, -300deg);
+    }
+
+    100% {
+        -webkit-transform: none;
+    }
+}
+
+@-moz-keyframes rotate {
+    0% {
+        -moz-transform: rotate3d(0, 0, 1, -300deg);
+    }
+
+    100% {
+        -moz-transform: none;
+    }
+}
+
+@-o-keyframes rotate {
+    0% {
+        -o-transform: rotate3d(0, 0, 1, -300deg);
+    }
+
+    100% {
+        -o-transform: none;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate3d(0, 0, 1, -300deg);
+    }
+
+    100% {
+        transform: none;
+    }
+}

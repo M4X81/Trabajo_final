@@ -1,0 +1,373 @@
+:root{
+    --box-shadow-activo: 0 4px 8px rgba(0, 217, 255, 0.699),
+    0 6px 20px rgba(169, 229, 253, 0.637);
+    --box-shadow-inactivo: 0 4px 8px rgba(255, 255, 255, 0.699),
+    0 6px 20px rgba(212, 204, 204, 0.315);
+    --bg-color-nav:#a09f9f;
+    --fuente-activa:#0ff;
+    --bordes: 5px;
+    --bordes-grandes:24px;
+    --borde-lnk:2px rgba(110, 50, 50, 0.555);
+    --bg-radial: radial-gradient(at 100% 0, #fff2, #fff0 50%),
+    radial-gradient(at 0% 100%, #0002, #0000 50%),
+    #545153;
+    --bg-lineal:linear-gradient(45deg, #223, #112);
+    --bg-nav:rgba(147, 147, 173, 0.438);
+    --bg-nav-solid:rgba(147, 147, 173, 0.884);
+}
+
+/* estilos dektop acá */
+.contenedor-form {
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-layout {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    min-height: 100%;
+    padding: 20px 24px 48px;
+}
+
+.contenedor-tarjeta {
+    background-image: var(--bg-lineal);
+    background:var(--bg-radial);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: var(--bordes-grandes);
+    padding: 40px;
+    width: 425px;
+    text-align: center;
+}
+
+.contenedor-tarjeta2 {
+    background-image: var(--bg-lineal);
+    background:var(--bg-radial);
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: var(--bordes-grandes);
+    padding: 40px;
+    width: 425px;
+    height: 80dvh;
+    text-align: center;
+}
+
+.logo {
+    position: relative;
+    height: 3rem;
+    background-image: url(../../public/img/logo.png);
+    background-position: center;
+    background-size: 10%;
+    background-repeat: no-repeat;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.tyc {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.btn {
+    background-color: var(--bg-color-nav) !important;
+    justify-content: center;
+    align-items: center;
+}
+
+.separador {
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.google {
+    width: 15px;
+    margin-right: 5px;
+}
+
+.login-google {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    width: 70%;
+    height: 2rem;
+    border-radius: var(--bordes);
+    background-color:var(--bg-color-nav) !important;
+    color: rgb(0, 0, 0) !important;
+    text-decoration: none;
+    border: var(--borde-lnk) !important;
+    box-shadow:var(--box-shadow-inactivo) !important;
+}
+
+.registro-externo {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#login-button {
+    margin: 15px;
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--bg-color-nav) !important;
+    border-radius:var(--bordes);
+    color: var(--fuente-activa);
+    box-shadow: var(--box-shadow-activo);
+}
+
+.disabled-link {
+    pointer-events: none;
+    color: rgb(0, 0, 0) !important;
+    text-decoration: none;
+    border:var(--borde-lnk) !important;
+    box-shadow: var(--box-shadow-inactivo) !important;
+}
+
+
+.btn {
+    margin: 0 auto;
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--bg-color-nav);
+    border-radius: var(--bordes);
+}
+
+.btn:hover, .login-google:hover {
+    transform: scale(1.1);
+    transition: 500ms;
+    box-shadow: var(--box-shadow-activo) !important;
+    color: var(--fuente-activa) !important;
+}
+
+/*--------form con validacion visual--------*/
+label {
+    display: flex !important;
+    flex-direction: column;
+    align-content: stretch;
+}
+
+label:has(:focus:invalid) {
+    color: tomato;
+}
+
+label:has(:focus:valid) {
+    color: green;
+    box-shadow:var(--box-shadow-activo);
+    border-radius: 5px;
+}
+
+label:has(:focus-visible:invalid) input {
+    outline-color: pink;
+}
+
+label:has(:focus-visible:valid) input {
+    outline-color: green;
+}
+
+.icon {
+    display: none;
+}
+
+label:has(:focus:invalid) .icon-cancel,
+label:has(:focus:valid) .icon-check {
+    display: unset
+}
+
+input {
+    font-size: 24px;
+    margin-top: 8px;
+}
+
+/*-----------checkbox------------*/
+/*-----------checkbox------------*/
+.neon {
+    margin-top: 2%;
+    margin-left: 2%;
+    --x: 1deg;
+    --c: #0000;
+    font-size: 2rem;
+    appearance: none;
+    position: relative;
+    aspect-ratio: 2;
+    border-radius: 100em;
+    background: linear-gradient(to bottom right, #0001, #0000), #444143;
+    width: 1em;
+    box-shadow: inset 0 0 0.25em -0.25em #0008, inset 0.05em 0.05em 0.2em #000811, inset -0.05em -0.05em 0.15em 0.05em #ccc1, 0 0 0 0.11em #545153;
+    transition: --x 0.5s, --c 0.35s, box-shadow 0.5s;
+    filter: drop-shadow(0 0 0.2em var(--c));
+}
+
+.neon::before {
+    content: "";
+    position: absolute;
+    height: 80%;
+    aspect-ratio: 1;
+    top: 50%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+    background: #545153;
+    box-shadow: inset -0.05em -0.05em 0.1em #0008, inset 0.05em 0.05em 0.1em #ffffff22, inset 0.05em 0em 0.1em -0.065em var(--c), 0.1em 0.1em 0.15em #000c;
+    border-radius: 50%;
+    transition: left 0.5s, box-shadow 0.15s;
+}
+
+.neon::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 0.25em);
+    height: calc(100% + 0.25em);
+    border: 0.1em solid #0ff;
+    border-radius: 100em;
+    -webkit-mask: conic-gradient(from calc(270deg - var(--x)), #000 calc(2 * var(--x)), #0001 0);
+    mask: conic-gradient(from calc(270deg - var(--x)), #000 calc(2 * var(--x)), #0001 0); /* Standard property for cross-browser compatibility */
+    box-shadow: 0 0 0 2em #0000;
+    /* hack for safari */
+}
+
+.neon:hover {
+    --x: 3deg;
+    --c: #0ff5;
+    box-shadow: inset 0 0 0.25em -0.25em #0008, inset 0.05em 0.05em 0.2em #000811, inset -0.05em -0.05em 0.15em 0.05em #ccc1, 0 0 0.05em 0.075em #545153;
+}
+
+.neon:checked {
+    --x: 180deg;
+    --c: #0fff;
+    box-shadow: inset 0 0 0.25em -0.25em #0008, inset 0.05em 0.05em 0.2em #000811, inset -0.05em -0.05em 0.15em 0.05em #ccc1, 0 0 0.1em 0.05em #545153;
+}
+
+.neon:checked::before {
+    left: 75%;
+    box-shadow: inset -0.05em -0.05em 0.1em #0008, inset 0.05em 0.05em 0.1em #ffffff22, inset -0.05em 0em 0.1em -0.035em var(--c), 0.1em 0.1em 0.15em #000c;
+}
+
+.neon[disabled] {
+    opacity: 0.25;
+}
+
+@media print {
+    .neon {
+        background: none;
+
+        &,
+        &::before,
+        &::after {
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+    }
+}
+
+@media (prefers-reduced-motion) {
+    .neon,
+    .neon::before,
+    .neon::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+
+
+/*media queries*/
+/* la decisión fue armar el responsive abordándolo como desktop first.
+Los mediaqueries entonces son armados con max-width, pasando por los breakpoints:
+1440px - contenedor máximo
+992px - tablet
+768px - mobile
+*/
+
+/*Tengo que revisar las mediaQ a ver si falta algo*/
+@media screen and (max-width:1440px) {}
+
+/* ajustes para tablet*/
+@media (max-width:992px) {}
+
+/* ajustes para mobile */
+@media (max-width:768px) {
+
+    .contenedor-layout {
+        padding: 10px 4px 24px;
+    }
+
+    .contenedor-tarjeta, .contenedor-tarjeta2 {
+        padding: 10px;
+        width: 340px;
+    }
+
+    .formulario {
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .tyc {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: 400;
+    }
+
+    .btn {
+        background-color:var(--bg-color-nav) !important;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #login-button {
+        margin: 15px auto;
+        height: 1.2rem;
+        font-size: 0.7rem;
+        width: 30dvw;
+        align-items: center;
+    }
+
+    .disabled-link {
+        background-color: var(--bg-color-nav) !important;
+        pointer-events: none;
+        color: rgb(0, 0, 0) !important;
+        text-decoration: none;
+        border: var(--borde-lnk) !important;
+        box-shadow:var(--box-shadow-inactivo) !important;
+    }
+}
+@media(max-width: 320px) {
+.contenedor-tarjeta2{
+        padding: 0;
+        width: 160px;
+        height: 360px;
+    }
+}
+@media screen and (max-width:1440px) { 
+}
+
+/* ajustes para tablet*/
+@media (max-width:992px) { 
+
+
+}
+/* ajustes para mobile */
+@media (max-width:768px) { 
+}

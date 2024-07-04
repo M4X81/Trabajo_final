@@ -1,0 +1,186 @@
+/* Estilos generales */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #1d1d1d;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    position: relative;
+    height: 100vh;
+}
+
+.contenedor {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color:#333
+}
+
+h2, h3 {
+    color: #333;
+    text-align: center;
+}
+
+p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+/* video del banner de inicio */
+.funcionalidades video {
+    height:579px;
+   }
+/* Funcionalidades */
+
+.funcionalidades {
+    margin-bottom: 40px;
+}
+
+.wallet-funcionalidad {
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+    list-style: none;
+    padding-left: 20px;
+    position: relative;
+}
+
+.wallet-funcionalidad::before {
+    content: "✔";
+    color: #1d1d1d;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+}
+
+/* Sección de descarga y ventajas */
+.cuatro-columnas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.descarga-item, .ventaja-item {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.descarga-item:hover, .ventaja-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.descarga-titulo, .ventaja-titulo {
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.titulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    position: relative;
+    text-align: left;
+}
+
+.logo {
+    max-width: 100px;
+    margin: 10px 0;
+    transition: transform 0.3s ease;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+/* Estilos del video */
+.video-container {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.video-container video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Animaciones */
+.fade-in {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media queries */
+@media (max-width: 1440px) {
+    .contenedor {
+        padding: 20px 15px;
+    }
+}
+
+@media (max-width: 992px) {
+    .cuatro-columnas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .contenedor {
+        margin-top: 30px;
+    }
+    .banner-hijo:first-child {
+        width: 100%;
+        padding-right: 10px;
+    }
+    .texto {
+        order: 2;
+    }
+    .media {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .cuatro-columnas {
+        grid-template-columns: 1fr;
+    }
+    .contenedor {
+        margin-top: 30px;
+    }
+    .banner-hijo:first-child {
+        width: 100%;
+        padding-right: 10px;
+    }
+    .texto {
+        order: 2;
+    }
+    .media {
+        order: 1;
+    }
+}
