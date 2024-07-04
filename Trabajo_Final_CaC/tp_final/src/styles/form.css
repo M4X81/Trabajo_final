@@ -57,7 +57,7 @@
 .logo {
     position: relative;
     height: 3rem;
-    background-image: url(../../public/img/logo.png);
+    background-image: url(/img/logo.png);
     background-position: center;
     background-size: 10%;
     background-repeat: no-repeat;
@@ -128,6 +128,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     background-color: var(--bg-color-nav) !important;
     border-radius:var(--bordes);
     color: var(--fuente-activa);

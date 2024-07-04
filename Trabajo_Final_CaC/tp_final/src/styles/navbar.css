@@ -57,7 +57,7 @@
 
     nav ul {
         padding: 0.5rem 1rem;
-        background: url(../../public/img/logo.png),
+        background: url(/img/logo.png),
             radial-gradient(circle, rgba(2, 0, 36, 0.7) 29%, rgba(9, 9, 121, 0.7) 54%, rgba(137, 138, 138, 0.5550595238095238) 83%);
         background-size:20dvh;
         background-position: center;

@@ -9,9 +9,9 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg fixed-top" id="navbar">
       <div className="container-fluid">
         <a href="/" className="logo-animado">
-          <img src="../../public/img/logo.png" alt="Criptocodo logo" width="30" height="30" className="d-inline-block align-text-top" />
+          <img src="/img/logo.png" alt="CriptoApp logo" width="30" height="30" className="d-inline-block align-text-top" />
         </a>
-        <a className="navbar-brand" href="/">Criptocodo</a>
+        <a className="navbar-brand" href="/">CriptoApp</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
