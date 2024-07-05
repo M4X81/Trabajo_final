@@ -1,9 +1,11 @@
 import React from 'react'
+import '../styles/wallet.css'
+
 
 export default function Wallet() {
   return (
-    <div>
-      <div className="contenedor-externo fondo-lila">
+    <div className='div_ppal'>
+        <div className="contenedor-externo fondo-lila">
 <div className="contenedor">
     <div className="banner funcionalidades">
         <div className="banner-hijo texto">
@@ -36,22 +38,22 @@ export default function Wallet() {
 <div className="ventaja-item">
     <p className="ventaja-titulo">Controle sus criptomonedas</p>
     <p>Coinbase Wallet es una billetera de autocustodia que le brinda control total de sus criptomonedas</p>
-    <img src="./img/icons8-llave-32.png" alt="Ilustrativo" className="logo ilustrativo"></img>
+    <img src="./img/icons8-llave-32.png" alt="Ilustrativo" className="logo"></img>
 </div>
 <div className="ventaja-item">
     <p className="ventaja-titulo">Almacena y gestiona tus NFT</p>
     <p>Almacena y visualiza de forma segura todos tus NFT de Ethereum, Base, Optimism, Polygon y Solana en una sola billetera</p>
-    <img src="./img/icons8-organización-32.png" alt="Ilustrativo" className="logo ilustrativo"></img>
+    <img src="./img/icons8-organización-32.png" alt="Ilustrativo" className="logo"></img>
 </div>
 <div className="ventaja-item">
     <p className="ventaja-titulo">Seguridad líder del sector</p>
     <p>Las opciones de seguridad adicionales en todos tus dispositivos y la compatibilidad con el dispositivo de billetera proporcionan más formas de mantener tus criptomonedas seguras</p>
-    <img src="./img/icons8-safebox-32.png" alt="Ilustrativo" className="logo ilustrativo"></img>
+    <img src="./img/icons8-safebox-32.png" alt="Ilustrativo" className="logo "></img>
 </div>
 <div className="ventaja-item">
     <p className="ventaja-titulo">Trabaje con Criptocodo</p>
     <p>¿Ya eres cliente de Coinbase? Vincula tu cuenta de Criptocodo a tu Wallet para acceder fácilmente a tus criptomonedas</p>
-    <img src="./img/icons8-billetera-32.png" alt="Ilustrativo" className="logo ilustrativo"></img>
+    <img src="./img/icons8-billetera-32.png" alt="Ilustrativo" className="logo"></img>
 </div>
 </div>
 <div className="contenedor-externo margen-superior">
@@ -67,22 +69,22 @@ export default function Wallet() {
 <div className="descarga-item">
     <p className="descarga-titulo">Descarga para iOS</p>
     <p>Descarga el Wallet del App Store</p>
-    <img src="./img/app-store.png" alt="App Store Logo" className="logo iOS pointer"></img>
+    <img src="./img/app-store.png" alt="App Store Logo" className="logo_pointer"></img>
 </div>
 <div className="descarga-item">
     <p className="descarga-titulo">Descarga para Android</p>
     <p>Descarga el Wallet desde el Play Store</p>
-    <img src="./img/play-store.png" alt="Play Store Logo" className="logo android pointer"></img>
+    <img src="./img/play-store.png" alt="Play Store Logo" className="logo_pointer"></img>
 </div>
 <div className="descarga-item">
     <p className="descarga-titulo">Descarga para Chrome</p>
     <p>Descarga la extensión de Chrome desde el Chrome Web Store</p>
-    <img src="./img/google-chrome.png" alt="Chrome Logo" className="logo Chrome pointer"></img>
+    <img src="./img/google-chrome.png" alt="Chrome Logo" className="logo_pointer"></img>
 </div>
 <div className="descarga-item">
     <p className="descarga-titulo">Descarga para Firefox</p>
     <p>Descarga la extensión para Firefox desde el store</p>
-    <img src="./img/mozilla-firefox.png" alt="Firefox Logo" className="logo Firefox pointer"></img>
+    <img src="./img/mozilla-firefox.png" alt="Firefox Logo" className="logo_pointer"></img>
 </div>
 </div>
 <div className="contenedor-externo disclaimer">

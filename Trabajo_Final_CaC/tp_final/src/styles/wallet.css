@@ -7,11 +7,13 @@ body {
     padding: 0;
     overflow-x: hidden;
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
 }
-
+.div_ppal{
+    margin: 0 auto;
+    position: relative;
+}
 .contenedor {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -38,6 +40,7 @@ p {
 
 .funcionalidades {
     margin-bottom: 40px;
+    
 }
 
 .wallet-funcionalidad {
@@ -97,17 +100,25 @@ p {
 }
 
 .logo {
-    max-width: 100px;
+    height: 6rem;
+    width: 6rem;
     margin: 10px 0;
     transition: transform 0.3s ease;
 }
 
+.logo_pointer{
+    width: 4rem;
+}
 .pointer {
     cursor: pointer;
 }
 
 .logo:hover {
     transform: scale(1.1);
+}
+.logo_pointer:hover {
+    transform: scale(1.1);
+    transition: 500ms ease-in-out;
 }
 
 /* Estilos del video */

@@ -1,7 +1,8 @@
 /* ------------ NavBar general -------------- */
-:root{
-    --bg-nav-solid:rgba(147, 147, 173, 0.884);
+:root {
+    --bg-nav-solid: rgba(147, 147, 173, 0.884);
 }
+
 .navbar {
     min-width: 190px;
     max-width: 1920px;
@@ -28,6 +29,15 @@
     animation-iteration-count: 1;
 }
 
+.nav-item_true {
+    display: flex;
+    background-color: pink;
+    border-radius: 15px;
+    width: min-content;
+    align-items: center;
+    justify-content: center;
+}
+
 /* ----------------Footer-------------- */
 #footer {
     display: flex;
@@ -41,7 +51,7 @@
     width: 4rem;
 }
 
-.img-footer:hover{
+.img-footer:hover {
     transform: scale(1.1);
     transition: 500ms ease-in;
 }
@@ -54,12 +64,14 @@
         position: fixed;
         height: 50px;
     }
-
+    .nav-item_true {
+        width:20rem; 
+    }
     nav ul {
         padding: 0.5rem 1rem;
         background: url(/img/logo.png),
             radial-gradient(circle, rgba(2, 0, 36, 0.7) 29%, rgba(9, 9, 121, 0.7) 54%, rgba(137, 138, 138, 0.5550595238095238) 83%);
-        background-size:20dvh;
+        background-size: 20dvh;
         background-position: center;
         border-radius: 2rem;
         max-width: 45dvw;
@@ -141,7 +153,8 @@
         font-size: .5rem;
     }
 
-    #navbar a, nav-item,
+    #navbar a,
+    nav-item,
     nav ul li:hover {
         transform: scale(1.5);
         transition: 0.5s;

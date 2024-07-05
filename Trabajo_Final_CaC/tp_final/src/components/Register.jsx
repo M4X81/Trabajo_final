@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; 
+import { useAuth } from '../context/authContext'; 
 import '../styles/form.css';
 
 const Register = () => {
@@ -7,6 +8,9 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [ageConfirmed, setAgeConfirmed] = useState(false);
+
+    const { login } = useAuth();  // Hook del contexto de autenticación
+    const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
 
     const validateFields = () => {
         return email.trim() !== '' && password.trim() !== '' && termsAccepted && ageConfirmed;
@@ -18,16 +22,23 @@ const Register = () => {
             alert('Por favor, complete los campos para continuar.');
             return;
         }
+
+        // Lógica de registro (aquí podrías llamar a una API real)
         localStorage.setItem('email', email);
         localStorage.setItem('pass', password);
-        window.location.href = '/login-exitoso';
+
+        // Actualizar el contexto de autenticación
+        login(email);  // Pasar el email como identificador de usuario logueado
+
+        // Redireccionar a la página de éxito de login
+        navigate('/');
     };
 
     return (
         <div className="contenedor">
             <div className="contenedor-layout">
                 <main className="contenedor-tarjeta">
-                    <div className="logo"></div>
+                    <div className="logo_reg"></div>
                     <h4>Te damos la bienvenida a nuestra plataforma CriptoApp</h4>
                     <h6>Regístrate para continuar</h6>
                     <form className="form" onSubmit={handleRegister}>
@@ -59,11 +70,8 @@ const Register = () => {
                                     Al crear una cuenta, acepto los{' '}
                                     <Link to="/tyc" target="_blank" rel="noopener noreferrer">
                                         Términos de servicio
-                                    </Link>
-
-                                    {' '}
+                                    </Link>{' '}
                                     y la{' '}
-                                    Al crear una cuenta, acepto los{' '}
                                     <Link to="/pdp" target="_blank" rel="noopener noreferrer">
                                         Política de privacidad
                                     </Link>{' '}
@@ -113,3 +121,4 @@ const Register = () => {
 };
 
 export default Register;
+

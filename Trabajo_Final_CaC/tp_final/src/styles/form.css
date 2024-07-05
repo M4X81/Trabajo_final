@@ -54,12 +54,12 @@
     text-align: center;
 }
 
-.logo {
+.logo_reg {
     position: relative;
-    height: 3rem;
+    height: 6rem;
     background-image: url(/img/logo.png);
     background-position: center;
-    background-size: 10%;
+    background-size: 20%;
     background-repeat: no-repeat;
 }
 

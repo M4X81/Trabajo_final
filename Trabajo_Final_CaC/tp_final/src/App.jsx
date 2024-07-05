@@ -8,11 +8,13 @@ import Inicio from './components/Inicio';
 import Exchange from './components/Exchange';
 import Tyc from './components/Tyc';
 import Pdp from './components/Pdp';
+import { AuthProvider } from './context/authContext';
 
 function App() {
 
   return (
         <>
+        <AuthProvider>
         <HashRouter>
         <Navbar />
 
@@ -26,6 +28,7 @@ function App() {
         </Routes>
         <Footer />
       </HashRouter>
+      </AuthProvider>
        
     </>
   )
