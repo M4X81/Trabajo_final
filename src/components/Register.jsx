@@ -30,7 +30,7 @@ const Register = () => {
         setError(null);
 
         try {
-            const response = await fetch('http://tudominio.com/api/register', {
+            const response = await fetch('http://https://tp-final-back.vercel.app/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
