@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'; 
-import { useAuth } from '../context/authContext'; 
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/authContext';
 import '../styles/form.css';
 
 const Register = () => {
@@ -8,6 +8,8 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [ageConfirmed, setAgeConfirmed] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const { login } = useAuth();  // Hook del contexto de autenticación
     const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
@@ -16,22 +18,42 @@ const Register = () => {
         return email.trim() !== '' && password.trim() !== '' && termsAccepted && ageConfirmed;
     };
 
-    const handleRegister = (event) => {
+    const handleRegister = async (event) => {
         event.preventDefault();
+
         if (!validateFields()) {
             alert('Por favor, complete los campos para continuar.');
             return;
         }
 
-        // Lógica de registro (aquí podrías llamar a una API real)
-        localStorage.setItem('email', email);
-        localStorage.setItem('pass', password);
+        setLoading(true);
+        setError(null);
 
-        // Actualizar el contexto de autenticación
-        login(email);  // Pasar el email como identificador de usuario logueado
+        try {
+            const response = await fetch('http://tudominio.com/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
 
-        // Redireccionar a la página de éxito de login
-        navigate('/');
+            if (!response.ok) {
+                throw new Error('Fallo en el registro, intente nuevamente.');
+            }
+
+            const data = await response.json();
+
+            // Guardar la información en el contexto
+            login(data.email);  // O el identificador de usuario retornado por la API
+
+            // Redirigir al usuario a la página de perfil
+            navigate('/users');
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -95,8 +117,9 @@ const Register = () => {
                                     onChange={(e) => setAgeConfirmed(e.target.checked)}
                                 />
                             </article>
-                            <button type="submit" id="login-button">
-                                Registrarse
+                            {error && <p className="error">{error}</p>}
+                            <button type="submit" id="login-button" disabled={loading}>
+                                {loading ? 'Registrando...' : 'Registrarse'}
                             </button>
                         </section>
                         <section className="separador">
@@ -121,4 +144,5 @@ const Register = () => {
 };
 
 export default Register;
+
 
