@@ -6,7 +6,7 @@ import '../styles/form.css';
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [termsAccepted, setTermsAccepted] = useState(false);
+    const [termsAccepted, setTermsAccepted] = useState(false);//123
     const [ageConfirmed, setAgeConfirmed] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
