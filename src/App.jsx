@@ -10,6 +10,7 @@ import Tyc from './components/Tyc';
 import Pdp from './components/Pdp';
 import { AuthProvider } from './context/authContext';
 import Users from './components/Users';
+import Sesion from './components/Sesion';
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/tyc' element={<Tyc/>} />
           <Route path='/pdp' element={<Pdp/>} />
           <Route path='/users' element={<Users/>} />
+          <Route path='/sesion' element={<Sesion/>} />
         </Routes>
         <Footer />
       </HashRouter>
