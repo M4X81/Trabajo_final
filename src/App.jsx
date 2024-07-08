@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route, BrowserRouter } from 'react-router-dom'
 import Navbar from '../src/components/Navbar'
 import './App.css';
 import Register from './components/Register';
@@ -17,7 +17,7 @@ function App() {
   return (
         <>
         <AuthProvider>
-        <HashRouter>
+        <BrowserRouter>
         <Navbar />
 
         <Routes>
@@ -31,7 +31,7 @@ function App() {
           <Route path='/sesion' element={<Sesion/>} />
         </Routes>
         <Footer />
-      </HashRouter>
+      </BrowserRouter>
       </AuthProvider>
        
     </>
