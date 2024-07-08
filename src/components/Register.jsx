@@ -6,7 +6,7 @@ import '../styles/form.css';
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [termsAccepted, setTermsAccepted] = useState(false);//123
+    const [termsAccepted, setTermsAccepted] = useState(false);
     const [ageConfirmed, setAgeConfirmed] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -30,7 +30,6 @@ const Register = () => {
         setError(null);
 
         try {
-            // const response = await fetch('https://tp-final-back.vercel.app/api/register', {
             const response = await fetch('https://trabajo-finalcac.vercel.app/#/register', {
                 method: 'POST',
                 headers: {

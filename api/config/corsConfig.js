@@ -6,6 +6,7 @@ const allowedOrigins = [
 
 const corsOptions = {
     origin: (origin, callback) => {
+        console.log("Solicitando desde origen:", origin); // Añadido para verificar el origen
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
             // El !origin permite solicitudes sin origen, como las de la misma máquina (ej. postman o curl).
             callback(null, true);

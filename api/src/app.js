@@ -2,13 +2,13 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
-// const corsOptions = require('../config/corsConfig');
+const corsOptions = require('../config/corsConfig');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 console.log("cors inicializado");
-// console.log("CORS inicializado con origen permitido:", corsOptions.origin);
+console.log("CORS inicializado con origen permitido:", corsOptions.origin);
 app.use(express.json());
 console.log("Servidor está iniciando...");
 
