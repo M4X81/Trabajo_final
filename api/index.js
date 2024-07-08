@@ -95,7 +95,7 @@ pool.connect(err => {
 // Ruta de registro
 app.options('*', cors(corsOptions)); // Maneja las solicitudes OPTIONS
 
-app.post('/api/register', async (req, res) => {
+app.post('/register', async (req, res) => {
     const { email, password } = req.body;
     console.log("Datos recibidos para registro:", { email, password });
     try {

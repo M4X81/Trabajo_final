@@ -28,7 +28,7 @@ pool.connect(err => {
 });
 
 // Ruta de registro
-app.post('/api/register', async (req, res) => {
+app.post('/register', async (req, res) => {
     const { email, password } = req.body;
   
     try {

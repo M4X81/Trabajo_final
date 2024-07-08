@@ -1,7 +1,7 @@
 const allowedOrigins = [
     'https://trabajo-finalcac.vercel.app',
     'http://localhost:3001',
-    'https://trabajo-finalcac.vercel.app/api/register'
+    'https://trabajo-finalcac.vercel.app/register'
 ];
 
 const corsOptions = {
