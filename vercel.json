@@ -2,8 +2,8 @@
     "version": 2,
     "routes": [
       {
-        "src": "/api/register",
-        "dest": "http://localhost:3001/register"
+        "src": "/register",
+        "dest": "/api/src/app.js"
       }
     ]
   }
