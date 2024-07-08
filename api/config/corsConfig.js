@@ -2,7 +2,7 @@ const allowedOrigins = [
     'https://trabajo-finalcac.vercel.app',
     'https://trabajo-finalcac.vercel.app/#/register', // Esto no se necesita realmente porque el #/register es una parte de la URL que no se envía al servidor
     'http://localhost:3001',
-    'https://otro-origen-2.vercel.app'
+    'https://trabajo-finalcac.vercel.app/api/register'
 ];
 
 const corsOptions = {

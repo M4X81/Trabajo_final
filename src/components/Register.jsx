@@ -31,7 +31,7 @@ const Register = () => {
 
         try {
             // const response = await fetch('https://tp-final-back.vercel.app/api/register', {
-            const response = await fetch('https://trabajo-finalcac.vercel.app/api/register', {
+            const response = await fetch('https://trabajo-finalcac.vercel.app/#/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
