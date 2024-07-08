@@ -8,7 +8,6 @@ require('dotenv').config();
 const app = express();
 app.use(cors(corsOptions));
 console.log("cors inicializado");
-console.log("CORS inicializado con origen permitido:", corsOptions.origin);
 app.use(express.json());
 console.log("Servidor está iniciando...");
 

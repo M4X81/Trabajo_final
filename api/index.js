@@ -65,16 +65,19 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+const corsOptions = require('./config/corsConfig');
+const config = require('./config/config');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
+console.log("CORS inicializado con origen permitido:", corsOptions.origin);
 console.log("cors inicializado");
 app.use(express.json());
 console.log("Servidor está iniciando...");
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.POSTGRES_URL,
   ssl: {
     rejectUnauthorized: false
   }
@@ -90,19 +93,28 @@ pool.connect(err => {
   });
 
 // Ruta de registro
+app.options('*', cors(corsOptions)); // Maneja las solicitudes OPTIONS
+
 app.post('/api/register', async (req, res) => {
     const { email, password } = req.body;
-  
+    console.log("Datos recibidos para registro:", { email, password });
     try {
       const result = await pool.query(
         'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
         [email, password]
       );
+      console.log("Resultado de la inserción en la base de datos:", result.rows[0]);
       res.status(201).json(result.rows[0]);
     } catch (err) {
+        console.error('Error al insertar en la base de datos:', err);
       res.status(500).json({ error: err.message });
     }
   });
+
+  app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
+});
   
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
