@@ -13,7 +13,8 @@ app.use(express.json());
 console.log("Servidor está iniciando...");
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+//   connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.POSTGRES_URL,
   ssl: {
     rejectUnauthorized: false
   }
