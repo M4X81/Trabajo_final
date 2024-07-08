@@ -4,10 +4,6 @@
       {
         "src": "/api/register",
         "dest": "http://localhost:3001/register"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/index.html"
       }
     ]
   }
