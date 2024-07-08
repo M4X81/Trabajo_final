@@ -30,7 +30,7 @@ const Register = () => {
         setError(null);
 
         try {
-            const response = await fetch('/register', {
+            const response = await fetch('https://trabajo-finalcac.vercel.app/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
