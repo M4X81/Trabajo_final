@@ -2,11 +2,13 @@
 const express = require('express');
 const cors = require('cors');
 const { Pool } = require('pg');
+const corsOptions = require('../config/corsConfig');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 console.log("cors inicializado");
+console.log("CORS inicializado con origen permitido:", corsOptions.origin);
 app.use(express.json());
 console.log("Servidor está iniciando...");
 
@@ -15,6 +17,14 @@ const pool = new Pool({
   ssl: {
     rejectUnauthorized: false
   }
+});
+
+pool.connect(err => {
+    if (err) {
+        console.error('Error al conectar a la base de datos:', err);
+    } else {
+        console.log('Conectado a la base de datos con éxito');
+    }
 });
 
 // Ruta de registro
