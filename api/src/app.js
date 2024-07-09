@@ -72,7 +72,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 // Ruta catch-all para manejar todas las rutas del lado del cliente
 app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, '../build', 'app.jsx');
+    const filePath = path.join(__dirname, '../build', 'index.html');
     console.log(`Enviando archivo: ${filePath}`);
     res.sendFile(filePath);
 });
