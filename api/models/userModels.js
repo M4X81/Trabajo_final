@@ -17,7 +17,6 @@
 
 const { Pool } = require('pg');
 const bcrypt = require('bcryptjs');
-const config = require('../config/config');
 
 // Configuración de la conexión a PostgreSQL
 const pool = new Pool({

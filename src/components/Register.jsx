@@ -48,7 +48,7 @@ const Register = () => {
             login(data.email);  // O el identificador de usuario retornado por la API
 
             // Redirigir al usuario a la página de perfil
-            navigate('/');
+            navigate('/users');
         } catch (error) {
             setError(error.message);
         } finally {

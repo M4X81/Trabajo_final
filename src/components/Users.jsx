@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/form.css';
 
 export default function Users() {
     const { username, pass } = useAuth();
+    const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
     const [userData, setUserData] = useState({
-        // email: '',
-        // password: '',
+        email: '',
+        password: '',
         user_name: '',
         lastname: '',
         address: '',
@@ -24,9 +25,7 @@ export default function Users() {
         const fetchData = async () => {
             try {
                 const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
-                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`);
-                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${formattedUsername}`);
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
                 const data = await response.json();
                 if (response.ok) {
                     setUserData({
@@ -46,7 +45,7 @@ export default function Users() {
         };
 
         fetchData();
-    }, [username, pass]);
+    }, [username, pass, email]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -63,9 +62,18 @@ export default function Users() {
 
         try {
             const formattedUsername = encodeURIComponent(username);
-            // const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${formattedUsername}`, {
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {
-                method: 'PUT',
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+
+            let method = 'PUT'; // Método por defecto para actualizar
+
+            if (!email) {
+                // Si no hay email (es decir, estás creando un nuevo usuario)
+                apiUrl = `https://trabajo-finalcac.vercel.app/users`;
+                method = 'POST';
+            }
+
+            const response = await fetch(apiUrl, {
+                method: method,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -96,34 +104,34 @@ export default function Users() {
 
     return (
         <div>
-        <h4>Completar perfil de usuario de {`${username.split('@')[0]}`}</h4>
-        <div className="container">
-            <h6>Registro</h6>
-            <form id="registerForm">
-                <label htmlFor="regEmail">Email:</label>
-                <input
-                    type="email"
-                    id="regEmail"
-                    name="email"
-                    value={`${username}`}
-                    readOnly // Para evitar que se pueda editar el campo
-                    required
-                /><br />
-                <label htmlFor="regPassword">Contraseña:</label>
-                <input
-                    type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
-                    id="regPassword"
-                    name="password"
-                    value={`${pass}`} // Aquí supongo que `password` también está disponible en tu contexto
-                    readOnly // Para evitar que se pueda editar el campo
-                    required
-                />
-                <button type="button" onClick={togglePasswordVisibility}>
-                    <img src="/img/ojo-cerrado.png" alt="ojo"></img>
-                </button>
-                <br />
-            </form>
-        </div>
+            <h4>Completar perfil de usuario de {`${username.split('@')[0]}`}</h4>
+            <div className="container">
+                <h6>Registro</h6>
+                <form id="registerForm">
+                    <label htmlFor="regEmail">Email:</label>
+                    <input
+                        type="email"
+                        id="regEmail"
+                        name="email"
+                        value={`${username}`}
+                        readOnly // Para evitar que se pueda editar el campo
+                        required
+                    /><br />
+                    <label htmlFor="regPassword">Contraseña:</label>
+                    <input
+                        type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
+                        id="regPassword"
+                        name="password"
+                        value={`${pass}`} // Aquí supongo que `password` también está disponible en tu contexto
+                        readOnly // Para evitar que se pueda editar el campo
+                        required
+                    />
+                    <button type="button" onClick={togglePasswordVisibility}>
+                        <img src="/img/ojo-cerrado.png" alt="ojo"></img>
+                    </button>
+                    <br />
+                </form>
+            </div>
 
             <div className="container">
                 <h6>Completar datos</h6>
@@ -192,6 +200,7 @@ export default function Users() {
         </div>
     );
 }
+
 
 
 
