@@ -6,6 +6,8 @@ import '../styles/form.css';
 export default function Users() {
     const { username } = useAuth();
     const [userData, setUserData] = useState({
+        email: '',
+        password: '',
         username: '',
         lastname: '',
         address: '',
@@ -76,12 +78,12 @@ export default function Users() {
             <div className="container">
                 <h6>Registro</h6>
                 <form id="registerForm">
-                    <label htmlFor="regUsername">Usuario:</label>
+                    <label htmlFor="regEmail">Email:</label>
                     <input
-                        type="text"
-                        id="regUsername"
-                        name="username"
-                        value={userData.username}
+                        type="email"
+                        id="regEmail"
+                        name="email"
+                        value={userData.email}
                         onChange={handleChange}
                         required
                     /><br />
@@ -90,9 +92,10 @@ export default function Users() {
                         type="password"
                         id="regPassword"
                         name="password"
+                        value={userData.password}
+                        onChange={handleChange}
                         required
                     /><br />
-                    <button type="submit">Registrarse</button>
                 </form>
             </div>
 
@@ -163,4 +166,5 @@ export default function Users() {
         </div>
     );
 }
+
 
