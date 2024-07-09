@@ -22,10 +22,10 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`);
                 const data = await response.json();
                 if (response.ok) {
-                    setUserData(data);
+                    setUserData(data); // Establece todos los datos del usuario desde la respuesta del servidor
                 } else {
                     setError(data.error);
                 }
@@ -40,7 +40,8 @@ export default function Users() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserData(prevData => ({
-            ...prevData, [name]: value
+            ...prevData,
+            [name]: value
         }));
     };
 
@@ -50,12 +51,12 @@ export default function Users() {
         setError(null);
 
         try {
-            const response = await fetch('https://trabajo-finalcac.vercel.app/users', {
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ ...userData, email: username })
+                body: JSON.stringify(userData)
             });
 
             const data = await response.json();
@@ -84,7 +85,7 @@ export default function Users() {
                         id="regEmail"
                         name="email"
                         value={userData.email}
-                        onChange={handleChange}
+                        readOnly // Para evitar que se pueda editar el campo
                         required
                     /><br />
                     <label htmlFor="regPassword">Contraseña:</label>
@@ -93,7 +94,7 @@ export default function Users() {
                         id="regPassword"
                         name="password"
                         value={userData.password}
-                        onChange={handleChange}
+                        readOnly // Para evitar que se pueda editar el campo
                         required
                     /><br />
                 </form>
@@ -166,5 +167,6 @@ export default function Users() {
         </div>
     );
 }
+
 
 
