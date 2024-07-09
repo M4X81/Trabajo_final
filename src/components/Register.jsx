@@ -37,10 +37,10 @@ const Register = () => {
                 // const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
                 const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const data = await response.json();
-                if (response.json.ok) {
+                if (response.ok) {
                     setUserData({
                         email: data.email,
-                        password: data.password,
+                      
                         user_name: data.user_name,
                         lastname: data.lastname,
                         address: data.address,
@@ -59,53 +59,53 @@ const Register = () => {
         fetchData();
     }, [username, pass, email]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUserData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setUserData(prevData => ({
+    //         ...prevData,
+    //         [name]: value
+    //     }));
+    // };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError(null);
+    // const handleSubmit = async (e) => {
+    //     e.preventDefault();
+    //     setLoading(true);
+    //     setError(null);
 
-        try {
-            // const formattedUsername = encodeURIComponent(username);
-            // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
-            let apiUrl = `https://trabajo-finalcac.vercel.app`;
+    //     try {
+    //         // const formattedUsername = encodeURIComponent(username);
+    //         // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+    //         let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
 
-            let method = 'PUT'; // Método por defecto para actualizar
+    //         let method = 'PUT'; // Método por defecto para actualizar
 
-            if (!email) {
-                // Si no hay email (es decir, estás creando un nuevo usuario)
-                apiUrl = `https://trabajo-finalcac.vercel.app`;
-                method = 'POST';
-            }
+    //         if (!email) {
+    //             // Si no hay email (es decir, estás creando un nuevo usuario)
+    //             apiUrl = `https://trabajo-finalcac.vercel.app/users`;
+    //             method = 'POST';
+    //         }
 
-            const response = await fetch(apiUrl, {
-                method: method,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            });
+    //         const response = await fetch(apiUrl, {
+    //             method: method,
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(userData)
+    //         });
 
-            const data = await response.json();
-            if (response.json.ok) {
-                alert('Datos actualizados con éxito');
-                navigate('/');
-            } else {
-                setError(data.error);
-            }
-        } catch (error) {
-            setError(error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
+    //         const data = await response.json();
+    //         if (response.json.ok) {
+    //             alert('Datos actualizados con éxito');
+    //             navigate('/');
+    //         } else {
+    //             setError(data.error);
+    //         }
+    //     } catch (error) {
+    //         setError(error.message);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
     //-----------------------------------------
 
     const { login } = useAuth();  // Hook del contexto de autenticación
@@ -154,7 +154,7 @@ const Register = () => {
     };
 
     const handleLoginRedirect = () => {
-        navigate('/login');  // Redirigir al usuario a la página de inicio de sesión
+        navigate('/');  // Redirigir al usuario a la página de inicio de sesión
     };
 
     return (
@@ -194,7 +194,7 @@ const Register = () => {
                                 id="user_name"
                                 name="user_name"
                                 value={userData.user_name}
-                                onChange={handleChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="lastname">Apellido:</label>
@@ -203,7 +203,7 @@ const Register = () => {
                                 id="lastname"
                                 name="lastname"
                                 value={userData.lastname}
-                                onChange={handleChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="address">Dirección:</label>
@@ -212,7 +212,7 @@ const Register = () => {
                                 id="address"
                                 name="address"
                                 value={userData.address}
-                                onChange={handleChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="phone">Teléfono:</label>
@@ -221,7 +221,7 @@ const Register = () => {
                                 id="phone"
                                 name="phone"
                                 value={userData.phone}
-                                onChange={handleChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="country">País:</label>
@@ -230,7 +230,7 @@ const Register = () => {
                                 id="country"
                                 name="country"
                                 value={userData.country}
-                                onChange={handleChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="city">Ciudad:</label>
@@ -239,7 +239,7 @@ const Register = () => {
                                 id="city"
                                 name="city"
                                 value={userData.city}
-                                onChange={handleChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <button type="submit" disabled={loading}>
