@@ -6,7 +6,7 @@ export default function Exchange() {
         <div>
             <div className="contenedor-externo">
                 <div className="contenedor exchange">
-                    <h1>Criptocodo Exchange</h1>
+                    <h1>CriptoApp Exchange</h1>
                     <p>En nuestro sitio podés consultar algunas de las cotizaciones de activos cripto.</p>
                 </div>
             </div>
@@ -14,7 +14,7 @@ export default function Exchange() {
             <div className="contenedor resumen-mercados">
                 <h2>Resumen de mercados</h2>
             </div>
-            
+
             <div className="contenedor tres-columnas">
                 <div className="exchange-tendencias tarjeta">
                     <h3><img src="img/tenencias.png" alt="logo de tendencias" />Tendencias</h3>
@@ -122,7 +122,7 @@ export default function Exchange() {
             <div className="contenedor populares">
                 <h2>Podrían interesarte</h2>
             </div>
-            
+
             <div className="contenedor tres-columnas populares">
                 <div className="exchange-tendencias popular">
                     <h3 className="activo"><img src="img/logo_BTC.png" alt="logo btc" />BTC</h3>
@@ -281,7 +281,7 @@ export default function Exchange() {
             <div className="contenedor-externo disclaimer">
                 <div className="contenedor">
                     <p>
-                        Al utilizar este Sitio, aceptas los Términos de servicio de Criptocodo, las pautas de marca de Criptocodo y todas las reglas y políticas de Criptocodo, que pueden estar disponibles y actualizadas de vez en cuando. Todos los nombres de empresas, productos y servicios que se utilicen en este sitio son solo a fines de identificación y no se consideran promoción. Reconoce que Criptocodo es el titular único de todas las marcas comerciales de Criptocodo y se compromete a usar el contenido del sitio o las marcas de Criptocodo solo con fines personales o comerciales. Criptocodo puede revisar el uso de los materiales de marca en cualquier momento y se reserva el derecho de finalizar o modificar cualquier uso.
+                        Al utilizar este Sitio, aceptas los Términos de servicio de CriptoApp, las pautas de marca de CriptoApp y todas las reglas y políticas de CriptoApp, que pueden estar disponibles y actualizadas de vez en cuando. Todos los nombres de empresas, productos y servicios que se utilicen en este sitio son solo a fines de identificación y no se consideran promoción. Reconoce que CriptoApp es el titular único de todas las marcas comerciales de CriptoApp y se compromete a usar el contenido del sitio o las marcas de CriptoApp solo con fines personales o comerciales. CriptoApp puede revisar el uso de los materiales de marca en cualquier momento y se reserva el derecho de finalizar o modificar cualquier uso.
                     </p>
                 </div>
             </div>
