@@ -35,7 +35,7 @@ export default function Users() {
         };
 
         fetchData();
-    }, [username, passw]);
+    }, [username, pass]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
