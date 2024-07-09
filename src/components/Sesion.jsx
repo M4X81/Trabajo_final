@@ -12,17 +12,16 @@ const Sesion = () => {
     const { login } = useAuth();  // Hook del contexto de autenticación
     const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
 
-    const handleRegister = async (event) => {
+    // const handleRegister = async (event) => {
+    //     event.preventDefault();
+
+
+    const handleLogin = async (event) => {
         event.preventDefault();
-    
-        if (!validateFields()) {
-            alert('Por favor, complete los campos para continuar.');
-            return;
-        }
-    
+
         setLoading(true);
         setError(null);
-    
+
         try {
             const response = await fetch('https://trabajo-finalcac.vercel.app/login', {
                 method: 'POST',
@@ -31,18 +30,22 @@ const Sesion = () => {
                 },
                 body: JSON.stringify({ email, password }),
             });
-    
+
+            const data = await response.json();
+            
             if (!response.ok) {
                 throw new Error('Credenciales incorrectas');
-            }
-    
-            const data = await response.json();
-    
-            // Guardar la información en el contexto o local storage si es necesario
+            }else{
+                // Guardar la información en el contexto o local storage si es necesario
             login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación
-    
+
             // Redirigir al usuario a la página de perfil u otra página protegida
-            navigate('/users');
+            navigate('/');
+            }
+
+
+
+            
         } catch (error) {
             setError(error.message);
         } finally {
@@ -50,9 +53,9 @@ const Sesion = () => {
         }
     };
 
-    const handleLoginRedirect = () => {
-        navigate('/');  // Redirigir al usuario a la página de inicio 
-    };
+    // const handleLoginRedirect = () => {
+    //     navigate('/');  // Redirigir al usuario a la página de inicio 
+    // };
 
     return (
         <div className="contenedor">
@@ -61,7 +64,7 @@ const Sesion = () => {
                     <div className="logo_reg"></div>
                     <h4>Te damos la bienvenida a nuestra plataforma CriptoApp</h4>
 
-                    <form className="form" onSubmit={handleRegister}>
+                    <form className="form" onSubmit={handleLogin}>
                         <section className="formulario">
                             <label htmlFor="email">
                                 Correo o número de teléfono
@@ -85,12 +88,12 @@ const Sesion = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </label>
-                           
+
                             {error && <p className="error">{error}</p>}
 
                         </section>
                         <section className="separador">
-                               <button
+                            <button
                                 type="button"
                                 id="login-button2"
                                 onClick={handleLoginRedirect}
