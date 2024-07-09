@@ -42,7 +42,6 @@ const Sesion = () => {
             
             if (!response.ok) {
                 throw new Error('Credenciales incorrectas');
-                alert("Email o Contraseña incorrectos, intente nuevamente...")
             }else{
                 // Guardar la información en el contexto o local storage si es necesario
             login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación
@@ -53,6 +52,7 @@ const Sesion = () => {
             
         } catch (error) {
             setError(error.message);
+            alert("Email o Contraseña incorrectos, intente nuevamente...")
         } finally {
             setLoading(false);
         }
