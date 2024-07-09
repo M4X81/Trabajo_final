@@ -6,9 +6,9 @@ import '../styles/form.css';
 export default function Users() {
     const { username, pass } = useAuth();
     const [userData, setUserData] = useState({
-        email: '',
-        password: '',
-        username: '',
+        // email: '',
+        // password: '',
+        user_name: '',
         lastname: '',
         address: '',
         phone: '',
@@ -93,7 +93,7 @@ export default function Users() {
                         type="password"
                         id="regPassword"
                         name="password"
-                        value={pass}
+                        value={`${pass}`}
                         readOnly // Para evitar que se pueda editar el campo
                         required
                     /><br />
@@ -103,12 +103,12 @@ export default function Users() {
             <div className="container">
                 <h6>Completar datos</h6>
                 <form id="profileForm" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Nombre:</label>
+                    <label htmlFor="user_name">Nombre:</label>
                     <input
                         type="text"
-                        id="username"
-                        name="username"
-                        value={userData.username}
+                        id="user_name"
+                        name="user_name"
+                        value={userData.user_name}
                         onChange={handleChange}
                         required
                     /><br />
