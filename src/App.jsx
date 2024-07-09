@@ -28,7 +28,7 @@ function App() {
           <Route path='/tyc' element={<Tyc/>} />
           <Route path='/pdp' element={<Pdp/>} />
           <Route path='/users' element={<Users/>} />
-          <Route path='/sesion' element={<Sesion/>} />
+          <Route path='/login' element={<Sesion/>} />
         </Routes>
         <Footer />
       </BrowserRouter>

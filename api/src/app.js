@@ -43,7 +43,7 @@ app.post('/register', async (req, res) => {
   });
 
   // Agrego ruta para inicio de sesión(reviso la db para validar si el usuario existe)
-app.post('/sesion', async (req, res) => {
+app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
     try {
