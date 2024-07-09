@@ -72,14 +72,14 @@ export default function Users() {
         } finally {
             setLoading(false);
         }
+    };
 
-        const togglePasswordVisibility = () => {
-            setShowPassword(true); // Mostrar la contraseña temporalmente como texto
-    
-            setTimeout(() => {
-                setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 3 segundos
-            }, 3000);
-        };
+    const togglePasswordVisibility = () => {
+        setShowPassword(true); // Mostrar la contraseña temporalmente como texto
+
+        setTimeout(() => {
+            setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 3 segundos
+        }, 3000);
     };
 
     return (
