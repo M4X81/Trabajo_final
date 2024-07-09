@@ -69,11 +69,12 @@ app.post('/login', async (req, res) => {
   //sino al actualizar o volver hacia atras no encuentra la ruta/pagina y da un 404
 
 // Ruta catch-all para manejar todas las rutas del lado del cliente
-app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, 'app.jsx');
-    console.log(`Enviando archivo: ${filePath}`);
-    res.sendFile(filePath);
-});
+
+// app.get('*', (req, res) => {
+//     const filePath = path.join(__dirname, 'app.jsx');
+//     console.log(`Enviando archivo: ${filePath}`);
+//     res.sendFile(filePath);
+// });
 
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
