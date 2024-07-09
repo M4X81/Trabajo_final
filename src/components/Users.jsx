@@ -22,7 +22,7 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const data = await response.json();
                 if (response.ok) {
                     setUserData(data);
