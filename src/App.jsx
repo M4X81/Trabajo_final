@@ -28,6 +28,7 @@ function App() {
           <Route path='/tyc' element={<Tyc/>} />
           <Route path='/pdp' element={<Pdp/>} />
           <Route path='/users' element={<Users/>} />
+          <Route path='/users:email' element={<Users/>} />
           <Route path='/login' element={<Login/>} />
         </Routes>
         <Footer />
