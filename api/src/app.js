@@ -70,7 +70,7 @@ app.post('/login', async (req, res) => {
 
 // Ruta catch-all para manejar todas las rutas del lado del cliente
 app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, 'index.html');
+    const filePath = path.join(__dirname, 'app.jsx');
     console.log(`Enviando archivo: ${filePath}`);
     res.sendFile(filePath);
 });
