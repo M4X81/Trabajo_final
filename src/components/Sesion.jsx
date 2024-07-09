@@ -94,9 +94,9 @@ const Sesion = () => {
                         </section>
                         <section className="separador">
                             <button
-                                type="button"
+                                type="submit"
                                 id="login-button2"
-                                onClick={handleLoginRedirect}
+                                // onClick={handleLoginRedirect}
                                 disabled={loading}
                             >
                                 {loading ? 'Iniciando...' : 'Iniciar sesión'}
