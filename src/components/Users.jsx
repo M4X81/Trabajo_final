@@ -102,7 +102,7 @@ export default function Users() {
                     type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
                     id="regPassword"
                     name="password"
-                    value={`${password}`} // Aquí supongo que `password` también está disponible en tu contexto
+                    value={`${pass}`} // Aquí supongo que `password` también está disponible en tu contexto
                     readOnly // Para evitar que se pueda editar el campo
                     required
                 />
