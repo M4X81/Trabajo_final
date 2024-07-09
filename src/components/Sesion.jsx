@@ -12,40 +12,36 @@ const Sesion = () => {
     const { login } = useAuth();  // Hook del contexto de autenticación
     const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
 
-    const validateFields = () => {
-        return email.trim() !== '' && password.trim() !== '';
-    };
-
     const handleRegister = async (event) => {
         event.preventDefault();
-
+    
         if (!validateFields()) {
             alert('Por favor, complete los campos para continuar.');
             return;
         }
-
+    
         setLoading(true);
         setError(null);
-
+    
         try {
-            const response = await fetch('https://trabajo-finalcac.vercel.app/register', {
+            const response = await fetch('https://tu-servidor-backend/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, password }),
             });
-
+    
             if (!response.ok) {
-                throw new Error('Fallo en el registro, intente nuevamente.');
+                throw new Error('Credenciales incorrectas');
             }
-
+    
             const data = await response.json();
-
-            // Guardar la información en el contexto
-            login(data.email);  // O el identificador de usuario retornado por la API
-
-            // Redirigir al usuario a la página de perfil
+    
+            // Guardar la información en el contexto o local storage si es necesario
+            login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación
+    
+            // Redirigir al usuario a la página de perfil u otra página protegida
             navigate('/users');
         } catch (error) {
             setError(error.message);
