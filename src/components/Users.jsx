@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/form.css';
 
 export default function Users() {
-    const { username } = useAuth();
+    const { username, pass } = useAuth();
     const [userData, setUserData] = useState({
         email: '',
         password: '',
@@ -35,7 +35,7 @@ export default function Users() {
         };
 
         fetchData();
-    }, [username]);
+    }, [username, passw]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -84,7 +84,7 @@ export default function Users() {
                         type="email"
                         id="regEmail"
                         name="email"
-                        value={userData.email}
+                        value={`${username}`}
                         readOnly // Para evitar que se pueda editar el campo
                         required
                     /><br />
@@ -93,7 +93,7 @@ export default function Users() {
                         type="password"
                         id="regPassword"
                         name="password"
-                        value={userData.password}
+                        value={pass}
                         readOnly // Para evitar que se pueda editar el campo
                         required
                     /><br />
