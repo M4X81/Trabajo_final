@@ -30,6 +30,8 @@ export default function Users() {
                 const data = await response.json();
                 if (response.ok) {
                     setUserData({
+                        email: data.email,
+                        password: data.password,
                         user_name: data.user_name,
                         lastname: data.lastname,
                         address: data.address,
@@ -96,13 +98,13 @@ export default function Users() {
         }
     };
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(true); // Mostrar la contraseña temporalmente como texto
+    // const togglePasswordVisibility = () => {
+    //     setShowPassword(true); // Mostrar la contraseña temporalmente como texto
 
-        setTimeout(() => {
-            setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 3 segundos
-        }, 3000);
-    };
+    //     setTimeout(() => {
+    //         setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 3 segundos
+    //     }, 3000);
+    // };
 
     return (
         <div>
@@ -119,7 +121,7 @@ export default function Users() {
                         readOnly // Para evitar que se pueda editar el campo
                         required
                     /><br />
-                    <label htmlFor="regPassword">Contraseña:</label>
+                    {/* <label htmlFor="regPassword">Contraseña:</label>
                     <input
                         type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
                         id="regPassword"
@@ -131,7 +133,7 @@ export default function Users() {
                     <button type="button" onClick={togglePasswordVisibility}>
                         <img src="/img/ojo-cerrado.png" alt="ojo"></img>
                     </button>
-                    <br />
+                    <br /> */}
                 </form>
             </div>
 
