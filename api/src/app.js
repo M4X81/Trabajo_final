@@ -76,6 +76,74 @@ app.get('*', (req, res) => {
     res.sendFile(filePath);
 });
 
+//me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
+app.get('/users', async (req, res) => {
+    const { email } = req.query;
+
+    try {
+        const userResult = await pool.query(
+            'SELECT id FROM users WHERE email = $1',
+            [email]
+        );
+
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        const userId = userResult.rows[0].id;
+
+        const profileResult = await pool.query(
+            'SELECT * FROM user_profiles WHERE user_id = $1',
+            [userId]
+        );
+
+        if (profileResult.rows.length === 0) {
+            return res.status(404).json({ error: 'Perfil de usuario no encontrado' });
+        }
+
+        res.status(200).json(profileResult.rows[0]);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+//para modificar(agregar)
+// Ruta para actualizar datos del perfil del usuario
+app.put('/users', async (req, res) => {
+    const { email, username, lastname, address, phone, country, city } = req.body;
+
+    try {
+        const userResult = await pool.query(
+            'SELECT id FROM users WHERE email = $1',
+            [email]
+        );
+
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ error: 'Usuario no encontrado' });
+        }
+
+        const userId = userResult.rows[0].id;
+
+        const profileResult = await pool.query(
+            `INSERT INTO user_profiles (user_id, username, lastname, address, phone, country, city)
+             VALUES ($1, $2, $3, $4, $5, $6, $7)
+             ON CONFLICT (user_id) DO UPDATE SET
+             username = EXCLUDED.username,
+             lastname = EXCLUDED.lastname,
+             address = EXCLUDED.address,
+             phone = EXCLUDED.phone,
+             country = EXCLUDED.country,
+             city = EXCLUDED.city
+             RETURNING *`,
+            [userId, username, lastname, address, phone, country, city]
+        );
+
+        res.status(200).json(profileResult.rows[0]);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
