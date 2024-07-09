@@ -9,6 +9,10 @@
       {
         "src": "/login",
         "dest": "/api/src/app.js"
+      },
+      {
+        "src": "/users",
+        "dest": "/api/src/app.js"
       }
     ]
   }

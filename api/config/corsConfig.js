@@ -2,6 +2,7 @@ const allowedOrigins = [
     'https://trabajo-finalcac.vercel.app',
     'http://localhost:3001',
     'https://trabajo-finalcac.vercel.app/register',
+    'https://trabajo-finalcac.vercel.app/users',
     'https://trabajo-finalcac.vercel.app/login'
 ];
 
