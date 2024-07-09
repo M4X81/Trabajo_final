@@ -51,7 +51,7 @@ const Sesion = () => {
     };
 
     const handleLoginRedirect = () => {
-        navigate('/sesion');  // Redirigir al usuario a la página de inicio de sesión
+        navigate('/');  // Redirigir al usuario a la página de inicio 
     };
 
     return (
