@@ -1,6 +1,7 @@
 const allowedOrigins = [
     'https://trabajo-finalcac.vercel.app',
     'http://localhost:3001',
+    'http://localhost:5173',
     'https://trabajo-finalcac.vercel.app/register',
     'https://trabajo-finalcac.vercel.app/users',
     'https://trabajo-finalcac.vercel.app/login'
@@ -16,7 +17,7 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    methods: ['GET,POST,PUT,DELETE,OPTIONS'],
+    methods: ['GET','POST','PUT','DELETE','OPTIONS'],
     allowedHeaders: ['Content-Type,Authorization,X-Requested-With,Accept'],
     optionsSuccessStatus: 200
 };

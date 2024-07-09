@@ -13,6 +13,13 @@
       {
         "src": "/users",
         "dest": "/api/src/app.js"
+      },
+      {
+        "src": "/users",
+        "methods": ["GET", "PUT"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
       }
     ]
   }
