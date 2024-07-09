@@ -28,7 +28,7 @@ export default function Users() {
                 // const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
                 const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const data = await response.json();
-                if (response.ok) {
+                if (response.json.ok) {
                     setUserData({
                         email: data.email,
                         password: data.password,
@@ -66,13 +66,13 @@ export default function Users() {
         try {
             // const formattedUsername = encodeURIComponent(username);
             // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app`;
 
             let method = 'PUT'; // Método por defecto para actualizar
 
             if (!email) {
                 // Si no hay email (es decir, estás creando un nuevo usuario)
-                apiUrl = `https://trabajo-finalcac.vercel.app/users`;
+                apiUrl = `https://trabajo-finalcac.vercel.app`;
                 method = 'POST';
             }
 
@@ -85,7 +85,7 @@ export default function Users() {
             });
 
             const data = await response.json();
-            if (response.ok) {
+            if (response.json.ok) {
                 alert('Datos actualizados con éxito');
                 navigate('/');
             } else {
@@ -120,7 +120,7 @@ export default function Users() {
                         value={`${username}`}
                         readOnly // Para evitar que se pueda editar el campo
                         required
-                    />
+                    /><br />
                     {/* <label htmlFor="regPassword">Contraseña:</label>
                     <input
                         type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
@@ -148,7 +148,7 @@ export default function Users() {
                         value={userData.user_name}
                         onChange={handleChange}
                         required
-                    />
+                    /><br />
                     <label htmlFor="lastname">Apellido:</label>
                     <input
                         type="text"
@@ -157,7 +157,7 @@ export default function Users() {
                         value={userData.lastname}
                         onChange={handleChange}
                         required
-                    />
+                    /><br />
                     <label htmlFor="address">Dirección:</label>
                     <input
                         type="text"
@@ -166,7 +166,7 @@ export default function Users() {
                         value={userData.address}
                         onChange={handleChange}
                         required
-                    />
+                    /><br />
                     <label htmlFor="phone">Teléfono:</label>
                     <input
                         type="text"
@@ -175,7 +175,7 @@ export default function Users() {
                         value={userData.phone}
                         onChange={handleChange}
                         required
-                    />
+                    /><br />
                     <label htmlFor="country">País:</label>
                     <input
                         type="text"
@@ -184,7 +184,7 @@ export default function Users() {
                         value={userData.country}
                         onChange={handleChange}
                         required
-                    />
+                    /><br />
                     <label htmlFor="city">Ciudad:</label>
                     <input
                         type="text"
@@ -193,7 +193,7 @@ export default function Users() {
                         value={userData.city}
                         onChange={handleChange}
                         required
-                    />
+                    /><br />
                     <button type="submit" disabled={loading}>
                         {loading ? 'Actualizando...' : 'Actualizar'}
                     </button>
