@@ -30,7 +30,15 @@ const Sesion = () => {
                 body: JSON.stringify({ email, password }),
             });
 
-            const data = await response.json();
+            // const data = await response.json();
+            try {
+                const data = await response.json();
+                // Procesar los datos recibidos
+            } catch (error) {
+                console.error('Error al parsear respuesta JSON:', error);
+                // Manejar el error, por ejemplo, mostrando un mensaje al usuario
+            }
+            
             
             if (!response.ok) {
                 throw new Error('Credenciales incorrectas');
