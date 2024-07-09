@@ -25,7 +25,7 @@ export default function Users() {
             try {
                 const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
                 // const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`);
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/?email=${formattedUsername}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${formattedUsername}`);
                 const data = await response.json();
                 if (response.ok) {
                     setUserData({
@@ -62,7 +62,7 @@ export default function Users() {
 
         try {
             const formattedUsername = encodeURIComponent(username);
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/users/?email=${formattedUsername}`, {
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${formattedUsername}`, {
             // const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {
                 method: 'PUT',
                 headers: {
