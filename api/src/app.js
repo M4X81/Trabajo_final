@@ -1,6 +1,7 @@
 // src/app.js
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const { Pool } = require('pg');
 const corsOptions = require('../config/corsConfig');
 require('dotenv').config();
@@ -64,7 +65,16 @@ app.post('/login', async (req, res) => {
     }
 });
 
-  
+  //esto lo cargo para que la navegacion la maneje react y no el servidor
+  //sino al actualizar o volver hacia atras no encuentra la ruta/pagina y da un 404
+// Servir los archivos estáticos del build de React
+app.use(express.static(path.join(__dirname, '../build')));
+
+// Ruta catch-all para manejar todas las rutas del lado del cliente
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+});
+
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);
