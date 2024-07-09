@@ -107,7 +107,7 @@ export default function Users() {
                     required
                 />
                 <button type="button" onClick={togglePasswordVisibility}>
-                    Mostrar contraseña por 3 segundos
+                    <img src="/public/img/ojo-cerrado.png" alt="ojo" />
                 </button>
                 <br />
             </form>
