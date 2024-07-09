@@ -71,34 +71,46 @@ export default function Users() {
         } finally {
             setLoading(false);
         }
+
+        const togglePasswordVisibility = () => {
+            setShowPassword(true); // Mostrar la contraseña temporalmente como texto
+    
+            setTimeout(() => {
+                setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 3 segundos
+            }, 3000);
+        };
     };
 
     return (
         <div>
-            <h4>Completar perfil de usuario de {`${username.split('@')[0]}`}</h4>
-            <div className="container">
-                <h6>Registro</h6>
-                <form id="registerForm">
-                    <label htmlFor="regEmail">Email:</label>
-                    <input
-                        type="email"
-                        id="regEmail"
-                        name="email"
-                        value={`${username}`}
-                        readOnly // Para evitar que se pueda editar el campo
-                        required
-                    /><br />
-                    <label htmlFor="regPassword">Contraseña:</label>
-                    <input
-                        type="password"
-                        id="regPassword"
-                        name="password"
-                        value={`${pass}`}
-                        readOnly // Para evitar que se pueda editar el campo
-                        required
-                    /><br />
-                </form>
-            </div>
+        <h4>Completar perfil de usuario de {`${username.split('@')[0]}`}</h4>
+        <div className="container">
+            <h6>Registro</h6>
+            <form id="registerForm">
+                <label htmlFor="regEmail">Email:</label>
+                <input
+                    type="email"
+                    id="regEmail"
+                    name="email"
+                    value={`${username}`}
+                    readOnly // Para evitar que se pueda editar el campo
+                    required
+                /><br />
+                <label htmlFor="regPassword">Contraseña:</label>
+                <input
+                    type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
+                    id="regPassword"
+                    name="password"
+                    value={`${password}`} // Aquí supongo que `password` también está disponible en tu contexto
+                    readOnly // Para evitar que se pueda editar el campo
+                    required
+                />
+                <button type="button" onClick={togglePasswordVisibility}>
+                    Mostrar contraseña por 3 segundos
+                </button>
+                <br />
+            </form>
+        </div>
 
             <div className="container">
                 <h6>Completar datos</h6>
