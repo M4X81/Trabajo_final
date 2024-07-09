@@ -4,6 +4,10 @@
       {
         "src": "/register",
         "dest": "/api/src/app.js"
+      },
+      {
+        "src": "/login",
+        "dest": "/api/src/app.js"
       }
     ]
   }
