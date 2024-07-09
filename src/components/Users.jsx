@@ -23,10 +23,19 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`);
+                const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
+                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${formattedUsername}`);
                 const data = await response.json();
                 if (response.ok) {
-                    setUserData(data); // Establece todos los datos del usuario desde la respuesta del servidor
+                    setUserData({
+                        user_name: data.user_name,
+                        lastname: data.lastname,
+                        address: data.address,
+                        phone: data.phone,
+                        country: data.country,
+                        city: data.city
+                    }); // Establece todos los datos del usuario desde la respuesta del servidor
                 } else {
                     setError(data.error);
                 }
@@ -52,8 +61,8 @@ export default function Users() {
         setError(null);
 
         try {
-            // const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`, {
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`, {
+            // const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
