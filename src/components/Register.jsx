@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import '../styles/form.css';
@@ -10,6 +11,102 @@ const Register = () => {
     const [ageConfirmed, setAgeConfirmed] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    //-----------------------
+    const { username, pass } = useAuth();
+   
+    const [userData, setUserData] = useState({
+        email: '',
+        password: '',
+        user_name: '',
+        lastname: '',
+        address: '',
+        phone: '',
+        country: '',
+        city: ''
+    });
+  
+   
+    const [showPassword, setShowPassword] = useState(false);
+    
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
+                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
+                const data = await response.json();
+                if (response.json.ok) {
+                    setUserData({
+                        email: data.email,
+                        password: data.password,
+                        user_name: data.user_name,
+                        lastname: data.lastname,
+                        address: data.address,
+                        phone: data.phone,
+                        country: data.country,
+                        city: data.city
+                    }); // Establece todos los datos del usuario desde la respuesta del servidor
+                } else {
+                    setError(data.error);
+                }
+            } catch (error) {
+                setError(error.message);
+            }
+        };
+
+        fetchData();
+    }, [username, pass, email]);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUserData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+
+        try {
+            // const formattedUsername = encodeURIComponent(username);
+            // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app`;
+
+            let method = 'PUT'; // Método por defecto para actualizar
+
+            if (!email) {
+                // Si no hay email (es decir, estás creando un nuevo usuario)
+                apiUrl = `https://trabajo-finalcac.vercel.app`;
+                method = 'POST';
+            }
+
+            const response = await fetch(apiUrl, {
+                method: method,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const data = await response.json();
+            if (response.json.ok) {
+                alert('Datos actualizados con éxito');
+                navigate('/');
+            } else {
+                setError(data.error);
+            }
+        } catch (error) {
+            setError(error.message);
+        } finally {
+            setLoading(false);
+        }
+    };
+    //-----------------------------------------
 
     const { login } = useAuth();  // Hook del contexto de autenticación
     const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
@@ -91,6 +188,63 @@ const Register = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </label>
+                            <label htmlFor="user_name">Nombre:</label>
+                            <input
+                                type="text"
+                                id="user_name"
+                                name="user_name"
+                                value={userData.user_name}
+                                onChange={handleChange}
+                                required
+                            /><br />
+                            <label htmlFor="lastname">Apellido:</label>
+                            <input
+                                type="text"
+                                id="lastname"
+                                name="lastname"
+                                value={userData.lastname}
+                                onChange={handleChange}
+                                required
+                            /><br />
+                            <label htmlFor="address">Dirección:</label>
+                            <input
+                                type="text"
+                                id="address"
+                                name="address"
+                                value={userData.address}
+                                onChange={handleChange}
+                                required
+                            /><br />
+                            <label htmlFor="phone">Teléfono:</label>
+                            <input
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                value={userData.phone}
+                                onChange={handleChange}
+                                required
+                            /><br />
+                            <label htmlFor="country">País:</label>
+                            <input
+                                type="text"
+                                id="country"
+                                name="country"
+                                value={userData.country}
+                                onChange={handleChange}
+                                required
+                            /><br />
+                            <label htmlFor="city">Ciudad:</label>
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                value={userData.city}
+                                onChange={handleChange}
+                                required
+                            /><br />
+                            <button type="submit" disabled={loading}>
+                                {loading ? 'Actualizando...' : 'Actualizar'}
+                            </button>
                             <article className="tyc">
                                 <h6>
                                     Al crear una cuenta, acepto los{' '}
@@ -121,6 +275,7 @@ const Register = () => {
                                     onChange={(e) => setAgeConfirmed(e.target.checked)}
                                 />
                             </article>
+                    
                             {error && <p className="error">{error}</p>}
 
                             <button type="submit" id="login-button" disabled={loading}>
@@ -128,7 +283,7 @@ const Register = () => {
                             </button>
                         </section>
                         <section className="separador">
-                               <button
+                            <button
                                 type="button"
                                 id="login-button2"
                                 onClick={handleLoginRedirect}
@@ -137,10 +292,8 @@ const Register = () => {
                                 {'Iniciar sesión'}
                             </button>
                         </section>
-                         <p>ó</p>
+                        <p>ó</p>
                         <section className="registro-externo">
-                         
-                           
                             <a
                                 className="login-google"
                                 href="https://www.argentina.gob.ar/justicia/convosenlaweb/situaciones/como-puedo-detectar-una-pagina-falsa"
@@ -152,6 +305,7 @@ const Register = () => {
                             </a>
                         </section>
                     </form>
+                   
                 </main>
             </div>
         </div>
