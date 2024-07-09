@@ -41,6 +41,29 @@ app.post('/register', async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   });
+
+  // Agrego ruta para inicio de sesión(reviso la db para validar si el usuario existe)
+app.post('/sesion', async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+        const result = await pool.query(
+            'SELECT * FROM users WHERE email = $1 AND password = $2',
+            [email, password]
+        );
+
+        if (result.rows.length > 0) {
+            // Usuario autenticado correctamente
+            res.status(200).json({ message: 'Inicio de sesión exitoso', user: result.rows[0] });
+        } else {
+            // Credenciales incorrectas
+            res.status(401).json({ error: 'Credenciales incorrectas' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
   
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
