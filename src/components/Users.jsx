@@ -61,7 +61,8 @@ export default function Users() {
         setError(null);
 
         try {
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`, {
+            const formattedUsername = encodeURIComponent(username);
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${formattedUsername}`, {
             // const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {
                 method: 'PUT',
                 headers: {
