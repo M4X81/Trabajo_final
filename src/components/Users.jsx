@@ -24,8 +24,9 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
+                // const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
+                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const data = await response.json();
                 if (response.ok) {
                     setUserData({
@@ -61,8 +62,9 @@ export default function Users() {
         setError(null);
 
         try {
-            const formattedUsername = encodeURIComponent(username);
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+            // const formattedUsername = encodeURIComponent(username);
+            // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
 
             let method = 'PUT'; // Método por defecto para actualizar
 

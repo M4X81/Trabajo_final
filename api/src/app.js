@@ -34,7 +34,7 @@ app.post('/register', async (req, res) => {
   
     try {
       const result = await pool.query(
-        'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
+        'INSERT INTO user_profiles (email, password) VALUES ($1, $2) RETURNING *',
         [email, password]
       );
       res.status(201).json(result.rows[0]);
@@ -49,7 +49,7 @@ app.post('/login', async (req, res) => {
 
     try {
         const result = await pool.query(
-            'SELECT * FROM users WHERE email = $1 AND password = $2',
+            'SELECT * FROM user_profiles WHERE email = $1 AND password = $2',
             [email, password]
         );
 
@@ -83,7 +83,7 @@ app.get('/users', async (req, res) => {
 
     try {
         const userResult = await pool.query(
-            'SELECT id FROM users WHERE email = $1',
+            'SELECT id FROM user_profiles WHERE email = $1',
             [email]
         );
 
@@ -116,7 +116,7 @@ app.put('/users', async (req, res) => {
 
     try {
         const userResult = await pool.query(
-            'SELECT id FROM users WHERE email = $1',
+            'SELECT id FROM user_profiles WHERE email = $1',
             [email]
         );
 
