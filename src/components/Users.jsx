@@ -107,7 +107,7 @@ export default function Users() {
                     required
                 />
                 <button type="button" onClick={togglePasswordVisibility}>
-                    <img src="/public/img/ojo-cerrado.png" alt="ojo" />
+                    <img src="/public/img/ojo-cerrado.png" alt="ojo"></img>
                 </button>
                 <br />
             </form>
