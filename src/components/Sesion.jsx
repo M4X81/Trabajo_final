@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import '../styles/form.css';
 
@@ -8,7 +8,6 @@ const Sesion = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
     const { login } = useAuth();  // Hook del contexto de autenticación
     const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
 
@@ -42,9 +41,6 @@ const Sesion = () => {
             // Redirigir al usuario a la página de perfil u otra página protegida
             navigate('/');
             }
-
-
-
             
         } catch (error) {
             setError(error.message);
