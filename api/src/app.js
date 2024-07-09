@@ -77,7 +77,7 @@ app.get('*', (req, res) => {
 });
 
 //me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
-app.get('/users:email', async (req, res) => {
+app.get('/users/:email', async (req, res) => {
     const { email } = req.params;
 
     try {
