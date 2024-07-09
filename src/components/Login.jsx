@@ -11,10 +11,6 @@ const Sesion = () => {
     const { login } = useAuth();  // Hook del contexto de autenticación
     const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
 
-    // const handleRegister = async (event) => {
-    //     event.preventDefault();
-
-
     const handleLogin = async (event) => {
         event.preventDefault();
 
@@ -31,36 +27,28 @@ const Sesion = () => {
             });
 
             const data = await response.json();
-            // try {
-            //     const data = await response.json();
-            //     // Procesar los datos recibidos
-            // } catch (error) {
-            //     console.error('Error al parsear respuesta JSON:', error);
-            //     // Manejar el error, por ejemplo, mostrando un mensaje al usuario
-            // }
-            
             
             if (!response.ok) {
                 throw new Error('Credenciales incorrectas');
-            }else{
-                // Guardar la información en el contexto o local storage si es necesario
-            login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación
+            } else {
+                // Guardar la información en local storage
+                localStorage.setItem('email', email);
+                localStorage.setItem('password', password);
 
-            // Redirigir al usuario a la página de perfil u otra página protegida
-            navigate('/');
+                // Guardar la información en el contexto si es necesario
+                login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación
+
+                // Redirigir al usuario a la página de perfil u otra página protegida
+                navigate('/');
             }
             
         } catch (error) {
             setError(error.message);
-            alert("Email o Contraseña incorrectos, intente nuevamente...")
+            alert("Email o Contraseña incorrectos, intente nuevamente...");
         } finally {
             setLoading(false);
         }
     };
-
-    // const handleLoginRedirect = () => {
-    //     navigate('/');  // Redirigir al usuario a la página de inicio 
-    // };
 
     return (
         <div className="contenedor">
@@ -101,7 +89,6 @@ const Sesion = () => {
                             <button
                                 type="submit"
                                 id="login-button2"
-                                // onClick={handleLoginRedirect}
                                 disabled={loading}
                             >
                                 {loading ? 'Iniciando...' : 'Iniciar sesión'}
