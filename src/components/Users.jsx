@@ -52,7 +52,8 @@ export default function Users() {
         setError(null);
 
         try {
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`, {
+            // const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${username}`, {
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -107,7 +108,7 @@ export default function Users() {
                     required
                 />
                 <button type="button" onClick={togglePasswordVisibility}>
-                    <img src="/public/img/ojo-cerrado.png" alt="ojo"></img>
+                    <img src="/img/ojo-cerrado.png" alt="ojo"></img>
                 </button>
                 <br />
             </form>
