@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const { Pool } = require('pg');
-const corsOptions = require('../config/corsConfig');
+const corsOptions = require('./config/corsConfig');
 require('dotenv').config();
 
 const app = express();

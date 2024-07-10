@@ -4,28 +4,28 @@
     "routes": [
       {
         "src": "/register",
-        "dest": "/api/src/app.js"
+        "dest": "/api/app.js"
       },
       {
         "src": "/login",
-        "dest": "/api/src/app.js"
+        "dest": "/api/app.js"
       },
       {
         "src": "/users",
-        "dest": "/api/src/app.js"
+        "dest": "/api/app.js"
       },
       
       {
         "src": "/#/users",
-        "dest": "/api/src/app.js"
+        "dest": "/api/app.js"
       },
       {
         "src": "/#/register",
-        "dest": "/api/src/app.js"
+        "dest": "/api/app.js"
       },
       {
         "src": "/register",
-        "dest": "/api/src/app.js"
+        "dest": "/api/app.js"
       },
       {
         "src": "/users",
