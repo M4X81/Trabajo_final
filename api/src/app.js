@@ -84,7 +84,7 @@ app.get('*', (req, res) => {
 });
 
 //me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
-app.get('/users:email', async (req, res) => {
+app.get('/register:email', async (req, res) => {
 // app.get('/users', async (req, res) => {
     const { email } = req.params;
 
@@ -118,7 +118,7 @@ app.get('/users:email', async (req, res) => {
 //para modificar(agregar)
 // Ruta para actualizar datos del perfil del usuario
 // app.put('/users:email', async (req, res) => {
-app.put('/users', async (req, res) => {
+app.put('/register', async (req, res) => {
     const { email, username, lastname, address, phone, country, city } = req.body;
 
     try {
