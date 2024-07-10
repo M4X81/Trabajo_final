@@ -142,7 +142,7 @@ const Register = () => {
                                 id="user_name"
                                 name="user_name"
                                 value={userData.user_name}
-                                onChange={handleFieldChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="lastname">Apellido:</label>
@@ -151,7 +151,7 @@ const Register = () => {
                                 id="lastname"
                                 name="lastname"
                                 value={userData.lastname}
-                                onChange={handleFieldChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="address">Dirección:</label>
@@ -160,7 +160,7 @@ const Register = () => {
                                 id="address"
                                 name="address"
                                 value={userData.address}
-                                onChange={handleFieldChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="phone">Teléfono:</label>
@@ -169,7 +169,7 @@ const Register = () => {
                                 id="phone"
                                 name="phone"
                                 value={userData.phone}
-                                onChange={handleFieldChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="country">País:</label>
@@ -178,7 +178,7 @@ const Register = () => {
                                 id="country"
                                 name="country"
                                 value={userData.country}
-                                onChange={handleFieldChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <label htmlFor="city">Ciudad:</label>
@@ -187,7 +187,7 @@ const Register = () => {
                                 id="city"
                                 name="city"
                                 value={userData.city}
-                                onChange={handleFieldChange}
+                                onChange={handleRegister}
                                 required
                             /><br />
                             <article className="tyc">
