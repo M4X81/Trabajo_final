@@ -70,15 +70,22 @@ app.post('/login', async (req, res) => {
 
 // Ruta catch-all para manejar todas las rutas del lado del cliente
 
+
+// Configurar el servidor para que sirva la aplicación React en todas las rutas no API
+app.use(express.static(path.join(__dirname, 'build')));
+
 app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, 'app.jsx');
+    res.sendFile(path.join(__dirname, 'build', 'app.js'));
+});
+app.get('*', (req, res) => {
+    const filePath = path.join(__dirname, 'app.js');
     console.log(`Enviando archivo: ${filePath}`);
     res.sendFile(filePath);
 });
 
 //me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
-// app.get('/users:email', async (req, res) => {
-app.get('/users', async (req, res) => {
+app.get('/users:email', async (req, res) => {
+// app.get('/users', async (req, res) => {
     const { email } = req.params;
 
     try {
@@ -91,7 +98,7 @@ app.get('/users', async (req, res) => {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
-        const userId = userResult.rows[0].id;
+        // const userId = userResult.rows[0].id;
 
         const profileResult = await pool.query(
             'SELECT * FROM user_profiles WHERE user_id = $1',

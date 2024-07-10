@@ -1,4 +1,3 @@
-// import React, { useState } from 'react';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
@@ -12,9 +11,9 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    //-----------------------
-    const { username, pass } = useAuth();
-   
+    const { login } = useAuth();
+    const navigate = useNavigate();
+
     const [userData, setUserData] = useState({
         email: '',
         password: '',
@@ -25,94 +24,41 @@ const Register = () => {
         country: '',
         city: ''
     });
-  
-   
-    const [showPassword, setShowPassword] = useState(false);
-    
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
-                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
-                const data = await response.json();
-                if (response.ok) {
-                    setUserData({
-                        email: data.email,
-                      
-                        user_name: data.user_name,
-                        lastname: data.lastname,
-                        address: data.address,
-                        phone: data.phone,
-                        country: data.country,
-                        city: data.city
-                    }); // Establece todos los datos del usuario desde la respuesta del servidor
-                } else {
-                    setError(data.error);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/register`);
+
+                if (!response.ok) {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
                 }
+    
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('application/json')) {
+                    throw new Error('La respuesta no es un JSON válido');
+                }
+    
+                const data = await response.json();
+                setUserData({
+                    ...data,
+                    // Incluir cualquier otro campo adicional que puedas recibir
+                });
             } catch (error) {
                 setError(error.message);
             }
         };
-
+    
         fetchData();
-    }, [username, pass, email]);
+    }, []);
+    
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setUserData(prevData => ({
-    //         ...prevData,
-    //         [name]: value
-    //     }));
-    // };
-
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     setLoading(true);
-    //     setError(null);
-
-    //     try {
-    //         // const formattedUsername = encodeURIComponent(username);
-    //         // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
-    //         let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
-
-    //         let method = 'PUT'; // Método por defecto para actualizar
-
-    //         if (!email) {
-    //             // Si no hay email (es decir, estás creando un nuevo usuario)
-    //             apiUrl = `https://trabajo-finalcac.vercel.app/users`;
-    //             method = 'POST';
-    //         }
-
-    //         const response = await fetch(apiUrl, {
-    //             method: method,
-    //             headers: {
-    //                 'Content-Type': 'application/json'
-    //             },
-    //             body: JSON.stringify(userData)
-    //         });
-
-    //         const data = await response.json();
-    //         if (response.json.ok) {
-    //             alert('Datos actualizados con éxito');
-    //             navigate('/');
-    //         } else {
-    //             setError(data.error);
-    //         }
-    //     } catch (error) {
-    //         setError(error.message);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
-    //-----------------------------------------
-
-    const { login } = useAuth();  // Hook del contexto de autenticación
-    const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
-
-    const validateFields = () => {
-        return email.trim() !== '' && password.trim() !== '' && termsAccepted && ageConfirmed;
+    const handleFieldChange = (e) => {
+        const { name, value } = e.target;
+        setUserData(prevData => ({
+            ...prevData,
+            [name]: value
+        }));
     };
 
     const handleRegister = async (event) => {
@@ -141,10 +87,8 @@ const Register = () => {
 
             const data = await response.json();
 
-            // Guardar la información en el contexto
-            login(data.email);  // O el identificador de usuario retornado por la API
+            login(data.email); // O el identificador de usuario retornado por la API
 
-            // Redirigir al usuario a la página de perfil
             navigate('/users');
         } catch (error) {
             setError(error.message);
@@ -153,8 +97,12 @@ const Register = () => {
         }
     };
 
+    const validateFields = () => {
+        return email.trim() !== '' && password.trim() !== '' && termsAccepted && ageConfirmed;
+    };
+
     const handleLoginRedirect = () => {
-        navigate('/');  // Redirigir al usuario a la página de inicio de sesión
+        navigate('/login');
     };
 
     return (
@@ -194,7 +142,7 @@ const Register = () => {
                                 id="user_name"
                                 name="user_name"
                                 value={userData.user_name}
-                                onChange={handleRegister}
+                                onChange={handleFieldChange}
                                 required
                             /><br />
                             <label htmlFor="lastname">Apellido:</label>
@@ -203,7 +151,7 @@ const Register = () => {
                                 id="lastname"
                                 name="lastname"
                                 value={userData.lastname}
-                                onChange={handleRegister}
+                                onChange={handleFieldChange}
                                 required
                             /><br />
                             <label htmlFor="address">Dirección:</label>
@@ -212,7 +160,7 @@ const Register = () => {
                                 id="address"
                                 name="address"
                                 value={userData.address}
-                                onChange={handleRegister}
+                                onChange={handleFieldChange}
                                 required
                             /><br />
                             <label htmlFor="phone">Teléfono:</label>
@@ -221,7 +169,7 @@ const Register = () => {
                                 id="phone"
                                 name="phone"
                                 value={userData.phone}
-                                onChange={handleRegister}
+                                onChange={handleFieldChange}
                                 required
                             /><br />
                             <label htmlFor="country">País:</label>
@@ -230,7 +178,7 @@ const Register = () => {
                                 id="country"
                                 name="country"
                                 value={userData.country}
-                                onChange={handleRegister}
+                                onChange={handleFieldChange}
                                 required
                             /><br />
                             <label htmlFor="city">Ciudad:</label>
@@ -239,12 +187,9 @@ const Register = () => {
                                 id="city"
                                 name="city"
                                 value={userData.city}
-                                onChange={handleRegister}
+                                onChange={handleFieldChange}
                                 required
                             /><br />
-                            <button type="submit" disabled={loading}>
-                                {loading ? 'Actualizando...' : 'Actualizar'}
-                            </button>
                             <article className="tyc">
                                 <h6>
                                     Al crear una cuenta, acepto los{' '}
@@ -275,9 +220,7 @@ const Register = () => {
                                     onChange={(e) => setAgeConfirmed(e.target.checked)}
                                 />
                             </article>
-                    
                             {error && <p className="error">{error}</p>}
-
                             <button type="submit" id="login-button" disabled={loading}>
                                 {loading ? 'Registrando...' : 'Registrarse'}
                             </button>
@@ -289,7 +232,7 @@ const Register = () => {
                                 onClick={handleLoginRedirect}
                                 disabled={loading}
                             >
-                                {'Iniciar sesión'}
+                                Iniciar sesión
                             </button>
                         </section>
                         <p>ó</p>
@@ -305,7 +248,6 @@ const Register = () => {
                             </a>
                         </section>
                     </form>
-                   
                 </main>
             </div>
         </div>
@@ -313,5 +255,6 @@ const Register = () => {
 };
 
 export default Register;
+
 
 
