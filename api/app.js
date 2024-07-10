@@ -30,18 +30,21 @@ pool.connect(err => {
 
 // Ruta de registro
 app.post('/register', async (req, res) => {
-    const { email, password } = req.body;
-  
+    const { email, password, user_name, lastname, address, phone, country, city } = req.body;
+
     try {
-      const result = await pool.query(
-        'INSERT INTO user_profiles (email, password) VALUES ($1, $2) RETURNING *',
-        [email, password]
-      );
-      res.status(201).json(result.rows[0]);
+        const result = await pool.query(
+            `INSERT INTO user_profiles 
+            (email, password, user_name, lastname, address, phone, country, city) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+            RETURNING *`,
+            [email, password, user_name, lastname, address, phone, country, city]
+        );
+        res.status(201).json(result.rows[0]);
     } catch (err) {
-      res.status(500).json({ error: err.message });
+        res.status(500).json({ error: err.message });
     }
-  });
+});
 
   // Agrego ruta para inicio de sesión(reviso la db para validar si el usuario existe)
 app.post('/login', async (req, res) => {
