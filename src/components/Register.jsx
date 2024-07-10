@@ -28,7 +28,7 @@ const Register = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/api/register`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/#/register`);
 
                 if (!response.ok) {
                     throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -73,7 +73,7 @@ const Register = () => {
         setError(null);
 
         try {
-            const response = await fetch('https://trabajo-finalcac.vercel.app/api/register', {
+            const response = await fetch('https://trabajo-finalcac.vercel.app/#/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
