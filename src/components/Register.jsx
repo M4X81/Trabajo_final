@@ -6,6 +6,12 @@ import '../styles/form.css';
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [user_name, setUser_name] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [country, setCountry] = useState('');
+    const [city, setCity] = useState('');
     const [termsAccepted, setTermsAccepted] = useState(false);
     const [ageConfirmed, setAgeConfirmed] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -14,52 +20,24 @@ const Register = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    const [userData, setUserData] = useState({
-        email: '',
-        password: '',
-        user_name: '',
-        lastname: '',
-        address: '',
-        phone: '',
-        country: '',
-        city: ''
-    });
+    // const [userData, setUserData] = useState({
+    //     email: '',
+    //     password: '',
+    //     user_name: '',
+    //     lastname: '',
+    //     address: '',
+    //     phone: '',
+    //     country: '',
+    //     city: ''
+    // });
 
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         try {
-    //             const response = await fetch(`https://trabajo-finalcac.vercel.app/register`);
-
-    //             if (!response.ok) {
-    //                 throw new Error(`Error ${response.status}: ${response.statusText}`);
-    //             }
-    
-    //             const contentType = response.headers.get('content-type');
-    //             if (!contentType || !contentType.includes('application/json')) {
-    //                 throw new Error('La respuesta no es un JSON válido');
-    //             }
-    
-    //             const data = await response.json();
-    //             setUserData({
-    //                 ...data,
-    //                 // Incluir cualquier otro campo adicional que puedas recibir
-    //             });
-    //         } catch (error) {
-    //             setError(error.message);
-    //         }
-    //     };
-    
-    //     fetchData();
-    // }, []);
-    
-
-    const handleFieldChange = (e) => {
-        const { name, value } = e.target;
-        setUserData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
+    // const handleFieldChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setUserData(prevData => ({
+    //         ...prevData,
+    //         [name]: value
+    //     }));
+    // };
 
     const handleRegister = async (event) => {
         event.preventDefault();
@@ -113,9 +91,9 @@ const Register = () => {
                     <h4>Te damos la bienvenida a nuestra plataforma CriptoApp</h4>
                     <h6>Regístrate para continuar</h6>
                     <form className="form" onSubmit={handleRegister}>
-                        <section className="formulario">
+                        <section className="formulario"><br />
                             <label htmlFor="email">
-                                Correo o número de teléfono
+                                Correo: 
                                 <input
                                     type="email"
                                     id="email"
@@ -123,71 +101,77 @@ const Register = () => {
                                     placeholder="email@domain.com"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
-                                />
+                                /><br />
                             </label>
                             <label htmlFor="pass">
-                                Contraseña
+                                Contraseña:
                                 <input
                                     type="password"
                                     id="pass"
                                     required
-                                    placeholder="password"
+                                    placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                />
+                                /><br />
                             </label>
                             <label htmlFor="user_name">Nombre:</label>
                             <input
                                 type="text"
+                                placeholder="Name"
                                 id="user_name"
                                 name="user_name"
-                                value={userData.user_name}
-                                onChange={handleRegister}
+                                value={user_name}
+                                onChange={(e) => setUser_name(e.target.value)}
                                 required
                             /><br />
                             <label htmlFor="lastname">Apellido:</label>
                             <input
                                 type="text"
+                                placeholder="Lastname"
                                 id="lastname"
                                 name="lastname"
-                                value={userData.lastname}
-                                onChange={handleRegister}
+                                value={lastname}
+                                onChange={(e) => setLastname(e.target.value)}
                                 required
                             /><br />
                             <label htmlFor="address">Dirección:</label>
                             <input
                                 type="text"
+                                placeholder="Adresss"
                                 id="address"
                                 name="address"
-                                value={userData.address}
-                                onChange={handleRegister}
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
                                 required
                             /><br />
                             <label htmlFor="phone">Teléfono:</label>
                             <input
                                 type="text"
+                                placeholder="Phone"
                                 id="phone"
                                 name="phone"
-                                value={userData.phone}
-                                onChange={handleRegister}
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                                 required
                             /><br />
                             <label htmlFor="country">País:</label>
                             <input
                                 type="text"
+                                placeholder="Country"
                                 id="country"
                                 name="country"
-                                value={userData.country}
-                                onChange={handleRegister}
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
                                 required
                             /><br />
                             <label htmlFor="city">Ciudad:</label>
                             <input
                                 type="text"
+                                placeholder="City"
                                 id="city"
                                 name="city"
-                                value={userData.city}
-                                onChange={handleRegister}
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
                                 required
                             /><br />
                             <article className="tyc">
