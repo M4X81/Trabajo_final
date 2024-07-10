@@ -3,10 +3,14 @@ const allowedOrigins = [
     'http://localhost:3001',
     'http://localhost:5173',
     'https://trabajo-finalcac.vercel.app/register',
+    'https://trabajo-finalcac.vercel.app/#/register',
     'https://trabajo-finalcac.vercel.app/users',
+    'https://trabajo-finalcac.vercel.app/#/users',
+    'https://trabajo-finalcac.vercel.app/#/users/:email',
     'https://trabajo-finalcac.vercel.app/users/:email',
     'https://trabajo-finalcac.vercel.app/users:email',
-    'https://trabajo-finalcac.vercel.app/login'
+    'https://trabajo-finalcac.vercel.app/#/users:email',
+    'https://trabajo-finalcac.vercel.app/#/login'
 ];
 
 const corsOptions = {

@@ -14,6 +14,19 @@
         "src": "/users",
         "dest": "/api/src/app.js"
       },
+      
+      {
+        "src": "/#/users",
+        "dest": "/api/src/app.js"
+      },
+      {
+        "src": "/#/register",
+        "dest": "/api/src/app.js"
+      },
+      {
+        "src": "/register",
+        "dest": "/api/src/app.js"
+      },
       {
         "src": "/users",
         "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],

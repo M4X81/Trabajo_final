@@ -17,7 +17,7 @@ function App() {
   return (
         <>
         <AuthProvider>
-        <BrowserRouter>
+        <HashRouter>
         <Navbar />
 
         <Routes>
@@ -32,7 +32,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
         </Routes>
         <Footer />
-      </BrowserRouter>
+      </HashRouter>
       </AuthProvider>
        
     </>
