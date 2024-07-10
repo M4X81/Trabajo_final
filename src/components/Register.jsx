@@ -20,25 +20,6 @@ const Register = () => {
     const { login } = useAuth();
     const navigate = useNavigate();
 
-    // const [userData, setUserData] = useState({
-    //     email: '',
-    //     password: '',
-    //     user_name: '',
-    //     lastname: '',
-    //     address: '',
-    //     phone: '',
-    //     country: '',
-    //     city: ''
-    // });
-
-    // const handleFieldChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setUserData(prevData => ({
-    //         ...prevData,
-    //         [name]: value
-    //     }));
-    // };
-
     const handleRegister = async (event) => {
         event.preventDefault();
 
