@@ -25,32 +25,32 @@ const Register = () => {
         city: ''
     });
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/#/register`);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         try {
+    //             const response = await fetch(`https://trabajo-finalcac.vercel.app/register`);
 
-                if (!response.ok) {
-                    throw new Error(`Error ${response.status}: ${response.statusText}`);
-                }
+    //             if (!response.ok) {
+    //                 throw new Error(`Error ${response.status}: ${response.statusText}`);
+    //             }
     
-                const contentType = response.headers.get('content-type');
-                if (!contentType || !contentType.includes('application/json')) {
-                    throw new Error('La respuesta no es un JSON válido');
-                }
+    //             const contentType = response.headers.get('content-type');
+    //             if (!contentType || !contentType.includes('application/json')) {
+    //                 throw new Error('La respuesta no es un JSON válido');
+    //             }
     
-                const data = await response.json();
-                setUserData({
-                    ...data,
-                    // Incluir cualquier otro campo adicional que puedas recibir
-                });
-            } catch (error) {
-                setError(error.message);
-            }
-        };
+    //             const data = await response.json();
+    //             setUserData({
+    //                 ...data,
+    //                 // Incluir cualquier otro campo adicional que puedas recibir
+    //             });
+    //         } catch (error) {
+    //             setError(error.message);
+    //         }
+    //     };
     
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
     
 
     const handleFieldChange = (e) => {
@@ -73,7 +73,7 @@ const Register = () => {
         setError(null);
 
         try {
-            const response = await fetch('https://trabajo-finalcac.vercel.app/#/register', {
+            const response = await fetch('https://trabajo-finalcac.vercel.app/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
