@@ -17,3 +17,4 @@ ver si puedo guardar el local la sesion para que no se deslogee cuando refresco
 y de pasada ver si puedo agregar un cerar sesion
 si no funciona en users ver si puedo al menos hacer una print de los datos de la db para traerlos al navegador para que se 
 vea del lado del cliente lo que se registra en la db
+-revisar todos los enlaces de la pagina que la mayoria llevan a html( las imagenes, descargas y demas) revisar wallet, exchange, inicio etc
