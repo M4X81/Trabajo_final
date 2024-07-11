@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../styles/form.css';
 
 export default function Users() {
-    const { mail, pass } = useAuth();
-    console.log('mail:', mail, 'pass:', pass); // Verificar valores
+    const { mail, pass } = useAuth();// Obtener el correo electrónico del usuario actual
     const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
-    const [userData, setUserData] = useState({   
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [userDataDB, setUserDataDB] = useState({
+        pass: '',
         user_name: '',
         lastname: '',
         address: '',
@@ -15,49 +18,45 @@ export default function Users() {
         country: '',
         city: ''
     });
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
 
-useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/register/${email}`);
-            
-            // Verificar si la respuesta no es JSON
-            const contentType = response.headers.get("content-type");
-            if (!contentType || !contentType.includes("application/json")) {
-                const text = await response.text();
-                throw new Error(`Expected JSON, received: ${text}`);
-            }
 
-            const data = await response.json();
-            if (response.ok) {
-                setUserData({
-                    email: data.email,
-                    password: data.password,
-                    user_name: data.user_name,
-                    lastname: data.lastname,
-                    address: data.address,
-                    phone: data.phone,
-                    country: data.country,
-                    city: data.city
-                }); // Establece todos los datos del usuario desde la respuesta del servidor
-            } else {
-                setError(data.error);
-            }
-        } catch (error) {
-            setError(error.message);
-        }
-    };
-
-    if (email) {
-         fetchData();
-    }
+    const [userDataUpdate, setUserDataUpdate] = useState({
+        pass: '',
+        user_name: '',
+        lastname: '',
+        address: '',
+        phone: '',
+        country: '',
+        city: ''
+    });
    
-}, [email]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/register/${email}`);
+                const contentType = response.headers.get("content-type");
+                if (!contentType || !contentType.includes("application/json")) {
+                    const text = await response.text();
+                    throw new Error(`Expected JSON, received: ${text}`);
+                }
+
+                const data = await response.json();
+                if (response.ok) {
+                    setUserDataDB(data);
+                    setUserDataUpdate(data);
+                } else {
+                    setError(data.error || 'Error desconocido al cargar datos del usuario');
+                }
+            } catch (error) {
+                setError(error.message || 'Error al conectar con el servidor');
+            }
+        };
+
+        if (email) {
+            fetchData();
+        }
+    }, [email]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,69 +64,91 @@ useEffect(() => {
         setError(null);
 
         try {
-            
             let apiUrl = `https://trabajo-finalcac.vercel.app/register/${email}`;
-            // let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
-
             let method = 'PUT'; // Método por defecto para actualizar
-
-            if (!email) {
-                // Si no hay email (es decir, estás creando un nuevo usuario)
-                apiUrl = `https://trabajo-finalcac.vercel.app/register`;
-                method = 'POST';
-            }
 
             const response = await fetch(apiUrl, {
                 method: method,
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(userData)
+                body: JSON.stringify(userDataUpdate)
             });
 
             const data = await response.json();
             if (response.ok) {
                 alert('Datos actualizados con éxito');
-                navigate('/');
             } else {
-                setError(data.error);
+                setError(data.error || 'Error desconocido al actualizar datos del usuario');
             }
         } catch (error) {
-            setError(error.message);
+            setError(error.message || 'Error al conectar con el servidor');
         } finally {
             setLoading(false);
         }
     };
 
     const togglePasswordVisibility = () => {
-        setShowPassword(true); // Mostrar la contraseña temporalmente como texto
-        setTimeout(() => {
-            setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 1/2 segundo
-        }, 500);
+        setShowPassword(!showPassword); // Alternar visibilidad de la contraseña
     };
 
     return (
         <div>
-            <h4>Completar perfil de usuario de {`${mail.split('@')[0]}`}</h4>
-            < div className="container">
-                <h6>Registro</h6>
+             <div className="user-details">
+                <h5>Datos del usuario {`${mail.split('@')[0]}`}:</h5>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{mail}</td>
+                        </tr>
+                        <tr>
+                            <td>Nombre:</td>
+                            <td>{userDataDB.user_name}</td>
+                        </tr>
+                        <tr>
+                            <td>Apellido:</td>
+                            <td>{userDataDB.lastname}</td>
+                        </tr>
+                        <tr>
+                            <td>Dirección:</td>
+                            <td>{userDataDB.address}</td>
+                        </tr>
+                        <tr>
+                            <td>Teléfono:</td>
+                            <td>{userDataDB.phone}</td>
+                        </tr>
+                        <tr>
+                            <td>País:</td>
+                            <td>{userDataDB.country}</td>
+                        </tr>
+                        <tr>
+                            <td>Ciudad:</td>
+                            <td>{userDataDB.city}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h4>Modificar perfil:</h4>
+            <div className="container">
                 <form id="registerForm">
-                    <label htmlFor="regEmail">Email:</label>
+                    {/* <label htmlFor="regEmail">Email:</label>
                     <input
                         type="email"
                         id="regEmail"
                         name="email"
-                        value={`${mail}`}
+                        value={mail}
                         readOnly // Para evitar que se pueda editar el campo
                         required
-                    /><br />
+                    /><br /> */}
                     <label htmlFor="regPassword">Contraseña:</label>
                     <input
                         type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
                         id="regPassword"
                         name="password"
-                        value={`${pass}` || ''} // Aquí supongo que `password` también está disponible en tu contexto
-                        readOnly // Para evitar que se pueda editar el campo
+                        value={`${pass}` || ''} // Aquí no mostramos la contraseña directamente
+                        // readOnly // Para evitar que se pueda editar el campo
+                        onChange={(e) => setUserDataUpdate({ ...userData, user_name: e.target.value })}
                         required
                     />
                     <button type="button" onClick={togglePasswordVisibility}>
@@ -142,17 +163,17 @@ useEffect(() => {
                         type="text"
                         id="user_name"
                         name="user_name"
-                        value={userData.user_name || ''}
-                        onChange={(e) => setUserData({ ...userData, user_name: e.target.value })}
-                        // required
+                        value={userDataDB.user_name}
+                        onChange={(e) => setUserDataUpdate({ ...userDataDB, user_name: e.target.value })}
+                        required
                     /><br />
                     <label htmlFor="lastname">Apellido:</label>
                     <input
                         type="text"
                         id="lastname"
                         name="lastname"
-                        value={userData.lastname || ''}              
-                        onChange={(e) => setUserData({ ...userData, lastname: e.target.value })}
+                        value={userDataDB.lastname}              
+                        onChange={(e) => setUserDataUpdate({ ...userDataDB, lastname: e.target.value })}
                         required
                     /><br />
                     <label htmlFor="address">Dirección:</label>
@@ -160,36 +181,36 @@ useEffect(() => {
                         type="text"
                         id="address"
                         name="address"
-                        value={userData.address || ''}
-                        onChange={(e) => setUserData({ ...userData, address: e.target.value })}
-                        // required
+                        value={userDataDB.address}
+                        onChange={(e) => setUserDataUpdate({ ...userDataDB, address: e.target.value })}
+                        required
                     /><br />
                     <label htmlFor="phone">Teléfono:</label>
                     <input
                         type="text"
                         id="phone"
                         name="phone"
-                        value={userData.phone || ''}
-                        onChange={(e) => setUserData({ ...userData, phone: e.target.value })}
-                        // required
+                        value={userDataDB.phone}
+                        onChange={(e) => setUserDataUpdate({ ...userDataDB, phone: e.target.value })}
+                        required
                     /><br />
                     <label htmlFor="country">País:</label>
                     <input
                         type="text"
                         id="country"
                         name="country"
-                        value={userData.country || ''}
-                        onChange={(e) => setUserData({ ...userData, country: e.target.value })}
-                        // required
+                        value={userDataDB.country}
+                        onChange={(e) => setUserDataUpdate({ ...userDataDB, country: e.target.value })}
+                        required
                     /><br />
                     <label htmlFor="city">Ciudad:</label>
                     <input
                         type="text"
                         id="city"
                         name="city"
-                        value={userData.city || ''}
-                        onChange={(e) => setUserData({ ...userData, city: e.target.value })}
-                        // required
+                        value={userDataDB.city}
+                        onChange={(e) => setUserDataUpdate({ ...userDataDB, city: e.target.value })}
+                        required
                     /><br />
                     <button type="submit" disabled={loading}>
                         {loading ? 'Actualizando...' : 'Actualizar'}
@@ -198,9 +219,10 @@ useEffect(() => {
             </div>
 
             {error && <p className="error">{error}</p>}
-    </div>
+        </div>
     );
 }
+
 
 
 
