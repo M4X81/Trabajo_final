@@ -96,7 +96,7 @@ const Register = () => {
                             <label htmlFor="pass">
                                 Contraseña:
                                 <input
-                                    type="password"
+                                    type="text"//modifico esto( deberia ser pasword)
                                     id="pass"
                                     required
                                     placeholder="Password"

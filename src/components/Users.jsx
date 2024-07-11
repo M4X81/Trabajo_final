@@ -44,6 +44,7 @@ export default function Users() {
                 const data = await response.json();
                 if (response.ok) {
                     setUserDataDB(data);
+                    console.log("datos seteados" ,userDataDB);
                     setUserDataUpdate(data);
                 } else {
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
@@ -64,7 +65,7 @@ export default function Users() {
         setError(null);
 
         try {
-            let apiUrl = `https://trabajo-finalcac.vercel.app/register/${email}`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
             let method = 'PUT'; // Método por defecto para actualizar
 
             const response = await fetch(apiUrl, {
@@ -90,6 +91,10 @@ export default function Users() {
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword); // Alternar visibilidad de la contraseña
+    };
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setUserDataUpdate({ ...userDataUpdate, [name]: value });
     };
 
     return (
@@ -148,7 +153,7 @@ export default function Users() {
                         name="password"
                         value={`${pass}` || ''} // Aquí no mostramos la contraseña directamente
                         // readOnly // Para evitar que se pueda editar el campo
-                        onChange={(e) => setUserDataUpdate({ ...userData, user_name: e.target.value })}
+                        onChange={handleInputChange}
                         required
                     />
                     <button type="button" onClick={togglePasswordVisibility}>
@@ -164,7 +169,7 @@ export default function Users() {
                         id="user_name"
                         name="user_name"
                         value={userDataDB.user_name}
-                        onChange={(e) => setUserDataUpdate({ ...userDataDB, user_name: e.target.value })}
+                        onChange={handleInputChange}
                         required
                     /><br />
                     <label htmlFor="lastname">Apellido:</label>
@@ -173,7 +178,7 @@ export default function Users() {
                         id="lastname"
                         name="lastname"
                         value={userDataDB.lastname}              
-                        onChange={(e) => setUserDataUpdate({ ...userDataDB, lastname: e.target.value })}
+                        onChange={handleInputChange}
                         required
                     /><br />
                     <label htmlFor="address">Dirección:</label>
@@ -182,7 +187,7 @@ export default function Users() {
                         id="address"
                         name="address"
                         value={userDataDB.address}
-                        onChange={(e) => setUserDataUpdate({ ...userDataDB, address: e.target.value })}
+                        onChange={handleInputChange}
                         required
                     /><br />
                     <label htmlFor="phone">Teléfono:</label>
@@ -191,7 +196,7 @@ export default function Users() {
                         id="phone"
                         name="phone"
                         value={userDataDB.phone}
-                        onChange={(e) => setUserDataUpdate({ ...userDataDB, phone: e.target.value })}
+                        onChange={handleInputChange}
                         required
                     /><br />
                     <label htmlFor="country">País:</label>
@@ -200,7 +205,7 @@ export default function Users() {
                         id="country"
                         name="country"
                         value={userDataDB.country}
-                        onChange={(e) => setUserDataUpdate({ ...userDataDB, country: e.target.value })}
+                        onChange={handleInputChange}
                         required
                     /><br />
                     <label htmlFor="city">Ciudad:</label>
@@ -209,7 +214,7 @@ export default function Users() {
                         id="city"
                         name="city"
                         value={userDataDB.city}
-                        onChange={(e) => setUserDataUpdate({ ...userDataDB, city: e.target.value })}
+                        onChange={handleInputChange}
                         required
                     /><br />
                     <button type="submit" disabled={loading}>
