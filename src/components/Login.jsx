@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import '../styles/form.css';
 
-const Sesion = () => {
+const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { login } = useAuth();  // Hook del contexto de autenticación
+    const { logIn } = useAuth();  // Hook del contexto de autenticación
     const navigate = useNavigate(); // Hook para redireccionar, reemplaza useHistory
 
     const handleLogin = async (event) => {
@@ -37,7 +37,7 @@ const Sesion = () => {
                 localStorage.setItem('password', password);
 
                 // // Guardar la información en el contexto si es necesario
-                login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación          
+                logIn(email, password);  // Ejemplo: guardar el email en el contexto de autenticación           
                 // Redirigir al usuario a la página de perfil u otra página protegida
                 navigate('/');
             }
@@ -102,4 +102,4 @@ const Sesion = () => {
     );
 };
 
-export default Sesion;
+export default Login;

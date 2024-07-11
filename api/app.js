@@ -122,7 +122,7 @@ app.get('/register:email', async (req, res) => {
 // Ruta para actualizar datos del perfil del usuario
 // app.put('/users:email', async (req, res) => {
 app.put('/users/:email', async (req, res) => { //ver bien esta ruta si es /users o /users/:email
-    const { user_name, lastname, address, phone, country, city } = req.body;
+    const { password, user_name, lastname, address, phone, country, city } = req.body;
 
     try {
         const userResult = await pool.query(
@@ -137,9 +137,10 @@ app.put('/users/:email', async (req, res) => { //ver bien esta ruta si es /users
         const userId = userResult.rows[0].id;
 
         const profileResult = await pool.query(
-            `INSERT INTO user_profiles (user_id, user_name, lastname, address, phone, country, city)
-             VALUES ($1, $2, $3, $4, $5, $6, $7)
+            `INSERT INTO user_profiles (user_id, password, user_name, lastname, address, phone, country, city)
+             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
              ON CONFLICT (user_id) DO UPDATE SET
+             password = EXCLUDED.password,
              username = EXCLUDED.user_name,
              lastname = EXCLUDED.lastname,
              address = EXCLUDED.address,
@@ -147,7 +148,7 @@ app.put('/users/:email', async (req, res) => { //ver bien esta ruta si es /users
              country = EXCLUDED.country,
              city = EXCLUDED.city
              RETURNING *`,
-            [userId, user_name, lastname, address, phone, country, city]
+            [userId, password,user_name, lastname, address, phone, country, city]
         );
 
         res.status(200).json(profileResult.rows[0]);

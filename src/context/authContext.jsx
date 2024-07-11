@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [pass, setPass] = useState('');
 
 
-  const login = (mail, pass) => {
+  const logIn = (mail, pass) => {
     console.log('Login - mail:', mail, 'pass:', pass);
     setIsLoggedIn(true);
     setMail(mail);
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, mail,pass, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, mail,pass, logIn, logout }}>
       {children}
     </AuthContext.Provider>
   );

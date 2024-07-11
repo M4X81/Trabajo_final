@@ -19,7 +19,6 @@ export default function Users() {
         city: ''
     });
 
-
     const [userDataUpdate, setUserDataUpdate] = useState({
         pass: '',
         user_name: '',
@@ -34,7 +33,7 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/register`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
@@ -57,7 +56,7 @@ export default function Users() {
         if (email) {
             fetchData();
         }
-    }, [email]);
+    }, [email, pass]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -90,8 +89,12 @@ export default function Users() {
     };
 
     const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword); // Alternar visibilidad de la contraseña
+        setShowPassword(true); // Mostrar la contraseña temporalmente como texto
+        setTimeout(() => {
+            setShowPassword(false); // Restablecer la visibilidad de la contraseña después de - 1/2 segundo
+        }, 200);
     };
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserDataUpdate({ ...userDataUpdate, [name]: value });
