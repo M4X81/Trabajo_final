@@ -6,7 +6,7 @@ import '../styles/navbar.css';
 
 
 const Navbar = () => {
-  const { isLoggedIn, username } = useAuth();
+  const { isLoggedIn, mail } = useAuth();
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top" id="navbar">
@@ -33,7 +33,7 @@ const Navbar = () => {
             ) : (
               <li className="nav-item_true">
                   <Link className="nav-link active" aria-current="page" to="/users">
-                  {`${username.split('@')[0]}`}
+                  {`${mail.split('@')[0]}`}
                 </Link>
               </li>
             )}

@@ -31,13 +31,13 @@ const Sesion = () => {
             if (!response.ok) {
                 throw new Error('Credenciales incorrectas');
             } else {
+                console.log('Login - email:', data.email, 'password:', data.password);
                 // Guardar la información en local storage
                 localStorage.setItem('email', email);
                 localStorage.setItem('password', password);
 
-                // Guardar la información en el contexto si es necesario
-                login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación
-
+                // // Guardar la información en el contexto si es necesario
+                login(data.user.email);  // Ejemplo: guardar el email en el contexto de autenticación          
                 // Redirigir al usuario a la página de perfil u otra página protegida
                 navigate('/');
             }

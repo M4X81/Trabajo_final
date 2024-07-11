@@ -4,11 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/form.css';
 
 export default function Users() {
-    const { username, pass } = useAuth();
+    const { mail, pass } = useAuth();
+    console.log('mail:', mail, 'pass:', pass); // Verificar valores
     const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
-    const [userData, setUserData] = useState({
-        email: '',
-        password: '',
+    const [userData, setUserData] = useState({   
         user_name: '',
         lastname: '',
         address: '',
@@ -21,42 +20,44 @@ export default function Users() {
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // const formattedUsername = encodeURIComponent(username); // Formatear el username para URL
-                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
-                const data = await response.json();
-                if (response.json.ok) {
-                    setUserData({
-                        email: data.email,
-                        password: data.password,
-                        user_name: data.user_name,
-                        lastname: data.lastname,
-                        address: data.address,
-                        phone: data.phone,
-                        country: data.country,
-                        city: data.city
-                    }); // Establece todos los datos del usuario desde la respuesta del servidor
-                } else {
-                    setError(data.error);
-                }
-            } catch (error) {
-                setError(error.message);
+useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
+            
+            // Verificar si la respuesta no es JSON
+            const contentType = response.headers.get("content-type");
+            if (!contentType || !contentType.includes("application/json")) {
+                const text = await response.text();
+                throw new Error(`Expected JSON, received: ${text}`);
             }
-        };
 
-        fetchData();
-    }, [username, pass, email]);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUserData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
+            const data = await response.json();
+            if (response.ok) {
+                setUserData({
+                    email: data.email,
+                    password: data.password,
+                    user_name: data.user_name,
+                    lastname: data.lastname,
+                    address: data.address,
+                    phone: data.phone,
+                    country: data.country,
+                    city: data.city
+                }); // Establece todos los datos del usuario desde la respuesta del servidor
+            } else {
+                setError(data.error);
+            }
+        } catch (error) {
+            setError(error.message);
+        }
     };
+
+    if (email) {
+         fetchData();
+    }
+   
+}, [email]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -64,15 +65,15 @@ export default function Users() {
         setError(null);
 
         try {
-            // const formattedUsername = encodeURIComponent(username);
-            // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
-            let apiUrl = `https://trabajo-finalcac.vercel.app`;
+            
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+            // let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
 
             let method = 'PUT'; // Método por defecto para actualizar
 
             if (!email) {
                 // Si no hay email (es decir, estás creando un nuevo usuario)
-                apiUrl = `https://trabajo-finalcac.vercel.app`;
+                apiUrl = `https://trabajo-finalcac.vercel.app/user`;
                 method = 'POST';
             }
 
@@ -85,7 +86,7 @@ export default function Users() {
             });
 
             const data = await response.json();
-            if (response.json.ok) {
+            if (response.ok) {
                 alert('Datos actualizados con éxito');
                 navigate('/');
             } else {
@@ -98,18 +99,17 @@ export default function Users() {
         }
     };
 
-    // const togglePasswordVisibility = () => {
-    //     setShowPassword(true); // Mostrar la contraseña temporalmente como texto
-
-    //     setTimeout(() => {
-    //         setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 3 segundos
-    //     }, 3000);
-    // };
+    const togglePasswordVisibility = () => {
+        setShowPassword(true); // Mostrar la contraseña temporalmente como texto
+        setTimeout(() => {
+            setShowPassword(false); // Restablecer la visibilidad de la contraseña después de 1/2 segundo
+        }, 500);
+    };
 
     return (
         <div>
-            <h4>Completar perfil de usuario de {`${username.split('@')[0]}`}</h4>
-            <div className="container">
+            <h4>Completar perfil de usuario de {`${mail.split('@')[0]}`}</h4>
+            < div className="container">
                 <h6>Registro</h6>
                 <form id="registerForm">
                     <label htmlFor="regEmail">Email:</label>
@@ -117,27 +117,24 @@ export default function Users() {
                         type="email"
                         id="regEmail"
                         name="email"
-                        value={`${username}`}
+                        value={`${mail}`}
                         readOnly // Para evitar que se pueda editar el campo
                         required
                     /><br />
-                    {/* <label htmlFor="regPassword">Contraseña:</label>
+                    <label htmlFor="regPassword">Contraseña:</label>
                     <input
                         type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
                         id="regPassword"
                         name="password"
-                        value={`${pass}`} // Aquí supongo que `password` también está disponible en tu contexto
+                        value={`${pass}` || ''} // Aquí supongo que `password` también está disponible en tu contexto
                         readOnly // Para evitar que se pueda editar el campo
                         required
                     />
                     <button type="button" onClick={togglePasswordVisibility}>
                         <img src="/img/ojo-cerrado.png" alt="ojo"></img>
                     </button>
-                    <br /> */}
+                    <br />
                 </form>
-            </div>
-
-            <div className="container">
                 <h6>Completar datos</h6>
                 <form id="profileForm" onSubmit={handleSubmit}>
                     <label htmlFor="user_name">Nombre:</label>
@@ -145,8 +142,9 @@ export default function Users() {
                         type="text"
                         id="user_name"
                         name="user_name"
-                        value={userData.user_name}
-                        onChange={handleChange}
+                        value={userData.user_name || ''}
+                        readOnly
+                        // onChange={handleChange}
                         required
                     /><br />
                     <label htmlFor="lastname">Apellido:</label>
@@ -154,8 +152,9 @@ export default function Users() {
                         type="text"
                         id="lastname"
                         name="lastname"
-                        value={userData.lastname}
-                        onChange={handleChange}
+                        value={userData.lastname || ''}
+                        readOnly
+                        // onChange={handleChange}
                         required
                     /><br />
                     <label htmlFor="address">Dirección:</label>
@@ -163,8 +162,9 @@ export default function Users() {
                         type="text"
                         id="address"
                         name="address"
-                        value={userData.address}
-                        onChange={handleChange}
+                        value={userData.address || ''}
+                        readOnly
+                        // onChange={handleChange}
                         required
                     /><br />
                     <label htmlFor="phone">Teléfono:</label>
@@ -172,8 +172,9 @@ export default function Users() {
                         type="text"
                         id="phone"
                         name="phone"
-                        value={userData.phone}
-                        onChange={handleChange}
+                        value={userData.phone || ''}
+                        readOnly
+                        // onChange={handleChange}
                         required
                     /><br />
                     <label htmlFor="country">País:</label>
@@ -181,8 +182,9 @@ export default function Users() {
                         type="text"
                         id="country"
                         name="country"
-                        value={userData.country}
-                        onChange={handleChange}
+                        value={userData.country || ''}
+                        readOnly
+                        // onChange={handleChange}
                         required
                     /><br />
                     <label htmlFor="city">Ciudad:</label>
@@ -190,8 +192,9 @@ export default function Users() {
                         type="text"
                         id="city"
                         name="city"
-                        value={userData.city}
-                        onChange={handleChange}
+                        value={userData.city || ''}
+                        readOnly
+                        // onChange={handleChange}
                         required
                     /><br />
                     <button type="submit" disabled={loading}>
@@ -201,7 +204,7 @@ export default function Users() {
             </div>
 
             {error && <p className="error">{error}</p>}
-        </div>
+    </div>
     );
 }
 
