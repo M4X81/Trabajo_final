@@ -23,7 +23,7 @@ export default function Users() {
 useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/register/${email}`);
             
             // Verificar si la respuesta no es JSON
             const contentType = response.headers.get("content-type");
@@ -66,14 +66,14 @@ useEffect(() => {
 
         try {
             
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app/register/${email}`;
             // let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
 
             let method = 'PUT'; // Método por defecto para actualizar
 
             if (!email) {
                 // Si no hay email (es decir, estás creando un nuevo usuario)
-                apiUrl = `https://trabajo-finalcac.vercel.app/user`;
+                apiUrl = `https://trabajo-finalcac.vercel.app/register`;
                 method = 'POST';
             }
 
@@ -143,18 +143,16 @@ useEffect(() => {
                         id="user_name"
                         name="user_name"
                         value={userData.user_name || ''}
-                        readOnly
-                        // onChange={handleChange}
-                        required
+                        onChange={(e) => setUserData({ ...userData, user_name: e.target.value })}
+                        // required
                     /><br />
                     <label htmlFor="lastname">Apellido:</label>
                     <input
                         type="text"
                         id="lastname"
                         name="lastname"
-                        value={userData.lastname || ''}
-                        readOnly
-                        // onChange={handleChange}
+                        value={userData.lastname || ''}              
+                        onChange={(e) => setUserData({ ...userData, lastname: e.target.value })}
                         required
                     /><br />
                     <label htmlFor="address">Dirección:</label>
@@ -163,9 +161,8 @@ useEffect(() => {
                         id="address"
                         name="address"
                         value={userData.address || ''}
-                        readOnly
-                        // onChange={handleChange}
-                        required
+                        onChange={(e) => setUserData({ ...userData, address: e.target.value })}
+                        // required
                     /><br />
                     <label htmlFor="phone">Teléfono:</label>
                     <input
@@ -173,9 +170,8 @@ useEffect(() => {
                         id="phone"
                         name="phone"
                         value={userData.phone || ''}
-                        readOnly
-                        // onChange={handleChange}
-                        required
+                        onChange={(e) => setUserData({ ...userData, phone: e.target.value })}
+                        // required
                     /><br />
                     <label htmlFor="country">País:</label>
                     <input
@@ -183,9 +179,8 @@ useEffect(() => {
                         id="country"
                         name="country"
                         value={userData.country || ''}
-                        readOnly
-                        // onChange={handleChange}
-                        required
+                        onChange={(e) => setUserData({ ...userData, country: e.target.value })}
+                        // required
                     /><br />
                     <label htmlFor="city">Ciudad:</label>
                     <input
@@ -193,9 +188,8 @@ useEffect(() => {
                         id="city"
                         name="city"
                         value={userData.city || ''}
-                        readOnly
-                        // onChange={handleChange}
-                        required
+                        onChange={(e) => setUserData({ ...userData, city: e.target.value })}
+                        // required
                     /><br />
                     <button type="submit" disabled={loading}>
                         {loading ? 'Actualizando...' : 'Actualizar'}
