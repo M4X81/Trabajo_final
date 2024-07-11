@@ -34,7 +34,7 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/register/${email}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/register`);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
