@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import '../styles/form.css';
 
 export default function Users() {
-    const { email, pass } = useAuth();// Obtener el correo electrónico del usuario actual
+    const { email, password } = useAuth();// Obtener el correo electrónico del usuario actual
     // const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
     const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
     const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +22,7 @@ export default function Users() {
     });
 
     const [userDataUpdate, setUserDataUpdate] = useState({
-        pass: '',
+        password: '',
         user_name: '',
         lastname: '',
         address: '',
@@ -67,7 +67,7 @@ export default function Users() {
         if (emailParam) {
             fetchData();
         }
-    }, [emailParam, pass]);
+    }, [emailParam, password]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
