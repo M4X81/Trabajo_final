@@ -29,6 +29,7 @@ pool.connect(err => {
 });
 
 // Ruta de registro
+//esta funciona bien, los registros se cargan ok en la db
 app.post('/register', async (req, res) => {
     const { email, password, user_name, lastname, address, phone, country, city } = req.body;
 
@@ -47,6 +48,8 @@ app.post('/register', async (req, res) => {
 });
 
   // Agrego ruta para inicio de sesión(reviso la db para validar si el usuario existe)
+  //el login funciona ok, se ingresa al usuario( pero todavia no esto pudiendo traer los datos 
+  //de todas las tablas del usuario para desplegar en pantalla)
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
@@ -68,25 +71,9 @@ app.post('/login', async (req, res) => {
     }
 });
 
-  //esto lo cargo para que la navegacion la maneje react y no el servidor
-  //sino al actualizar o volver hacia atras no encuentra la ruta/pagina y da un 404
-
-// Ruta catch-all para manejar todas las rutas del lado del cliente
-
-
-// Configurar el servidor para que sirva la aplicación React en todas las rutas no API
-app.use(express.static(path.join(__dirname, 'build')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'app.js'));
-});
-app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, 'app.js');
-    console.log(`Enviando archivo: ${filePath}`);
-    res.sendFile(filePath);
-});
 
 //me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
+//esta la tengo que testear a ver si funciona bien...
 // app.get('/register:email', async (req, res) => {
 app.get('/users', async (req, res) => {
     const { email } = req.params;
@@ -101,8 +88,7 @@ app.get('/users', async (req, res) => {
             return res.status(404).json({ error: 'Usuario no encontrado' });
         }
 
-        // const userId = userResult.rows[0].id;
-
+        const userId = userResult.rows[0].id;
         const profileResult = await pool.query(
             'SELECT * FROM user_profiles WHERE user_id = $1',
             [userId]
@@ -173,6 +159,27 @@ app.put('/users', async (req, res) => {
     }
   });
 
+//esto lo cargo para que la navegacion la maneje react y no el servidor
+//sino al actualizar o volver hacia atras no encuentra la ruta/pagina y da un 404
+// Ruta catch-all para manejar todas las rutas del lado del cliente
+
+
+// Configurar el servidor para que sirva la aplicación React en todas las rutas no API
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'app.js'));
+});
+
+//esta tengo que ver bien si "redirijo" a app.js o a index.html
+app.get('*', (req, res) => {
+    const filePath = path.join(__dirname, 'app.js');
+    console.log(`Enviando archivo: ${filePath}`);
+    res.sendFile(filePath);
+});
+
+
+//despues una vez terminado quitar el puerto 3001 por las dudas
   const PORT = process.env.PORT || 3001;
   app.listen(PORT, () => {
     console.log(`Servidor escuchando en el puerto ${PORT}`);

@@ -34,22 +34,28 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                console.log("Fetching data for email:", email); // Log email
                 const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
                     throw new Error(`Expected JSON, received: ${text}`);
                 }
-
+                if (response.status === 204) {
+                    throw new Error('No hay contenido en la respuesta');
+                }
                 const data = await response.json();
                 if (response.ok) {
+                    console.log("Data fetched successfully:", data); // Log data
                     // setUserDataDB(data);
                     // console.log("datos seteados" ,userDataDB);
                     setUserDataUpdate(data);
                 } else {
+                    console.error("Error fetching data:", data.error); // Log error
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
                 }
             } catch (error) {
+                console.error("Fetch error:", error); // Log error
                 setError(error.message || 'Error al conectar con el servidor');
             }
         };
@@ -65,9 +71,10 @@ export default function Users() {
         setError(null);
 
         try {
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
             let method = 'PUT'; // Método por defecto para actualizar
 
+            console.log("Updating data:", userDataUpdate); // Log data to update
             const response = await fetch(apiUrl, {
                 method: method,
                 headers: {
@@ -76,13 +83,30 @@ export default function Users() {
                 body: JSON.stringify(userDataUpdate)
             });
 
-            const data = await response.json();
+            // const data = await response.json();
+            // if (response.ok) {
+            //     alert('Datos actualizados con éxito');
+            // } else {
+            //     setError(data.error || 'Error desconocido al actualizar datos del usuario');
+            // }
+
+            //esto agrego nuevo
+            const contentType = response.headers.get("content-type");
+            const text = await response.text();
+            if (!contentType || !contentType.includes("application/json")) {
+                throw new Error(`Expected JSON, received: ${text}`);
+            }
+
+            const data = JSON.parse(text);
             if (response.ok) {
+                console.log("Data updated successfully:", data); // Log success
                 alert('Datos actualizados con éxito');
             } else {
+                console.error("Error updating data:", data.error); // Log error
                 setError(data.error || 'Error desconocido al actualizar datos del usuario');
             }
         } catch (error) {
+            console.error("Update error:", error); // Log error
             setError(error.message || 'Error al conectar con el servidor');
         } finally {
             setLoading(false);
