@@ -75,8 +75,8 @@ export default function Users() {
         setError(null);
 
         try {
-            // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${emailParam}`;
+            // let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
             let method = 'PUT'; // Método por defecto para actualizar
 
             console.log("Updating data:", userDataUpdate); // Log data to update

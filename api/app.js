@@ -143,7 +143,7 @@ app.get('/users/:email', async (req, res) => {
 //     }
 // });
 
-app.put('/users', async (req, res) => {
+app.put('/users/:email', async (req, res) => {
     const { email } = req.params;
     const { password, user_name, lastname, address, phone, country, city } = req.body;
   
