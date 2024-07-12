@@ -6,6 +6,7 @@ import '../styles/form.css';
 export default function Users() {
     const { email, pass } = useAuth();// Obtener el correo electrónico del usuario actual
     // const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
+    const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword_2, setShowPassword_2] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -34,8 +35,10 @@ export default function Users() {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                
                 console.log("Fetching data for email:", email); // Log email
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
+                console.log('Fetching data for email:', emailParam); // Log email
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${emailParam}`);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
@@ -60,10 +63,10 @@ export default function Users() {
             }
         };
 
-        if (email) {
+        if (emailParam) {
             fetchData();
         }
-    }, [email, pass]);
+    }, [emailParam, pass]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
