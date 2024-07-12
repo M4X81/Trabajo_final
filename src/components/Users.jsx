@@ -22,7 +22,7 @@ export default function Users() {
         city: ''
     });
 
-
+//...
     useEffect(() => {
         const fetchData = async () => {
             try {
