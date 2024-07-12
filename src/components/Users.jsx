@@ -43,8 +43,8 @@ export default function Users() {
 
                 const data = await response.json();
                 if (response.ok) {
-                    setUserDataDB(data);
-                    console.log("datos seteados" ,userDataDB);
+                    // setUserDataDB(data);
+                    // console.log("datos seteados" ,userDataDB);
                     setUserDataUpdate(data);
                 } else {
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
