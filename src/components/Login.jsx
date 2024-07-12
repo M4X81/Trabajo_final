@@ -4,14 +4,15 @@ import { useAuth } from '../context/authContext';
 import '../styles/form.css';
 
 const Login = () => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [user_name, setUser_name] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone, setPhone] = useState('');
+    const [country, setCountry] = useState('');
+    const [city, setCity] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { logIn } = useAuth();  // Hook del contexto de autenticación
@@ -33,7 +34,7 @@ const Login = () => {
             });
 
             const data = await response.json();
-            
+
             if (!response.ok) {
                 throw new Error('Credenciales incorrectas');
             } else {
@@ -47,13 +48,14 @@ const Login = () => {
                 // Redirigir al usuario a la página de perfil u otra página protegida
                 navigate('/');
             }
-            
+
         } catch (error) {
             setError(error.message);
             alert("Email o Contraseña incorrectos, intente nuevamente...");
         } finally {
             setLoading(false);
         }
+        navigate(`/users/${email}`);
     };
 
     return (
