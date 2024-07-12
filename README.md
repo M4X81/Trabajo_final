@@ -10,7 +10,7 @@ Currently, two official plugins are available:
 
 Register esta bien. 
 login también
-falta actualizar users para traer todos los datos del usuario(en base al log del mail) y poder modificar los campos
+falta actualizar users para traer todos los datos del usuario(en base al log del email) y poder modificar los campos
 despues acomodar un poco lo grafico
 revisar si puedo activar el jwt
 ver si puedo guardar el local la sesion para que no se deslogee cuando refresco

@@ -4,15 +4,14 @@ import { useParams } from 'react-router-dom';
 import '../styles/form.css';
 
 export default function Users() {
-    const { mail, pass } = useAuth();// Obtener el correo electrónico del usuario actual
+    const { email, pass } = useAuth();// Obtener el correo electrónico del usuario actual
     // const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
-    const email = mail;
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword_2, setShowPassword_2] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [userDataDB, setUserDataDB] = useState({
-      
+
         user_name: '',
         lastname: '',
         address: '',
@@ -30,7 +29,7 @@ export default function Users() {
         country: '',
         city: ''
     });
-   
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -127,7 +126,7 @@ export default function Users() {
             setShowPassword_2(false);
         }, 2000);
     };
-//revisar esta, quizas poner un hover en vez del setTimeOut
+    //revisar esta, quizas poner un hover en vez del setTimeOut
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -136,13 +135,13 @@ export default function Users() {
 
     return (
         <div>
-             <div className="user-details">
-                <h5>Datos del usuario {`${mail.split('@')[0]}`}:</h5>
+            <div className="user-details">
+                <h5>Datos del usuario {`${email.split('@')[0]}`}:</h5>
                 <table>
                     <tbody>
                         <tr>
                             <td>Email:</td>
-                            <td>{mail}</td>
+                            <td>{email}</td>
                         </tr>
                         <tr>
                             <td>Contraseña:</td>
@@ -183,16 +182,16 @@ export default function Users() {
             <h4>Modificar perfil:</h4>
             <div className="container">
                 <form id="profileForm" onSubmit={handleSubmit}>
-                <label htmlFor="regPassword">Contraseña:</label>
+                    <label htmlFor="regPassword">Contraseña:</label>
                     <input
                         type={showPassword_2 ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
                         id="regPassword"
                         name="password"
-                        value={userDataUpdate.password} 
+                        value={userDataUpdate.password}
                         onChange={handleInputChange}
                         required
                     />
-                    <br/>
+                    <br />
                     <button type="button" onClick={togglePasswordVisibility_2}>
                         <img src="/img/ojo-cerrado.png" alt="ojo"></img>
                     </button>
@@ -211,7 +210,7 @@ export default function Users() {
                         type="text"
                         id="lastname"
                         name="lastname"
-                        value={userDataUpdate.lastname}              
+                        value={userDataUpdate.lastname}
                         onChange={handleInputChange}
                         required
                     /><br />
