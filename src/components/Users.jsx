@@ -11,7 +11,7 @@ export default function Users() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [userDataDB, setUserDataDB] = useState({
-        pass: '',
+      
         user_name: '',
         lastname: '',
         address: '',
@@ -177,7 +177,7 @@ export default function Users() {
                         type="text"
                         id="user_name"
                         name="user_name"
-                        value={userDataDB.user_name}
+                        value={userDataUpdate.user_name}
                         onChange={handleInputChange}
                         required
                     /><br />
@@ -186,7 +186,7 @@ export default function Users() {
                         type="text"
                         id="lastname"
                         name="lastname"
-                        value={userDataDB.lastname}              
+                        value={userDataUpdate.lastname}              
                         onChange={handleInputChange}
                         required
                     /><br />
@@ -195,7 +195,7 @@ export default function Users() {
                         type="text"
                         id="address"
                         name="address"
-                        value={userDataDB.address}
+                        value={userDataUpdate.address}
                         onChange={handleInputChange}
                         required
                     /><br />
@@ -204,7 +204,7 @@ export default function Users() {
                         type="text"
                         id="phone"
                         name="phone"
-                        value={userDataDB.phone}
+                        value={userDataUpdate.phone}
                         onChange={handleInputChange}
                         required
                     /><br />
@@ -213,7 +213,7 @@ export default function Users() {
                         type="text"
                         id="country"
                         name="country"
-                        value={userDataDB.country}
+                        value={userDataUpdate.country}
                         onChange={handleInputChange}
                         required
                     /><br />
@@ -222,7 +222,7 @@ export default function Users() {
                         type="text"
                         id="city"
                         name="city"
-                        value={userDataDB.city}
+                        value={userDataUpdate.city}
                         onChange={handleInputChange}
                         required
                     /><br />

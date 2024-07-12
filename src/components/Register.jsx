@@ -17,7 +17,7 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const { login } = useAuth();
+    const { logIn } = useAuth();
     const navigate = useNavigate();
 
     const handleRegister = async (event) => {
@@ -55,7 +55,7 @@ const Register = () => {
 
             const data = await response.json();
 
-            login(data.email, data.password); // O el identificador de usuario retornado por la API
+            logIn(data.email, data.password, data.user_name, data.lastname, data.address, data.phone,data.country, data.city); // O el identificador de usuario retornado por la API
 
             navigate('/');
         } catch (error) {
