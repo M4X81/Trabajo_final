@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
 //esta la tengo que testear a ver si funciona bien...
 // app.get('/register:email', async (req, res) => {
 app.get('/users/:email', async (req, res) => {
-    const { email } = req.params;
+    const { email } = req.params.email;
 
     try {
         const user = await pool.query('SELECT * FROM user_profiles WHERE email = $1', [email]);
@@ -123,12 +123,12 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'app.jsx'));//probar en vez de index.html app.js o app.jsx
 });
 
-//esta tengo que ver bien si "redirijo" a app.js o a index.html
-app.get('*', (req, res) => {
-    const filePath = path.join(__dirname, 'app.js');
-    console.log(`Enviando archivo: ${filePath}`);
-    res.sendFile(filePath);
-});
+// //esta tengo que ver bien si "redirijo" a app.js o a index.html
+// app.get('*', (req, res) => {
+//     const filePath = path.join(__dirname, 'app.js');
+//     console.log(`Enviando archivo: ${filePath}`);
+//     res.sendFile(filePath);
+// });
 
 
 //despues una vez terminado quitar el puerto 3001 por las dudas
