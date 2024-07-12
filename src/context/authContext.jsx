@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     setPass(pass);
 
   };
-
+//qweqwe
   const logout = () => {
     setIsLoggedIn(false);
     setMail('');
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, mail,pass, logIn, logout }}>//qwe
+    <AuthContext.Provider value={{ isLoggedIn, mail,pass, logIn, logout }}>
       {children}
     </AuthContext.Provider>
   );
