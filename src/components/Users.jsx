@@ -7,6 +7,7 @@ export default function Users() {
     const { mail, pass } = useAuth();// Obtener el correo electrónico del usuario actual
     const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
     const [showPassword, setShowPassword] = useState(false);
+    const [showPassword_2, setShowPassword_2] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [userDataDB, setUserDataDB] = useState({
@@ -95,6 +96,14 @@ export default function Users() {
         }, 200);
     };
 
+    const togglePasswordVisibility_2 = () => {
+        setShowPassword_2(true);
+        setTimeout(() => {
+            setShowPassword_2(false);
+        }, 2000);
+    };
+//revisar esta, quizas poner un hover en vez del setTimeOut
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserDataUpdate({ ...userDataUpdate, [name]: value });
@@ -109,6 +118,15 @@ export default function Users() {
                         <tr>
                             <td>Email:</td>
                             <td>{mail}</td>
+                        </tr>
+                        <tr>
+                            <td>Contraseña:</td>
+                            <td>
+                                {showPassword ? pass : '••••••••'}
+                                <button type="button" onClick={togglePasswordVisibility} style={{ marginLeft: '10px' }}>
+                                    <img src="/img/ojo-cerrado.png" alt="ojo" />
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Nombre:</td>
@@ -139,33 +157,21 @@ export default function Users() {
             </div>
             <h4>Modificar perfil:</h4>
             <div className="container">
-                <form id="registerForm">
-                    {/* <label htmlFor="regEmail">Email:</label>
+                <form id="profileForm" onSubmit={handleSubmit}>
+                <label htmlFor="regPassword">Contraseña:</label>
                     <input
-                        type="email"
-                        id="regEmail"
-                        name="email"
-                        value={mail}
-                        readOnly // Para evitar que se pueda editar el campo
-                        required
-                    /><br /> */}
-                    <label htmlFor="regPassword">Contraseña:</label>
-                    <input
-                        type={showPassword ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
+                        type={showPassword_2 ? 'text' : 'password'} // Cambiar dinámicamente entre tipo texto y contraseña
                         id="regPassword"
                         name="password"
-                        value={`${pass}` || ''} // Aquí no mostramos la contraseña directamente
-                        // readOnly // Para evitar que se pueda editar el campo
+                        value={userDataUpdate.password} 
                         onChange={handleInputChange}
                         required
                     />
-                    <button type="button" onClick={togglePasswordVisibility}>
+                    <br/>
+                    <button type="button" onClick={togglePasswordVisibility_2}>
                         <img src="/img/ojo-cerrado.png" alt="ojo"></img>
                     </button>
                     <br />
-                </form>
-                <h6>Completar datos</h6>
-                <form id="profileForm" onSubmit={handleSubmit}>
                     <label htmlFor="user_name">Nombre:</label>
                     <input
                         type="text"

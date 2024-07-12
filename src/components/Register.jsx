@@ -55,7 +55,7 @@ const Register = () => {
 
             const data = await response.json();
 
-            login(data.email); // O el identificador de usuario retornado por la API
+            login(data.email, data.password); // O el identificador de usuario retornado por la API
 
             navigate('/');
         } catch (error) {
@@ -96,7 +96,7 @@ const Register = () => {
                             <label htmlFor="pass">
                                 Contraseña:
                                 <input
-                                    type="text"//modifico esto( deberia ser pasword)
+                                    type="password"//modifico esto( deberia ser pasword)
                                     id="pass"
                                     required
                                     placeholder="Password"

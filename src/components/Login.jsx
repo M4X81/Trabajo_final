@@ -32,9 +32,9 @@ const Login = () => {
                 throw new Error('Credenciales incorrectas');
             } else {
                 console.log('Login - email:', data.email, 'password:', data.password);
-                // Guardar la información en local storage
-                localStorage.setItem('email', email);
-                localStorage.setItem('password', password);
+                // // Guardar la información en local storage
+                // localStorage.setItem('email', email);
+                // localStorage.setItem('password', password);
 
                 // // Guardar la información en el contexto si es necesario
                 logIn(email, password);  // Ejemplo: guardar el email en el contexto de autenticación           
