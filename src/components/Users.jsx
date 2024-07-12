@@ -38,7 +38,8 @@ export default function Users() {
                 
                 console.log("Fetching data for email:", email); // Log email
                 console.log('Fetching data for email:', emailParam); // Log email
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${emailParam}`);
+                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${emailParam}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
@@ -74,7 +75,8 @@ export default function Users() {
         setError(null);
 
         try {
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+            // let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
             let method = 'PUT'; // Método por defecto para actualizar
 
             console.log("Updating data:", userDataUpdate); // Log data to update
