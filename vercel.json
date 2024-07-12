@@ -1,39 +1,22 @@
 {
-    "version": 2,
-  
-    "routes": [
-      {
-        "src": "/register",
-        "dest": "/api/app.js"
-      },
-      {
-        "src": "/login",
-        "dest": "/api/app.js"
-      },
-      {
-        "src": "/users",
-        "dest": "/api/app.js"
-      },
-      
-      {
-        "src": "/#/users",
-        "dest": "/api/app.js"
-      },
-      {
-        "src": "/#/register",
-        "dest": "/api/app.js"
-      },
-      {
-        "src": "/register",
-        "dest": "/api/app.js"
-      },
-      {
-        "src": "/users",
-        "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
-        "headers": {
-          "Access-Control-Allow-Origin": "*"
-        }
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
+
   
