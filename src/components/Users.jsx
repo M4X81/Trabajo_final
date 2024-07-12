@@ -151,7 +151,7 @@ export default function Users() {
                         <tr>
                             <td>Contraseña:</td>
                             <td>
-                                {showPassword ? pass : '••••••••'}
+                                {showPassword ? password : '••••••••'}
                                 <button type="button" onClick={togglePasswordVisibility} style={{ marginLeft: '10px' }}>
                                     <img src="/img/ojo-cerrado.png" alt="ojo" />
                                 </button>
