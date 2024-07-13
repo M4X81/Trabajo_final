@@ -27,20 +27,32 @@ pool.connect(err => {
     }
 });
 
-// Ruta de registro
-//esta funciona bien, los registros se cargan ok en la db
+// // Ruta de registro
+// //esta funciona bien, los registros se cargan ok en la db
+// app.post('/register', async (req, res) => {
+//     const { email, password, user_name, lastname, address, phone, country, city } = req.body;
+
+//     try {
+//         const result = await pool.query(
+//             `INSERT INTO user_profiles 
+//             (email, password, user_name, lastname, address, phone, country, city) 
+//             VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+//             RETURNING *`,
+//             [email, password, user_name, lastname, address, phone, country, city]
+//         );
+//         res.status(201).json(result.rows[0]);
+//     } catch (err) {
+//         res.status(500).json({ error: err.message });
+//     }
+// });
+//--------------------------la comento para hacer una prueba con otro tipo de PUT aca a continuacion
 app.post('/register', async (req, res) => {
     const { email, password, user_name, lastname, address, phone, country, city } = req.body;
 
     try {
-        const result = await pool.query(
-            `INSERT INTO user_profiles 
-            (email, password, user_name, lastname, address, phone, country, city) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
-            RETURNING *`,
-            [email, password, user_name, lastname, address, phone, country, city]
-        );
-        res.status(201).json(result.rows[0]);
+        // Llama a la función registerUser para registrar el usuario
+        const newUser = await registerUser(email, password, user_name, lastname, address, phone, country, city);
+        res.status(201).json(newUser);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -119,7 +131,7 @@ app.put('/users/:email', async (req, res) => {
 app.use(express.static(path.join(__dirname, 'app.jsx')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'app.jsx'));//probar en vez de index.html app.js o app.jsx
+    res.sendFile(path.join(__dirname, 'app.js'));//probar en vez de index.html app.js o app.jsx
 });
 
 // //esta tengo que ver bien si "redirijo" a app.js o a index.html

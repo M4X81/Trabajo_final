@@ -1,1 +1,3 @@
 .vercel
+# Ignorar todos los archivos que empiecen con .env
+.env*

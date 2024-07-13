@@ -26,16 +26,37 @@ const pool = new Pool({
     }
 });
 
-// Función para registrar un nuevo usuario
-const registerUser = async (email, password) => {
+// // Función para registrar un nuevo usuario
+// const registerUser = async (email, password) => {
+//     try {
+//         // Generar el hash de la contraseña
+//         const hashedPassword = await bcrypt.hash(password, 10); // 10 es el número de rondas de hash
+
+//         // Insertar usuario en la base de datos
+//         const result = await pool.query(
+//             'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
+//             [email, hashedPassword]
+//         );
+
+//         return result.rows[0]; // Devolvemos el usuario insertado
+//     } catch (error) {
+//         throw error;
+//     }
+// };
+//----------------------esta la voy a modificar a continuacion:
+// Importa tu función registerUser aquí
+const registerUser = async (email, password, user_name, lastname, address, phone, country, city) => {
     try {
         // Generar el hash de la contraseña
-        const hashedPassword = await bcrypt.hash(password, 10); // 10 es el número de rondas de hash
+        const hashedPassword = await bcrypt.hash(password, 8); // 8 es el número de rondas de hash
 
         // Insertar usuario en la base de datos
         const result = await pool.query(
-            'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
-            [email, hashedPassword]
+            `INSERT INTO user_profiles 
+            (email, password, user_name, lastname, address, phone, country, city) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+            RETURNING *`,
+            [email, hashedPassword, user_name, lastname, address, phone, country, city]
         );
 
         return result.rows[0]; // Devolvemos el usuario insertado
