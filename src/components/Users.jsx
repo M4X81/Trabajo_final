@@ -36,7 +36,6 @@ export default function Users() {
                 const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${emailParam}`);
                
                 const contentType = response.headers.get("content-type");
-                alert("aca que onda?")
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
                     throw new Error(`Expected JSON, received: ${text}`);
@@ -60,7 +59,6 @@ export default function Users() {
             } catch (error) {
                 console.error("Fetch error:", error); // Log error
                 setError(error.message || 'Error al conectar con el servidor');
-               alert("aca esta el error")
             }
         };
 
