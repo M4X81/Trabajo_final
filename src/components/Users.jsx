@@ -4,9 +4,12 @@ import { useParams } from 'react-router-dom';
 import '../styles/users.css';
 
 export default function Users() {
-    const { email, password} = useAuth();// Obtener el correo electrónico del usuario actual
-    // const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
+    // const { email, password} = useAuth();// Obtener el correo electrónico del usuario actual
+    // // const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
+    // const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
+    const { email: authEmail, password } = useAuth(); // Obtener el correo electrónico del usuario actual
     const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
+    const email = emailParam || authEmail;
     const [showPassword, setShowPassword] = useState(false);
     const [showPassword_2, setShowPassword_2] = useState(false);
     const [loading, setLoading] = useState(false);
