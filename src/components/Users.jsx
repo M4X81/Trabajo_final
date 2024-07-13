@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import '../styles/users.css';
 
 export default function Users() {
-    const { email, password } = useAuth();// Obtener el correo electrónico del usuario actual
+    const { email, password} = useAuth();// Obtener el correo electrónico del usuario actual
     // const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
     const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
     const [showPassword, setShowPassword] = useState(false);
@@ -30,7 +30,6 @@ export default function Users() {
                 console.log("Fetching data for email:", email); // Log email
                 console.log('Fetching data for email:', emailParam); // Log email
                 const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${emailParam}`);
-                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users`);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
@@ -58,7 +57,7 @@ export default function Users() {
         if (emailParam) {
             fetchData();
         }
-    }, [emailParam, password]);
+    }, [emailParam]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,12 +66,11 @@ export default function Users() {
 
         try {
             let apiUrl = `https://trabajo-finalcac.vercel.app/users/${emailParam}`;
-            // let apiUrl = `https://trabajo-finalcac.vercel.app/users`;
-            let method = 'PUT'; // Método por defecto para actualizar
+            
 
             console.log("Updating data:", userDataUpdate); // Log data to update
             const response = await fetch(apiUrl, {
-                method: method,
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -86,29 +84,45 @@ export default function Users() {
             //     setError(data.error || 'Error desconocido al actualizar datos del usuario');
             // }
 
-            //esto agrego nuevo
-            const contentType = response.headers.get("content-type");
-            const text = await response.text();
-            if (!contentType || !contentType.includes("application/json")) {
-                throw new Error(`Expected JSON, received: ${text}`);
-            }
+    //         //esto agrego nuevo
+    //         const contentType = response.headers.get("content-type");
+    //         const text = await response.text();
+    //         if (!contentType || !contentType.includes("application/json")) {
+    //             throw new Error(`Expected JSON, received: ${text}`);
+    //         }
 
-            const data = JSON.parse(text);
-            if (response.ok) {
-                console.log("Data updated successfully:", data); // Log success
-                alert('Datos actualizados con éxito');
-            } else {
-                console.error("Error updating data:", data.error); // Log error
-                setError(data.error || 'Error desconocido al actualizar datos del usuario');
-            }
-        } catch (error) {
-            console.error("Update error:", error); // Log error
-            setError(error.message || 'Error al conectar con el servidor');
-        } finally {
-            setLoading(false);
+    //         const data = JSON.parse(text);
+    //         if (response.ok) {
+    //             console.log("Data updated successfully:", data); // Log success
+    //             alert('Datos actualizados con éxito');
+    //         } else {
+    //             console.error("Error updating data:", data.error); // Log error
+    //             setError(data.error || 'Error desconocido al actualizar datos del usuario');
+    //         }
+    //     } catch (error) {
+    //         console.error("Update error:", error); // Log error
+    //         setError(error.message || 'Error al conectar con el servidor');
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
+
+
+    ////////esto es de prueba
+ 
+        if (!response.ok) {
+            throw new Error('Error al actualizar los datos del usuario');
         }
-    };
 
+        alert('Datos actualizados correctamente');
+    } catch (error) {
+        setError(error.message || 'Error al conectar con el servidor');
+    } finally {
+        setLoading(false);
+    }
+
+    ////////////
+};
     const togglePasswordVisibility = () => {
         setShowPassword(true); // Mostrar la contraseña temporalmente como texto
         setTimeout(() => {

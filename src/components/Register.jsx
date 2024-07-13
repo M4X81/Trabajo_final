@@ -55,16 +55,13 @@ const Register = () => {
 
             const data = await response.json();
 //agrego esto
-            if (data && data.email && data.password) {
+            if (data && data.email && data.password && data.user_name && data.lastname && data.address && data.phone && data.country && data.city) {
                 logIn(data.email, data.password, data.user_name, data.lastname, data.address, data.phone, data.country, data.city);
                 navigate('/');
               } else {
                 throw new Error('Datos de respuesta no válidos.');
               }
 
-            // logIn(data.email, data.password, data.user_name, data.lastname, data.address, data.phone,data.country, data.city); // O el identificador de usuario retornado por la API
-
-            navigate('/');
         } catch (error) {
             setError(error.message);
         } finally {

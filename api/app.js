@@ -76,7 +76,7 @@ app.post('/login', async (req, res) => {
 //esta la tengo que testear a ver si funciona bien...
 // app.get('/register:email', async (req, res) => {
 app.get('/users/:email', async (req, res) => {
-    const { email } = req.params.email;
+    const { email } = req.params;
 
     try {
         const user = await pool.query('SELECT * FROM user_profiles WHERE email = $1', [email]);

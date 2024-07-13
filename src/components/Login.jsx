@@ -55,7 +55,7 @@ const Login = () => {
         } finally {
             setLoading(false);
         }
-        navigate(`/users/${email}`);
+        // navigate(`/users/${email}`);
     };
 
     return (
