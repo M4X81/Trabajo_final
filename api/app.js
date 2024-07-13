@@ -73,7 +73,7 @@ app.post('/login', async (req, res) => {
 //me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
 //esta la tengo que testear a ver si funciona bien...
 // app.get('/register:email', async (req, res) => {
-app.get(`/users/:email`, async (req, res) => {
+app.get('/users/:email', async (req, res) => {
     const { email } = req.params;
 
     try {
