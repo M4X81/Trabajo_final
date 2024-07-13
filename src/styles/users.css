@@ -20,8 +20,9 @@ body{
 }
 .main {
     position: relative;
-    min-width: 100dvw;
-    justify-content: space-between;
+    min-width: 60dvw;
+    justify-content:center;
+    align-items: center;
 }
 
 .title {
