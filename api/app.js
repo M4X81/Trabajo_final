@@ -5,7 +5,7 @@ const path = require('path');
 const { Pool } = require('pg');
 const corsOptions = require('./config/corsConfig');
 require('dotenv').config();
-
+const registerUser = require('./models/userModels')
 const app = express();
 app.use(cors(corsOptions));
 console.log("cors inicializado");
