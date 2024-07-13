@@ -30,33 +30,43 @@ export default function Users() {
                 
                 console.log("Fetching data for email:", email); // Log email
                 console.log('Fetching data for email:', emailParam); // Log email
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${emailParam}`);
+               
                 const contentType = response.headers.get("content-type");
+                alert("aca que onda?")
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
                     throw new Error(`Expected JSON, received: ${text}`);
+                    
                 }
                 if (response.status === 204) {
                     throw new Error('No hay contenido en la respuesta');
+                    
                 }
                 const data = await response.json();
                 if (response.ok) {
+                    alert("Data fetched successfully:", data)
                     console.log("Data fetched successfully:", data); // Log data
                     setUserDataUpdate(data);
+                    
                 } else {
                     console.error("Error fetching data:", data.error); // Log error
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
+                    
                 }
             } catch (error) {
                 console.error("Fetch error:", error); // Log error
                 setError(error.message || 'Error al conectar con el servidor');
+               alert("aca esta el error")
             }
         };
 
         if (emailParam) {
+            
             fetchData();
+           
         }
-    }, [email]);
+    }, [emailParam]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
