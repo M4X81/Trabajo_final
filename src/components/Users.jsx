@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
 import { useParams } from 'react-router-dom';
-import '../styles/form.css';
+import '../styles/users.css';
 
 export default function Users() {
     const { email, password } = useAuth();// Obtener el correo electrónico del usuario actual
@@ -130,10 +130,13 @@ export default function Users() {
     };
 
     return (
-        <div>
+        <div className='main'>
+            <div className='title'> <h4>Datos del usuario {`${email.split('@')[0]}`}:</h4></div>
+            <div className='container-principal'>
+                
             <div className="user-details">
-                <h5>Datos del usuario {`${email.split('@')[0]}`}:</h5>
-                <table>
+                
+                <table className='table'>
                     <tbody>
                         <tr>
                             <td>Email:</td>
@@ -143,7 +146,7 @@ export default function Users() {
                             <td>Contraseña:</td>
                             <td>
                                 {showPassword ? password : '••••••••'}
-                                <button type="button" onClick={togglePasswordVisibility} style={{ marginLeft: '10px' }}>
+                                <button className='eye_button'type="button" onClick={togglePasswordVisibility} style={{ marginLeft: '10px' }}>
                                     <img src="/img/ojo-cerrado.png" alt="ojo" />
                                 </button>
                             </td>
@@ -175,8 +178,9 @@ export default function Users() {
                     </tbody>
                 </table>
             </div>
-            <h4>Modificar perfil:</h4>
+            
             <div className="container">
+                <h4>Modificar perfil:</h4>
                 <form id="profileForm" onSubmit={handleSubmit}>
                     <label htmlFor="regPassword">Contraseña:</label>
                     <input
@@ -188,7 +192,7 @@ export default function Users() {
                         required
                     />
                     <br />
-                    <button type="button" onClick={togglePasswordVisibility_2}>
+                    <button className='eye_button' type="button" onClick={togglePasswordVisibility_2}>
                         <img src="/img/ojo-cerrado.png" alt="ojo"></img>
                     </button>
                     <br />
@@ -246,12 +250,12 @@ export default function Users() {
                         onChange={handleInputChange}
                         required
                     /><br />
-                    <button type="submit" disabled={loading}>
+                    <button className='btn' type="submit" disabled={loading}>
                         {loading ? 'Actualizando...' : 'Actualizar'}
                     </button>
                 </form>
             </div>
-
+            </div>
             {error && <p className="error">{error}</p>}
         </div>
     );

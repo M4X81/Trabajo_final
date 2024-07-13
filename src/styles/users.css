@@ -1,0 +1,75 @@
+:root {
+    --box-shadow-activo: 0 4px 8px rgba(0, 217, 255, 0.699),
+    0 6px 20px rgba(169, 229, 253, 0.637);
+    --box-shadow-inactivo: 0 4px 8px rgba(255, 255, 255, 0.699),
+    0 6px 20px rgba(212, 204, 204, 0.315);
+    --bg-color-nav:#a09f9f;
+    --fuente-activa:#0ff;
+    --bordes: 5px;
+    --bordes-grandes:24px;
+    --borde-lnk:2px rgba(110, 50, 50, 0.555);
+    --bg-radial: radial-gradient(at 100% 0, #fff2, #fff0 50%),
+    radial-gradient(at 0% 100%, #0002, #0000 50%),
+    #545153;
+    --bg-lineal:linear-gradient(45deg, #223, #112);
+    --bg-nav:rgba(147, 147, 173, 0.438);
+    --bg-nav-solid:rgba(147, 147, 173, 0.884);
+}
+body{
+    background-color: var(--bg-nav-solid);
+}
+.main {
+    position: relative;
+    min-width: 100dvw;
+    justify-content: space-between;
+}
+
+.title {
+    position: relative;
+    margin-top: 10px;
+}
+
+.container-principal {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    justify-content: space-between;
+background-color: var( --bg-nav);
+}
+
+.user-details {
+    margin-top: 20px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    align-self: start;
+    gap: 2rem;
+    
+}
+
+.container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.eye_button{
+background-color: var(--bg-radial);
+}
+.btn{
+   
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color-nav);
+    border-radius:var(--bordes);
+    color: var(--fuente-activa);
+    box-shadow: var(--box-shadow-activo);
+}
+.table{
+    margin: 2rem ;
+    background-color: var(--bg-color-nav);
+    border-radius:var(--bordes);
+    color: var(--fuente-activa);
+    box-shadow: var(--box-shadow-activo);
+}
