@@ -32,7 +32,7 @@ const Navbar = () => {
               </li>
             ) : (
               <li className="nav-item_true">
-                <Link className="nav-link active" aria-current="page" to="/users">
+                <Link className="nav-link active" aria-current="page" to={`/users/${email}`}>
                   {`${email.split('@')[0]}`}
                 </Link>
               </li>

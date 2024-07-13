@@ -15,26 +15,26 @@ import Login from './components/Login';
 function App() {
 
   return (
-        <>
-        <AuthProvider>
-        <HashRouter>
-        <Navbar />
+    <>
+      <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
 
-        <Routes>
-          <Route path='/' element={<Inicio/>} />
-          <Route path='/wallet' element={<Wallet />} />
-          <Route path='/register' element={<Register/>} />
-          <Route path='/exchange' element={<Exchange/>} />
-          <Route path='/tyc' element={<Tyc/>} />
-          <Route path='/pdp' element={<Pdp/>} />
-          <Route path='/users' element={<Users/>} />
-          <Route path='/users/:email' element={<Users/>} />
-          <Route path='/login' element={<Login/>} />
-        </Routes>
-        <Footer />
-      </HashRouter>
+          <Routes>
+            <Route path='/users/:email' element={<Users />} />
+            <Route path='/' element={<Inicio />} />
+            <Route path='/wallet' element={<Wallet />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/exchange' element={<Exchange />} />
+            <Route path='/tyc' element={<Tyc />} />
+            <Route path='/pdp' element={<Pdp />} />
+            {/* <Route path='/users' element={<Users />} /> */}
+            <Route path='/login' element={<Login />} />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
       </AuthProvider>
-       
+
     </>
   )
 }

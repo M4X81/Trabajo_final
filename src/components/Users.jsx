@@ -21,6 +21,7 @@ export default function Users() {
         country: '',
         city: ''
     });
+    // const [userDataUpdate, setUserDataUpdate] = useState(null);
 
 //...
     useEffect(() => {
@@ -29,7 +30,7 @@ export default function Users() {
                 
                 console.log("Fetching data for email:", email); // Log email
                 console.log('Fetching data for email:', emailParam); // Log email
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${emailParam}`);
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users/${email}`);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
                     const text = await response.text();
@@ -41,8 +42,6 @@ export default function Users() {
                 const data = await response.json();
                 if (response.ok) {
                     console.log("Data fetched successfully:", data); // Log data
-                    // setUserDataDB(data);
-                    // console.log("datos seteados" ,userDataDB);
                     setUserDataUpdate(data);
                 } else {
                     console.error("Error fetching data:", data.error); // Log error
@@ -57,7 +56,7 @@ export default function Users() {
         if (emailParam) {
             fetchData();
         }
-    }, [emailParam]);
+    }, [email]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -65,7 +64,7 @@ export default function Users() {
         setError(null);
 
         try {
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${emailParam}`;
+            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${email}`;
             
 
             console.log("Updating data:", userDataUpdate); // Log data to update

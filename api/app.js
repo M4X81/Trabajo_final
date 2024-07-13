@@ -13,11 +13,10 @@ app.use(express.json());
 console.log("Servidor está iniciando...");
 
 const pool = new Pool({
-    //   connectionString: process.env.DATABASE_URL,
     connectionString: process.env.POSTGRES_URL,
-    ssl: {
-        rejectUnauthorized: true//lo tenia en false
-    }
+    // ssl: {
+    //     rejectUnauthorized: true//lo tenia en false
+    // }
 });
 
 pool.connect(err => {
@@ -75,17 +74,17 @@ app.post('/login', async (req, res) => {
 //me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
 //esta la tengo que testear a ver si funciona bien...
 // app.get('/register:email', async (req, res) => {
-app.get('/users/:email', async (req, res) => {
+app.get(`/users/:email`, async (req, res) => {
     const { email } = req.params;
 
     try {
         const user = await pool.query('SELECT * FROM user_profiles WHERE email = $1', [email]);
 
-        if (user.rows.length === 0) {
-            return res.status(404).json({ error: 'Usuario no encontrado' });
+        if (user.rows.length > 0) {
+             res.status(200).json(user.rows[0]);
+        }else{
+            res.status(404).json({ error: 'Usuario no Enncontrado' });
         }
-
-        res.status(200).json(user.rows[0]);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

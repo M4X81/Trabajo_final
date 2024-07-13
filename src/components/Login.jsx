@@ -47,6 +47,7 @@ const Login = () => {
                 logIn(email, password, user_name, lastname, address, phone, country, city);  // Ejemplo: guardar el email en el contexto de autenticación           
                 // Redirigir al usuario a la página de perfil u otra página protegida
                 navigate('/');
+                // navigate(`/users/${email}`);
             }
 
         } catch (error) {
@@ -55,7 +56,7 @@ const Login = () => {
         } finally {
             setLoading(false);
         }
-        // navigate(`/users/${email}`);
+        
     };
 
     return (
