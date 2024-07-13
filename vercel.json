@@ -30,10 +30,6 @@
       "dest": "/api/app.js"
     },
     {
-      "src": "/register",
-      "dest": "/api/app.js"
-    },
-    {
       "src": "/users/:email",
       "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
       "headers": {

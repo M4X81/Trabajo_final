@@ -118,7 +118,7 @@ app.put('/users/:email', async (req, res) => {
 app.use(express.static(path.join(__dirname, 'app.jsx')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'app.js'));//probar en vez de index.html app.js o app.jsx
+    res.sendFile(path.join(__dirname, 'app.jsx'));//probar en vez de index.html app.js o app.jsx
 });
 
 // //esta tengo que ver bien si "redirijo" a app.js o a index.html
