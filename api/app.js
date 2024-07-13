@@ -5,7 +5,6 @@ const path = require('path');
 const { Pool } = require('pg');
 const corsOptions = require('./config/corsConfig');
 require('dotenv').config();
-const registerUser = require('./models/userModels')
 const app = express();
 app.use(cors(corsOptions));
 console.log("cors inicializado");
@@ -29,30 +28,18 @@ pool.connect(err => {
 
 // // Ruta de registro
 // //esta funciona bien, los registros se cargan ok en la db
-// app.post('/register', async (req, res) => {
-//     const { email, password, user_name, lastname, address, phone, country, city } = req.body;
-
-//     try {
-//         const result = await pool.query(
-//             `INSERT INTO user_profiles 
-//             (email, password, user_name, lastname, address, phone, country, city) 
-//             VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
-//             RETURNING *`,
-//             [email, password, user_name, lastname, address, phone, country, city]
-//         );
-//         res.status(201).json(result.rows[0]);
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// });
-//--------------------------la comento para hacer una prueba con otro tipo de PUT aca a continuacion
 app.post('/register', async (req, res) => {
     const { email, password, user_name, lastname, address, phone, country, city } = req.body;
 
     try {
-        // Llama a la función registerUser para registrar el usuario
-        const newUser = await registerUser(email, password, user_name, lastname, address, phone, country, city);
-        res.status(201).json(newUser);
+        const result = await pool.query(
+            `INSERT INTO user_profiles 
+            (email, password, user_name, lastname, address, phone, country, city) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+            RETURNING *`,
+            [email, password, user_name, lastname, address, phone, country, city]
+        );
+        res.status(201).json(result.rows[0]);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
