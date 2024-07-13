@@ -115,10 +115,10 @@ app.put('/users/:email', async (req, res) => {
 
 
 // Configurar el servidor para que sirva la aplicación React en todas las rutas no API
-app.use(express.static(path.join(__dirname, 'src')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'src','app.jsx'));//probar en vez de index.html app.js o app.jsx
+    res.sendFile(path.join(__dirname, 'dist','index.html'));//probar en vez de index.html app.js o app.jsx
 });
 
 // //esta tengo que ver bien si "redirijo" a app.js o a index.html
