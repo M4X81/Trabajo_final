@@ -166,27 +166,27 @@ export default function Users() {
                         </tr>
                         <tr>
                             <td>Nombre:</td>
-                            <td>{userDataUpdate.user_name}</td>
+                            <td>{}</td>
                         </tr>
                         <tr>
                             <td>Apellido:</td>
-                            <td>{userDataUpdate.lastname}</td>
+                            <td>{}</td>
                         </tr>
                         <tr>
                             <td>Dirección:</td>
-                            <td>{userDataUpdate.address}</td>
+                            <td>{}</td>
                         </tr>
                         <tr>
                             <td>Teléfono:</td>
-                            <td>{userDataUpdate.phone}</td>
+                            <td>{}</td>
                         </tr>
                         <tr>
                             <td>País:</td>
-                            <td>{userDataUpdate.country}</td>
+                            <td>{}</td>
                         </tr>
                         <tr>
                             <td>Ciudad:</td>
-                            <td>{userDataUpdate.city}</td>
+                            <td>{}</td>
                         </tr>
                     </tbody>
                 </table>
