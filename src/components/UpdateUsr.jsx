@@ -2,6 +2,8 @@ import {React, useState} from 'react'
 import { useAuth } from '../context/authContext';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/users.css';
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const UpdateUsr = () => {
@@ -49,62 +51,53 @@ const UpdateUsr = () => {
         setError(null);
 
         try {
-            let apiUrl = `https://trabajo-finalcac.vercel.app/users/${encodedEmail}`;
-            console.log(email);
-
             console.log("Updating data:", userDataUpdate); // Log data to update
-            const response = await fetch(apiUrl, {
+
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${email}`, { mode: 'cors' }, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(userDataUpdate)
             });
+            const contentType = response.headers.get("content-type");
+            const text = await response.text();
+            if (!contentType || !contentType.includes("application/json")) {
+                throw new Error(`Expected JSON, received: ${text}`);
+            }
 
-            // const data = await response.json();
-            // if (response.ok) {
-            //     alert('Datos actualizados con éxito');
-            // } else {
-            //     setError(data.error || 'Error desconocido al actualizar datos del usuario');
-            // }
-
-    //         //esto agrego nuevo
-    //         const contentType = response.headers.get("content-type");
-    //         const text = await response.text();
-    //         if (!contentType || !contentType.includes("application/json")) {
-    //             throw new Error(`Expected JSON, received: ${text}`);
-    //         }
-
-    //         const data = JSON.parse(text);
-    //         if (response.ok) {
-    //             console.log("Data updated successfully:", data); // Log success
-    //             alert('Datos actualizados con éxito');
-    //         } else {
-    //             console.error("Error updating data:", data.error); // Log error
-    //             setError(data.error || 'Error desconocido al actualizar datos del usuario');
-    //         }
-    //     } catch (error) {
-    //         console.error("Update error:", error); // Log error
-    //         setError(error.message || 'Error al conectar con el servidor');
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+            const data = JSON.parse(text);
+            if (response.ok) {
+                console.log("Data updated successfully:", data); // Log success
+                toast.success('Datos actualizados con éxito'); 
+            } else {
+                console.error("Error updating data:", data.error); // Log error
+                toast.error('Error updating data:', data.error);
+                setError(data.error || 'Error desconocido al actualizar datos del usuario');
+            }
+        } catch (error) {
+            console.error("Update error:", error); // Log error
+            toast.error('Update error::', error);
+            setError(error.message || 'Error al conectar con el servidor');
+        } finally {
+            setLoading(false);
+        }
+  
 
 
     ////////esto es de prueba
  
-        if (!response.ok) {
-            alert("algo salio mal")
-            throw new Error('Error al actualizar los datos del usuario');
-        }
+    //     if (!response.ok) {
+    //         alert("algo salio mal")
+    //         throw new Error('Error al actualizar los datos del usuario');
+    //     }
 
-        alert('Datos actualizados correctamente');
-    } catch (error) {
-        setError(error.message || 'Error al conectar con el servidor');
-    } finally {
-        setLoading(false);
-    }
+    //     alert('Datos actualizados correctamente');
+    // } catch (error) {
+    //     setError(error.message || 'Error al conectar con el servidor');
+    // } finally {
+    //     setLoading(false);
+    // }
 
 };
 

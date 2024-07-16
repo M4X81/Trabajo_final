@@ -93,15 +93,15 @@ app.get('/users', async (req, res) => {
 //para modificar(agregar)
 // Ruta para actualizar datos del perfil del usuario
 
-app.put('/users', async (req, res) => {
-    const { email } = req.params;
+app.put('/updateuser', async (req, res) => {
+    const { email } = req.query.email;
     console.log('Received request for email:', email);
     const { password, user_name, lastname, address, phone, country, city } = req.body;
 
     try {
         const userResult = await pool.query(
-            'UPDATE user_profiles SET password = $1, user_name = $2, lastname = $3, address = $4, phone = $5, country = $6, city = $7 WHERE email = $8 RETURNING *',
-            [password, user_name, lastname, address, phone, country, city, email]
+            'UPDATE user_profiles SET password = $2, user_name = $3, lastname = $4, address = $5, phone = $6, country = $7, city = $8 WHERE email = $1 RETURNING *',
+            [email, password, user_name, lastname, address, phone, country, city]
         );
 
         res.status(200).json(userResult.rows[0]);
