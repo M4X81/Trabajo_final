@@ -12,12 +12,26 @@ import { AuthProvider } from './context/authContext';
 import Users from './components/Users';
 import Login from './components/Login';
 import UpdateUsr from './components/UpdateUsr';
+import { ToastContainer } from 'react-toastify';
+
 
 function App() {
 
   return (
     <>
       <AuthProvider>
+      <ToastContainer
+                position="top-right"
+                autoClose={500}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         <BrowserRouter>
           <Navbar />
 

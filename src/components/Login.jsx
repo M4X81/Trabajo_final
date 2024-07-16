@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import '../styles/form.css';
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
@@ -38,14 +40,11 @@ const Login = () => {
             if (!response.ok) {
                 throw new Error('Credenciales incorrectas');
             } else {
-                console.log('Login - email:', email, 'password:', password);
                 // // Guardar la información en local storage
                 // localStorage.setItem('email', email);
                 // localStorage.setItem('password', password);
-                alert("Email y Contraseña correctos...");
+                toast.success('Datos cargados exitosamente'); 
                 // // Guardar la información en el contexto si es necesario
-                console.log(email);   
-                // logIn(email, password);  // Ejemplo: guardar el email en el contexto de autenticación  
                 logIn(email, password, user_name, lastname, address, phone, country, city);
                
                 // Redirigir al usuario a la página de perfil u otra página protegida
@@ -53,8 +52,9 @@ const Login = () => {
             }
 
         } catch (error) {
+            toast.error('Credenciales incorrectas');
             setError(error.message);
-            alert("Email o Contraseña incorrectos, intente nuevamente...");
+
         } finally {
             setLoading(false);
         }

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/users.css';
+import { toast } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Users() {
 
@@ -20,7 +22,7 @@ export default function Users() {
                 console.log('Fetch url:', URL);
                 const contentType = response.headers.get("content-type");
                 if (!contentType || !contentType.includes("application/json")) {
-                    alert("algo anda mal...");
+                    toast.error('Algo huele mal...');
                     //salta primero este error, habria que ver loe headers
                     const text = await response.text();
                     throw new Error(`Expected JSON, received: ${text}`);
@@ -32,17 +34,13 @@ export default function Users() {
 
                 }
                 const data = await response.json();
-                if (response.ok) {
-                    alert("Data fetched successfully:", data)
-                    console.log("Data fetched successfully:", data); // Log data
+                if (response.ok) {            
                     setUserData(data);
-
                 } else {
                     console.error("Error fetching data:", data.error); // Log error
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
                 }
-            } catch (error) {
-                alert('aca anda algo mal')
+            } catch (error) {             
                 console.error("Fetch error:", error); // Log error
                 setError(error.message || 'Error al conectar con el servidor');
             }
