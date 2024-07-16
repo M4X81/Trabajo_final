@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/navbar.css';
@@ -7,7 +7,7 @@ import '../styles/navbar.css';
 
 const Navbar = () => {
   const { isLoggedIn, email } = useAuth();
-
+  const encodedEmail = encodeURIComponent(email); 
   return (
     <nav className="navbar navbar-expand-lg fixed-top" id="navbar">
       <div className="container-fluid">
@@ -32,9 +32,11 @@ const Navbar = () => {
               </li>
             ) : (
               <li className="nav-item_true">
-                <Link className="nav-link active" aria-current="page" to={`/users/${email}`}>
+                <Link className="nav-link active" aria-current="page" to={`/users`}>
+                
                   {`${email.split('@')[0]}`}
                 </Link>
+                
               </li>
             )}
           </ul>

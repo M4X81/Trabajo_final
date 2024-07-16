@@ -13,9 +13,9 @@ console.log("Servidor está iniciando...");
 
 const pool = new Pool({
     connectionString: process.env.POSTGRES_URL,
-    // ssl: {
-    //     rejectUnauthorized: true//lo tenia en false
-    // }
+    ssl: {
+        rejectUnauthorized: false//lo tenia en false
+    }
 });
 
 pool.connect(err => {
@@ -72,10 +72,10 @@ app.post('/login', async (req, res) => {
 
 //me traigo los datos del usuario para la pag user( asi cuando cargo los datos de la nueva tabla se a que usuario estoy modificando)
 //esta la tengo que testear a ver si funciona bien...
-// app.get('/register:email', async (req, res) => {
-app.get('/users/:email', async (req, res) => {
-    const { email } = req.params;
-
+app.get('/users', async (req, res) => {
+    // const { email } = req.params;
+    const email = req.query.email;
+    console.log('Received request for email:', email);
     try {
         const user = await pool.query('SELECT * FROM user_profiles WHERE email = $1', [email]);
 
@@ -93,8 +93,9 @@ app.get('/users/:email', async (req, res) => {
 //para modificar(agregar)
 // Ruta para actualizar datos del perfil del usuario
 
-app.put('/users/:email', async (req, res) => {
+app.put('/users', async (req, res) => {
     const { email } = req.params;
+    console.log('Received request for email:', email);
     const { password, user_name, lastname, address, phone, country, city } = req.body;
 
     try {

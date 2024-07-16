@@ -7,12 +7,6 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [user_name, setUser_name] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [address, setAddress] = useState('');
-    const [phone, setPhone] = useState('');
-    const [country, setCountry] = useState('');
-    const [city, setCity] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const { logIn } = useAuth();  // Hook del contexto de autenticación
@@ -44,10 +38,9 @@ const Login = () => {
                 // localStorage.setItem('password', password);
 
                 // // Guardar la información en el contexto si es necesario
-                logIn(email, password, user_name, lastname, address, phone, country, city);  // Ejemplo: guardar el email en el contexto de autenticación           
+                logIn(email, password);  // Ejemplo: guardar el email en el contexto de autenticación           
                 // Redirigir al usuario a la página de perfil u otra página protegida
                 navigate('/');
-                // navigate(`/users/${email}`);
             }
 
         } catch (error) {
@@ -65,7 +58,6 @@ const Login = () => {
                 <main className="contenedor-tarjeta">
                     <div className="logo_reg"></div>
                     <h4>Te damos la bienvenida a nuestra plataforma CriptoApp</h4>
-
                     <form className="form" onSubmit={handleLogin}>
                         <section className="formulario">
                             <label htmlFor="email">

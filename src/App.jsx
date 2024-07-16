@@ -11,6 +11,7 @@ import Pdp from './components/Pdp';
 import { AuthProvider } from './context/authContext';
 import Users from './components/Users';
 import Login from './components/Login';
+import UpdateUsr from './components/UpdateUsr';
 
 function App() {
 
@@ -21,14 +22,14 @@ function App() {
           <Navbar />
 
           <Routes>
-            <Route path='/users/:email' element={<Users />} />
+            <Route path='/updateuser' element={<UpdateUsr />} />
             <Route path='/' element={<Inicio />} />
             <Route path='/wallet' element={<Wallet />} />
             <Route path='/register' element={<Register />} />
             <Route path='/exchange' element={<Exchange />} />
             <Route path='/tyc' element={<Tyc />} />
             <Route path='/pdp' element={<Pdp />} />
-            {/* <Route path='/users' element={<Users />} /> */}
+            <Route path='/users' element={<Users />} />
             <Route path='/login' element={<Login />} />
           </Routes>
           <Footer />

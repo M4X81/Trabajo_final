@@ -26,18 +26,18 @@
     },
     
     {
-      "src": "/users/:email",
+      "src": "/updateuser",
       "dest": "/api/app.js"
     },
     {
-      "src": "/users/:email",
+      "src": "/users",
       "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
       }
     },
     {
-      "src": "/#/register",
+      "src": "/updateuser",
       "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
@@ -50,13 +50,14 @@
         "Access-Control-Allow-Origin": "*"
       }
     },
+
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/src/app.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/app.jsx"
+      "dest": "/dist/index.html"
     }
   ]
 }
