@@ -1,6 +1,7 @@
-import React from 'react'
-
-
+import {React, useState} from 'react'
+import { useAuth } from '../context/authContext';
+import { Link, useParams } from 'react-router-dom';
+import '../styles/users.css';
 
 
 const UpdateUsr = () => {
