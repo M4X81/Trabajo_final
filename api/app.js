@@ -14,7 +14,7 @@ console.log("Servidor está iniciando...");
 const pool = new Pool({
     connectionString: process.env.POSTGRES_URL,
     ssl: {
-        rejectUnauthorized: false//lo tenia en false
+        rejectUnauthorized: true//lo tenia en false
     }
 });
 

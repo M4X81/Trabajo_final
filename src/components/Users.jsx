@@ -54,8 +54,8 @@ export default function Users() {
             try {
                 console.log('useEffect triggered');
                 console.log("Fetching data for email:", email); // Log email
-                // const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {mode: 'cors'});
-                const response = await fetch(`https://localhost:5173/users`, {mode: 'cors'});
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users`, {mode: 'cors'});
+                // const response = await fetch(`https://localhost:5173/users`, {mode: 'cors'});
                 console.log('Fetch url:', response.url);
                 if (response.ok) {
                     const data = await response.json();
