@@ -14,7 +14,6 @@ const UpdateUsr = () => {
     const { email:authEmail, password } = useAuth(); // Obtener el correo electrónico del usuario actual
     const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
     const email = emailParam || authEmail;
-    const [showPassword, setShowPassword] = useState(false);
     const [showPassword_2, setShowPassword_2] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -51,22 +50,37 @@ const UpdateUsr = () => {
         setError(null);
 
         try {
+            console.log(email);
+          
             console.log("Updating data:", userDataUpdate); // Log data to update
-
-            const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${email}`, { mode: 'cors' }, {
+            const encodedEmail = encodeURIComponent(email); 
+            console.log(encodedEmail);
+            const response = await fetch(`https://trabajo-finalcac.vercel.app/updateuser?email=${encodedEmail}`,  {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(userDataUpdate)
             });
-            const contentType = response.headers.get("content-type");
-            const text = await response.text();
-            if (!contentType || !contentType.includes("application/json")) {
-                throw new Error(`Expected JSON, received: ${text}`);
-            }
 
-            const data = JSON.parse(text);
+            const text = await response.text();  
+            console.log('Response Text:', text); // Log the raw response text   
+            
+             // Verificar si la respuesta tiene el encabezado adecuado
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            alert("Received non-JSON response");
+            throw new Error(`Expected JSON, received: ${text}`);
+        }
+
+        let data;
+        try{
+            data = JSON.parse(text);
+       }catch (error) {
+           alert("Error parsing JSON response");
+           throw new Error(`Expected JSON, received: ${text}`);
+       }  
+   
             if (response.ok) {
                 console.log("Data updated successfully:", data); // Log success
                 toast.success('Datos actualizados con éxito'); 
@@ -82,25 +96,7 @@ const UpdateUsr = () => {
         } finally {
             setLoading(false);
         }
-  
-
-
-    ////////esto es de prueba
- 
-    //     if (!response.ok) {
-    //         alert("algo salio mal")
-    //         throw new Error('Error al actualizar los datos del usuario');
-    //     }
-
-    //     alert('Datos actualizados correctamente');
-    // } catch (error) {
-    //     setError(error.message || 'Error al conectar con el servidor');
-    // } finally {
-    //     setLoading(false);
-    // }
-
 };
-
 
   return (
     <div className="container">

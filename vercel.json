@@ -53,11 +53,11 @@
 
     {
       "src": "/api/(.*)",
-      "dest": "/src/app.js"
+      "dest": "/api/app.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/dist/index.html"
+      "dest": "/api/app.js"
     }
   ]
 }

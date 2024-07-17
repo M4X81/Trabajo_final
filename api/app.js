@@ -89,13 +89,24 @@ app.get('/users', async (req, res) => {
     }
 });
 
+// Ruta de ejemplo para verificar la configuración
+app.get('/api', (req, res) => {
+    res.send('API está funcionando correctamente');
+});
+
+// Middleware para loggear todas las solicitudes
+app.use((req, res, next) => {
+    console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
+    next();
+});
 
 //para modificar(agregar)
 // Ruta para actualizar datos del perfil del usuario
 
 app.put('/updateuser', async (req, res) => {
-    const { email } = req.query.email;
+    const email = req.query.email;
     console.log('Received request for email:', email);
+    console.log('Received body:', req.body); // <-- Aquí
     const { password, user_name, lastname, address, phone, country, city } = req.body;
 
     try {
@@ -104,7 +115,11 @@ app.put('/updateuser', async (req, res) => {
             [email, password, user_name, lastname, address, phone, country, city]
         );
 
-        res.status(200).json(userResult.rows[0]);
+        if (userResult.rows.length > 0) {
+            res.status(200).json(userResult.rows[0]);
+        } else {
+            res.status(404).json({ error: 'Usuario no encontrado' });
+        }
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -116,10 +131,12 @@ app.put('/updateuser', async (req, res) => {
 
 
 // Configurar el servidor para que sirva la aplicación React en todas las rutas no API
-app.use(express.static(path.join(__dirname, 'dist')));
+// app.use(express.static(path.join(__dirname, 'dist')));//este es el anterior en uso
+app.use(express.static(path.join(__dirname, '..', 'dist')));  
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist','index.html'));//probar en vez de index.html app.js o app.jsx
+    // res.sendFile(path.join(__dirname, 'dist','index.html'));//probar en vez de index.html app.js o app.jsx
+    res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
 
 // //esta tengo que ver bien si "redirijo" a app.js o a index.html
