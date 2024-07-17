@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import { useAuth } from '../context/authContext';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import '../styles/users.css';
 import { toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,9 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const UpdateUsr = () => {
 
-       // const { email, password} = useAuth();// Obtener el correo electrónico del usuario actual
-    // // const { email } = useParams(); // Obtener el parámetro de la ruta dinámica
-    // const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
     const { email:authEmail, password } = useAuth(); // Obtener el correo electrónico del usuario actual
     const { email: emailParam } = useParams(); // Obtener el parámetro de la ruta dinámica
     const email = emailParam || authEmail;
@@ -18,9 +15,6 @@ const UpdateUsr = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const encodedEmail = encodeURIComponent(email); 
-
-    //--------------------------------------------------revisar cuales van y cuales no
-
     const [userDataUpdate, setUserDataUpdate] = useState({
         password: '',
         user_name: '',
@@ -52,7 +46,7 @@ const UpdateUsr = () => {
         try {
             console.log(email);
           
-            console.log("Updating data:", userDataUpdate); // Log data to update
+            console.log("Updating data:", userDataUpdate);
             const encodedEmail = encodeURIComponent(email); 
             console.log(encodedEmail);
             const response = await fetch(`https://trabajo-finalcac.vercel.app/updateuser?email=${encodedEmail}`,  {
@@ -64,7 +58,7 @@ const UpdateUsr = () => {
             });
 
             const text = await response.text();  
-            console.log('Response Text:', text); // Log the raw response text   
+            console.log('Response Text:', text); 
             
              // Verificar si la respuesta tiene el encabezado adecuado
         const contentType = response.headers.get("content-type");
@@ -82,11 +76,11 @@ const UpdateUsr = () => {
        }  
    
             if (response.ok) {
-                console.log("Data updated successfully:", data); // Log success
+                console.log("Datos actualizados con éxito:", data); // Log success
                 toast.success('Datos actualizados con éxito'); 
             } else {
-                console.error("Error updating data:", data.error); // Log error
-                toast.error('Error updating data:', data.error);
+                console.error("Error al actualizar datos:", data.error); // Log error
+                toast.error('Error al actualizar datos:', data.error);
                 setError(data.error || 'Error desconocido al actualizar datos del usuario');
             }
         } catch (error) {
@@ -174,8 +168,7 @@ const UpdateUsr = () => {
                         {loading ? 'Actualizando...' : 'Actualizar'}
                     </button>
                 </form>
-            </div>
-            
+            </div>       
   )
 }
 

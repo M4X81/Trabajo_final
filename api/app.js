@@ -1,4 +1,3 @@
-// src/app.js
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
@@ -89,7 +88,7 @@ app.get('/users', async (req, res) => {
     }
 });
 
-// Ruta de ejemplo para verificar la configuración
+// Ruta de ejemplo para verificar la configuración y si funciona de verdad el servidor
 app.get('/api', (req, res) => {
     res.send('API está funcionando correctamente');
 });
@@ -101,7 +100,6 @@ app.use((req, res, next) => {
 });
 
 //para modificar(agregar)
-// Ruta para actualizar datos del perfil del usuario
 
 app.put('/updateuser', async (req, res) => {
     const email = req.query.email;
@@ -131,21 +129,12 @@ app.put('/updateuser', async (req, res) => {
 
 
 // Configurar el servidor para que sirva la aplicación React en todas las rutas no API
-// app.use(express.static(path.join(__dirname, 'dist')));//este es el anterior en uso
 app.use(express.static(path.join(__dirname, '..', 'dist')));  
 
 app.get('*', (req, res) => {
     // res.sendFile(path.join(__dirname, 'dist','index.html'));//probar en vez de index.html app.js o app.jsx
     res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'));
 });
-
-// //esta tengo que ver bien si "redirijo" a app.js o a index.html
-// app.get('*', (req, res) => {
-//     const filePath = path.join(__dirname, 'app.js');
-//     console.log(`Enviando archivo: ${filePath}`);
-//     res.sendFile(filePath);
-// });
-
 
 //despues una vez terminado quitar el puerto 3001 por las dudas
 const PORT = process.env.PORT || 3001;

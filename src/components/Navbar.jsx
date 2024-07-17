@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/authContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/navbar.css';
