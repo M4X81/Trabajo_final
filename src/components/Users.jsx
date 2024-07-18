@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
 import { Link, useParams } from 'react-router-dom';
 import '../styles/users.css';
-import { toast } from 'react-toastify'; 
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Users() {
@@ -11,6 +11,7 @@ export default function Users() {
     const [showPassword, setShowPassword] = useState(false);
     const [userData, setUserData] = useState({});
     const [error, setError] = useState(null);
+    const { logout } = useAuth();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -34,13 +35,13 @@ export default function Users() {
 
                 }
                 const data = await response.json();
-                if (response.ok) {            
+                if (response.ok) {
                     setUserData(data);
                 } else {
                     console.error("Error fetching data:", data.error); // Log error
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
                 }
-            } catch (error) {             
+            } catch (error) {
                 console.error("Fetch error:", error); // Log error
                 setError(error.message || 'Error al conectar con el servidor');
             }
@@ -57,6 +58,12 @@ export default function Users() {
             setShowPassword(false); // Restablecer la visibilidad de la contraseña después de - 1/2 segundo
         }, 200);
     };
+
+    const handleLogout = () => {
+        logout(); // Llama a la función de logout del contexto
+        navigate('/'); // Redirige al usuario a la página principal
+    };
+
 
 
     return (
@@ -109,6 +116,11 @@ export default function Users() {
                     <Link to={'/updateuser'}>
                         <button className='btn' type="submit" >
                             Actualizar datos
+                        </button>
+                    </Link>
+                    <Link to={'/'}>
+                        <button className='btn' onClick={handleLogout}>
+                            Cerrar sesión
                         </button>
                     </Link>
 
