@@ -7,7 +7,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Users() {
 
-    const { email, password, user_name, lastname, address, phone, country, city } = useAuth(); // Obtener el correo electrónico del usuario actual
+    // const { email, password, user_name, lastname, address, phone, country, city } = useAuth(); // Obtener el correo electrónico del usuario actual
+    const { email } = useAuth(); // Obtener el correo electrónico del usuario actual
     const [showPassword, setShowPassword] = useState(false);
     const [userData, setUserData] = useState({});
     const [error, setError] = useState(null);
