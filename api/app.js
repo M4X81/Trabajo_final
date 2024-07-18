@@ -73,7 +73,7 @@ app.post('/login', async (req, res) => {
 //esta la tengo que testear a ver si funciona bien...
 app.get('/users', async (req, res) => {
     // const { email } = req.params;
-    const email = req.query.email;
+    const email = req.params.email;
     console.log('Received request for email:', email);
     try {
         const user = await pool.query('SELECT * FROM user_profiles WHERE email = $1', [email]);

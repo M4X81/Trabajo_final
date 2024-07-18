@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/authContext';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import '../styles/users.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ export default function Users() {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState(null);
     const { logout } = useAuth();
+    const navigate = useNavigate();
     //---- => ===
 
     useEffect(() => {
