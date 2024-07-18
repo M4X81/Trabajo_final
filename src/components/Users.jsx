@@ -12,6 +12,7 @@ export default function Users() {
     const [userData, setUserData] = useState({});
     const [error, setError] = useState(null);
     const { logout } = useAuth();
+    //---- => ===
 
     useEffect(() => {
         const fetchData = async () => {
