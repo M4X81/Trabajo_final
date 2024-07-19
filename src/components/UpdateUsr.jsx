@@ -75,7 +75,7 @@ const UpdateUsr = () => {
            alert("Error parsing JSON response");
            throw new Error(`Expected JSON, received: ${text}`);
        }  
-   
+   //----
             if (response.ok) {
                 console.log("Datos actualizados con éxito:", data); // Log success
                 toast.success('Datos actualizados con éxito'); 
