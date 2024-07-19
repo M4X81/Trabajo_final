@@ -14,6 +14,7 @@ export default function Users() {
     const [error, setError] = useState(null);
     const { logout } = useAuth();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     //---- => ===
 
     useEffect(() => {
@@ -67,6 +68,38 @@ export default function Users() {
         navigate('/'); // Redirige al usuario a la página principal
     };
 
+    //eliminar usuario
+    const handleDeleteUser = async () => {
+        if (window.confirm('¿Está seguro de que desea eliminar este usuario? Esta acción es irreversible.')) {
+            setLoading(true);
+            setError(null);
+
+
+            try {
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${email}`, { mode: 'cors' }, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    toast.success('Usuario eliminado exitosamente');
+                    navigate('/');
+                } else {
+                    throw new Error(data.error || 'Error desconocido al eliminar el usuario');
+                }
+            } catch (error) {
+                toast.error(`Error al eliminar el usuario: ${error.message}`);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+                handleLogout();
+            }
+        }
+    };
 
 
     return (
@@ -115,22 +148,32 @@ export default function Users() {
                             </tr>
                         </tbody>
                     </table>
+                    <div className='buttons'>
 
-                    <Link to={'/updateuser'}>
-                        <button className='btn' type="submit" >
-                            Actualizar datos
-                        </button>
-                    </Link>
-                    <Link to={'/'}>
-                        <button className='btn' onClick={handleLogout}>
-                            Cerrar sesión
-                        </button>
-                    </Link>
+                        <Link to={'/updateuser'}>
+                            <button className='btn' type="submit" >
+                                Actualizar datos
+                            </button>
+                        </Link>
+                        <Link to={'/'}>
+                            <button className='btn' onClick={handleLogout}>
+                                Cerrar sesión
+                            </button>
+                        </Link>
+                        <Link to={'/'}>
+                            <button className='btn' onClick={handleDeleteUser}>
+                                Eliminar usuario
+
+                            </button>
+                        </Link>
+                    </div>
+
 
                 </div>
             </div>
         </div>
     );
+
 }
 
 

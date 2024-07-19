@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import { useAuth } from '../context/authContext';
-import { useParams } from 'react-router-dom';
+import { useParams ,useNavigate} from 'react-router-dom';
 import '../styles/users.css';
 import { toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,6 +14,7 @@ const UpdateUsr = () => {
     const [showPassword_2, setShowPassword_2] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
     const encodedEmail = encodeURIComponent(email); 
     const [userDataUpdate, setUserDataUpdate] = useState({
         password: '',
@@ -78,6 +79,7 @@ const UpdateUsr = () => {
             if (response.ok) {
                 console.log("Datos actualizados con éxito:", data); // Log success
                 toast.success('Datos actualizados con éxito'); 
+                navigate('/users');
             } else {
                 console.error("Error al actualizar datos:", data.error); // Log error
                 toast.error('Error al actualizar datos:', data.error);
@@ -89,6 +91,7 @@ const UpdateUsr = () => {
             setError(error.message || 'Error al conectar con el servidor');
         } finally {
             setLoading(false);
+            
         }
 };
 

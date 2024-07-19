@@ -123,6 +123,30 @@ app.put('/updateuser', async (req, res) => {
     }
 });
 
+
+//eliminar usuario
+
+app.delete('/users', async (req, res) => {
+    // const { email } = req.params;
+    const email = req.query.email;
+    console.log('Received request for email:', email);
+    try {
+        const result = await pool.query('DELETE FROM user_profiles WHERE email = $1 RETURNING *', [email]);
+
+        if (result.rows.length > 0) {
+            alert("entra aca?")
+            console.log('User deleted:', result.rows[0]);
+             res.status(200).json({ message: 'Usuario eliminado exitosamente', user: result.rows[0] });
+        }else{
+
+            console.log('User not found');
+            res.status(404).json({ error: 'Usuario no Enncontrado' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 //esto lo cargo para que la navegacion la maneje react y no el servidor
 //sino al actualizar o volver hacia atras no encuentra la ruta/pagina y da un 404
 // Ruta catch-all para manejar todas las rutas del lado del cliente

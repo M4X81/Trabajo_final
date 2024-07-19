@@ -1,27 +1,29 @@
 :root {
     --box-shadow-activo: 0 4px 8px rgba(0, 217, 255, 0.699),
-    0 6px 20px rgba(169, 229, 253, 0.637);
+        0 6px 20px rgba(169, 229, 253, 0.637);
     --box-shadow-inactivo: 0 4px 8px rgba(255, 255, 255, 0.699),
-    0 6px 20px rgba(212, 204, 204, 0.315);
-    --bg-color-nav:#a09f9f;
-    --fuente-activa:#0ff;
+        0 6px 20px rgba(212, 204, 204, 0.315);
+    --bg-color-nav: #a09f9f;
+    --fuente-activa: #0ff;
     --bordes: 5px;
-    --bordes-grandes:24px;
-    --borde-lnk:2px rgba(110, 50, 50, 0.555);
+    --bordes-grandes: 24px;
+    --borde-lnk: 2px rgba(110, 50, 50, 0.555);
     --bg-radial: radial-gradient(at 100% 0, #fff2, #fff0 50%),
-    radial-gradient(at 0% 100%, #0002, #0000 50%),
-    #545153;
-    --bg-lineal:linear-gradient(45deg, #223, #112);
-    --bg-nav:rgba(147, 147, 173, 0.438);
-    --bg-nav-solid:rgba(147, 147, 173, 0.884);
+        radial-gradient(at 0% 100%, #0002, #0000 50%),
+        #545153;
+    --bg-lineal: linear-gradient(45deg, #223, #112);
+    --bg-nav: rgba(147, 147, 173, 0.438);
+    --bg-nav-solid: rgba(147, 147, 173, 0.884);
 }
-body{
+
+body {
     background-color: var(--bg-nav-solid);
 }
+
 .main {
     position: relative;
     min-width: 60dvw;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
 }
 
@@ -32,10 +34,9 @@ body{
 
 .container-principal {
     display: flex;
-    position: relative;
     flex-direction: row;
-    justify-content: space-between;
-background-color: var( --bg-nav);
+    justify-content: center;
+    background-color: var(--bg-nav);
 }
 
 .user-details {
@@ -45,7 +46,7 @@ background-color: var( --bg-nav);
     flex-direction: column;
     align-self: start;
     gap: 2rem;
-    
+
 }
 
 .container {
@@ -54,23 +55,43 @@ background-color: var( --bg-nav);
     flex-direction: column;
     gap: 2rem;
 }
-.eye_button{
-background-color: var(--bg-radial);
+
+.eye_button {
+    background-color: var(--bg-radial);
 }
-.btn{
-   
-    height: 2rem;
+
+.buttons {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+
+}
+
+.btn {
     background-color: var(--bg-color-nav);
-    border-radius:var(--bordes);
+    border-radius: var(--bordes);
     color: var(--fuente-activa);
     box-shadow: var(--box-shadow-activo);
 }
-.table{
-    margin: 2rem ;
+
+.table {
+    height: 100%;
+    display: flex;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
     background-color: var(--bg-color-nav);
-    border-radius:var(--bordes);
+    border-radius: var(--bordes);
     color: var(--fuente-activa);
     box-shadow: var(--box-shadow-activo);
+}
+
+@media (max-width:768px) {
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+
+    }
 }
