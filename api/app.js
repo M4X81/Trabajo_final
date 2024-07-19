@@ -138,7 +138,7 @@ app.delete('/users', async (req, res) => {
         }else{
 
             console.log('User not found');
-            res.status(404).json({ error: 'Usuario no Enncontrado' });
+            res.status(404).json({ error: 'Usuario no Encontrado' });
         }
     } catch (error) {
         res.status(500).json({ error: error.message });

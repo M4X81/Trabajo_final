@@ -1,6 +1,6 @@
 import {React, useState} from 'react'
 import { useAuth } from '../context/authContext';
-import { useParams ,useNavigate} from 'react-router-dom';
+import { useParams ,useNavigate, Link} from 'react-router-dom';
 import '../styles/users.css';
 import { toast } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css';
@@ -167,9 +167,15 @@ const UpdateUsr = () => {
                         onChange={handleInputChange}
                         required
                     /><br />
-                    <button className='btn' type="submit" disabled={loading}>
+                    <div className='buttons'>
+                      <button className='btn' type="submit" disabled={loading}>
                         {loading ? 'Actualizando...' : 'Actualizar'}
                     </button>
+                    <button className='btn' >
+                        <Link to= "/users"> Cancelar</Link>
+                    </button>    
+                    </div>
+                  
                 </form>
             </div>       
   )

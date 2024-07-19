@@ -40,6 +40,7 @@ export default function Users() {
                 const data = await response.json();
                 if (response.ok) {
                     setUserData(data);
+                    localStorage.setItem('userData', JSON.stringify(data));
                 } else {
                     console.error("Error fetching data:", data.error); // Log error
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
@@ -64,6 +65,8 @@ export default function Users() {
 
     const handleLogout = () => {
         logout(); // Llama a la función de logout del contexto
+        localStorage.removeItem('email');
+        localStorage.removeItem('userData');
         navigate('/'); // Redirige al usuario a la página principal
     };
 

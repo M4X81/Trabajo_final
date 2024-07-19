@@ -65,6 +65,14 @@ body {
     flex-direction: row;
 
 }
+.buttons a{
+    color: #0ff ;
+    text-decoration: none ;
+}
+.buttons a:hover{
+    color: #0ff ;
+    text-decoration: none ;
+}
 
 .btn {
     background-color: var(--bg-color-nav);
