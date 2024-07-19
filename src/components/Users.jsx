@@ -15,7 +15,6 @@ export default function Users() {
     const { logout } = useAuth();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    //---- => ===
 
     useEffect(() => {
         const fetchData = async () => {
@@ -76,7 +75,7 @@ export default function Users() {
 
 
             try {
-                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${email}`, { mode: 'cors' }, {
+                const response = await fetch(`https://trabajo-finalcac.vercel.app/users?email=${email}`, {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
@@ -88,15 +87,16 @@ export default function Users() {
                 if (response.ok) {
                     toast.success('Usuario eliminado exitosamente');
                     navigate('/');
+                   
                 } else {
                     throw new Error(data.error || 'Error desconocido al eliminar el usuario');
                 }
             } catch (error) {
-                toast.error(`Error al eliminar el usuario: ${error.message}`);
+                
                 setError(error.message);
             } finally {
-                setLoading(false);
-                handleLogout();
+                setLoading(false);    
+                handleLogout();          
             }
         }
     };
@@ -149,7 +149,6 @@ export default function Users() {
                         </tbody>
                     </table>
                     <div className='buttons'>
-
                         <Link to={'/updateuser'}>
                             <button className='btn' type="submit" >
                                 Actualizar datos
@@ -163,17 +162,13 @@ export default function Users() {
                         <Link to={'/'}>
                             <button className='btn' onClick={handleDeleteUser}>
                                 Eliminar usuario
-
                             </button>
                         </Link>
                     </div>
-
-
                 </div>
             </div>
         </div>
     );
-
 }
 
 

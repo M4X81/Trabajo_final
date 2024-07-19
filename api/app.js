@@ -103,8 +103,6 @@ app.use((req, res, next) => {
 
 app.put('/updateuser', async (req, res) => {
     const email = req.query.email;
-    console.log('Received request for email:', email);
-    console.log('Received body:', req.body); // <-- Aquí
     const { password, user_name, lastname, address, phone, country, city } = req.body;
 
     try {
