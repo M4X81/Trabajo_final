@@ -1,65 +1,63 @@
 {
-  "version": 2,
-"builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    },
-    {
-      "src": "api/*.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/register",
-      "dest": "/api/app.js"
-    },
-    {
-      "src": "/login",
-      "dest": "/api/app.js"
-    },
-    {
-      "src": "/users",
-      "dest": "/api/app.js"
-    },
-    
-    {
-      "src": "/updateuser",
-      "dest": "/api/app.js"
-    },
-    {
-      "src": "/users",
-      "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
+    "version": 2,
+  "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/static-build",
+        "config": { "distDir": "dist" }
+      },
+      {
+        "src": "api/*.js",
+        "use": "@vercel/node"
       }
-    },
-    {
-      "src": "/updateuser",
-      "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      }
-    },
-    {
-      "src": "/register",
-      "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      }
-    },
-
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/app.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/app.js"
-    }
-  ]
-}
-
+    ],
+    "routes": [
+      {
+        "src": "/register",
+        "dest": "/api/app.js"
+      },
+      {
+        "src": "/login",
+        "dest": "/api/app.js"
+      },
+      {
+        "src": "/users",
+        "dest": "/api/app.js"
+      },
+      
+      {
+        "src": "/updateuser",
+        "dest": "/api/app.js"
+      },
+      {
+        "src": "/users",
+        "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
+      },
+      {
+        "src": "/updateuser",
+        "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
+      },
+      {
+        "src": "/register",
+        "methods": ["GET", "PUT", "POST" , "UPDATE", "DELETE"],
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
+      },
   
+      {
+        "src": "/api/(.*)",
+        "dest": "/api/app.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "/api/app.js"
+      }
+    ]
+  }
