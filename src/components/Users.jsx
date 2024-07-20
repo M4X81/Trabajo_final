@@ -40,7 +40,7 @@ export default function Users() {
                 const data = await response.json();
                 if (response.ok) {
                     setUserData(data);
-                    localStorage.setItem('userData', JSON.stringify(data));
+                    localStorage.setItem('userData', JSON.stringify(data));//---
                 } else {
                     console.error("Error fetching data:", data.error); // Log error
                     setError(data.error || 'Error desconocido al cargar datos del usuario');
