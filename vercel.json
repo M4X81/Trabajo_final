@@ -1,20 +1,5 @@
 {
     "version": 2,
-    "builds": [
-        {
-          "src": "src/index.js",
-          "use": "@vercel/node"
-        },
-        {
-          "src": "public/**/*",
-          "use": "@vercel/static"
-        },
-        {
-          "src": "vite.config.js",
-          "use": "@vercel/static-build",
-          "config": { "distDir": "dist" }
-        }
-      ],
     "routes": [
       {
         "src": "/register",
@@ -53,15 +38,6 @@
         "headers": {
           "Access-Control-Allow-Origin": "*"
         }
-      },
-  
-      {
-        "src": "/api/(.*)",
-        "dest": "/api/app.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/api/app.js"
       }
     ]
   }
