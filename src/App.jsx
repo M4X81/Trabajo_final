@@ -13,7 +13,7 @@ import Users from './components/Users';
 import Login from './components/Login';
 import UpdateUsr from './components/UpdateUsr';
 import { ToastContainer } from 'react-toastify';
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 function App() {
 
